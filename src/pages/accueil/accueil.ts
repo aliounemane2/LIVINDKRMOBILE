@@ -223,6 +223,9 @@ export class AccueilPage {
                 this.value = true;
                 let titre ="Une erreur est survenue reessayer plus tard ";
                 //this.presentPromptOk(titre);
+                //this.presentPromptOk(titre);
+
+
             },
             () => {loader.dismiss()}
       );
