@@ -1,0 +1,8 @@
+[
+  {"id":1,"nomInteret":"Night life","image":"../assets/images/nightlife.png"},
+  {"id":2,"nomInteret":"Gastronomie","image":"../assets/images/gastronomie.png"},
+  {"id":3,"nomInteret":"Bien etre","image":"../assets/images/nightlife.png"},
+  {"id":4,"nomInteret":"Nature","image":"../assets/images/gastronomie.png"},
+  {"id":5,"nomInteret":"Mode","image":"../assets/images/nightlife.png"},
+  {"id":6,"nomInteret":"Musique","image":"../assets/images/gastronomie.png"}
+]

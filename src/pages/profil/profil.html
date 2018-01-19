@@ -1,0 +1,148 @@
+<!--
+  Generated template for the ProfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profil</ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #cccccc;">
+  <div class="body-profil">
+    <div style="background-color: #ffffff;height: 280px;">
+      <div class="baniere-profil">
+        <img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
+        <div class="image-user">
+         
+        <ion-avatar item-start >
+          <ion-icon name="camera" class="icone-photo"></ion-icon>
+                <img src="assets/images/niass.jpg"  class="full-image"/>
+        </ion-avatar>
+         Amadou Niass
+        </div>
+
+        <div class="level">Local Guide Niveau {{moyenne}}/10</div>
+
+          <div class="contenu-bar">
+            <div *ngFor="let note of note ">
+              <div *ngIf="moyenne < note.id"  class="bar-level"  ></div>
+              <!--div *ngIf="level == note.id" class="bar-level-jaune"  ></div-->
+              <!--div *ngIf="level == note.id" class="cadre-level-jaune">{{level}} points</div-->
+              <div *ngIf ="moyenne > note.id" class="bar-level-color"></div>
+            </div> 
+          </div>
+ 
+      </div>
+
+      <!--div class="infos">
+        <div class="avis">21 avis</div>
+         <div class="nbphoto">17 photos</div>
+      <!/div-->
+    </div>
+    <ion-segment [(ngModel)]="pprofil" style="background-color:#ffffff;">
+        <ion-segment-button value="avis" style="color: #ffffff; background-color: #000000;">
+          Avis
+        </ion-segment-button>
+
+        <ion-segment-button value="photo" style="color: #ffffff; background-color: #000000;">
+          Photo
+        </ion-segment-button>
+
+        <ion-segment-button value="profil" style="color: #ffffff; background-color: #000000;">
+          Profil
+        </ion-segment-button>
+
+    </ion-segment>
+    <div [ngSwitch]="pprofil">
+      <div *ngSwitchCase="'avis'">
+        <div class="texte-institution">
+          <h1 [hidden]="!valueAvis" style="color:#ac0203;
+              margin-top:10%;
+              text-align:center">
+              {{messageAvis}}
+              </h1>
+            <div *ngFor="let avis of avis" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;">
+              {{avis.idInstitution.nomIns}}<br/>
+              <rating score="{{avis.note}}" max="5"></rating><br/>
+              {{avis.avis}}
+            </div>  
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'photo'">
+        <div class="texte-institution">
+          <ion-slides  >
+            <ion-slide *ngFor="let vign of vignette" >
+              <img src="{{vign.image}}" class="full-image" />
+            </ion-slide >
+          </ion-slides >
+          
+        </div>
+        
+      </div>
+
+      <div *ngSwitchCase="'profil'">
+        
+        <form [formGroup]="myFormulaire" style="background-color: #fff;" *ngFor="let user of users">
+
+          <ion-item>
+            <ion-input formControlName="prenom" type="text" class="champannonce" value="{{user.prenom}}"  placeholder="Prenom"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input formControlName="nom" type="text" class="champannonce" value="{{user.nom}}" placeholder="Nom"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input formControlName="username" type="text" class="champannonce" value="{{user.username}}" disabled="true" placeholder="Username"></ion-input>
+          </ion-item>
+
+          <!--ion-item>
+            <ion-label floating class="labelins">Numero de telephone</ion-label>
+            <ion-input formControlName="telephone" type="text" class="champannonce" ></ion-input>
+          </ion-item-->
+
+          <ion-item style="width: 50%; float:left;">
+            <ion-select formControlName="indicatif"  class="champannonce" interface="popover" placeholder="Indicatif">
+              <ion-option  value="+33" class="selectannonce">France(+33)</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item style="width: 50%; float:left;">
+            <ion-input formControlName="telephone" type="tel" class="champannonce" value="{{user.telephone}}" placeholder="Telephone"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input formControlName="email" type="text" class="champannonce" disabled="true" value="{{user.email}}" placeholder="Email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input formControlName="password" type="password" class="champannonce" placeholder="Mot de passe" ></ion-input>
+          </ion-item>
+
+          <button class="btnsuivant"  >Mettre a jour</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+<!--ion-footer class="bg-footer" >
+  
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+  
+</ion-footer-->

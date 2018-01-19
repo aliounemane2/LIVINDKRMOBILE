@@ -1,0 +1,5 @@
+[
+  {"id":1,"nomInteret":"Populaires","image":"assets/images/populaires1.png","photo":"assets/images/select.png"},
+  {"id":2,"nomInteret":"Classiques","image":"assets/images/Livin1.png","photo":"assets/images/select.png"},
+  {"id":3,"nomInteret":"Originaux","image":"assets/images/Originaux1.png","photo":"assets/images/select.png"}
+]

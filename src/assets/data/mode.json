@@ -1,0 +1,5 @@
+[
+  {"image": "assets/images/restaurant.jpg", "nom": "Couturier", "id": 1},
+  {"image": "assets/images/salon-de-coiffure.jpg", "nom": "Salon de coiffure", "id": 2},
+  {"image": "assets/images/onglerie.jpg", "nom": "Onglerie", "id": 3}
+]

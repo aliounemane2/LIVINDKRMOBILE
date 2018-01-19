@@ -1,0 +1,56 @@
+<!--
+  Generated template for the AccueilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Accueil</ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="body-acc">
+    <!--div class="baniere-acc" (click)= "goToEvenements()">
+        <div class="texte-accueil">      
+           Evénements
+        </div>
+        <img src="assets/images/evenement.jpg" class="full-image" />
+    </div>
+    <div *ngFor="let categorie of categories">
+  		<div class="baniere-acc" (click)= "goToListeinstitution(categorie)" >
+        <div class="texte-accueil">      
+            {{categorie.nom}}
+        </div>
+  			<img src="{{categorie.image}}" class="full-image" />
+  		</div>
+    </div-->
+    <h1 [hidden]="!value" style="color:#ac0203;
+     font-size: 16px;
+      text-align:center;
+      margin-top: 25%;
+      padding-left: 5%;
+      padding-right: 5%;">
+      {{message}}
+    </h1>
+
+    <div *ngFor="let categorie of category">
+      <div class="baniere-acc" (click)= "goToListeinstitution(categorie)" >
+        <div class="texte-accueil">      
+            {{categorie.nom}}
+        </div>
+        <img *ngIf="categorie.imageCategorie" src="{{url}}/{{categorie.imageCategorie}}" class="full-image" />
+
+        <img *ngIf="!categorie.imageCategorie" src="assets/images/evenement.jpg" class="full-image" />
+      </div>
+    </div>
+	</div>
+
+  
+</ion-content>
+

@@ -1,0 +1,102 @@
+page-details-sight {
+	.body-details{
+		width: 100%;
+	}
+	.baniere-details{
+		width:100%;
+		*height: 15%;
+		margin-bottom: -4px;
+	}
+
+	.details{
+		background-color: #ffffff;
+    	box-shadow: 1px 1px 7px #888888;
+    	text-align: center;
+    	padding-left: 3%;
+	    padding-top: 3%;
+	    padding-right: 3%;
+	    padding-bottom: 2%;
+	    margin-top: 5px;
+	    margin-left: 5px;
+    	margin-right: 5px;
+	}
+	.titre-event{
+		text-align: center;
+		font-weight: bold;
+		font-size: 14px;
+		color: #000000;
+	}
+
+	.route{
+		color:#000000;
+		*padding-top:20px;
+		*margin-left: 30%;
+		text-align: center;
+		*margin-top: 5%;
+		color: #c81437;
+		font-weight: bold;
+		font-size: 16px;
+	}
+	.texte-details1{
+		padding-top: 4%;
+		padding-left: 10px;
+    	padding-right: 10px;
+		color: #000000;
+		font-size: 12px;
+    	font-family: arial;
+		background-color: #ffffff;
+    	padding-bottom: 50px;
+    	box-shadow: 1px 1px 7px #888888;
+    	margin-top: 10px;
+    	text-align: justify;
+    	line-height: 24px;
+    	*font-weight: bold;
+    	margin-left: 5px;
+    	margin-right: 5px;
+	}
+	.cadre-pin{
+		background-color: #c81437;
+		float: left;
+		color: #ffffff;
+		width: 10%;
+		border-radius: 50%;
+		padding-top: 5px;
+		height: 30px;
+	}
+	.texte-pin{
+		float: left;
+		padding-top: 7px;
+	}
+
+	.descsight 
+	{
+	    color: #000000;
+	    font-size: 12px;
+	    font-family: arial;
+	    line-height: 24px;
+	    margin-top: 1%;
+	    *max-height: 200px;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    text-align: justify;
+	}
+
+	.footer-sight{
+		padding-top: 4%;
+	    width: 98%;
+	    padding-left: 10px;
+	    padding-right: 10px;
+	    font-size: 12px;
+	    font-family: arial;
+	    background-color: #ffffff;
+	    padding-bottom: 5%;
+	    -webkit-box-shadow: 1px 1px 7px #888888;
+	    box-shadow: 1px 1px 7px #888888;
+	    margin-top: 10px;
+	    text-align: justify;
+	    line-height: 24px;
+	    margin-left: 1%;
+	    margin-right: 1%;
+	}
+
+}

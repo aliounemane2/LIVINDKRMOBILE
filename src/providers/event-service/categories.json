@@ -1,0 +1,5 @@
+[
+      {image: '../assets/images/restau.png', nom: 'Evenements', id: 1},
+      {image: '../assets/images/shopping.png', nom: 'Favoris', id: 2},
+      {image: '../assets/images/hotspot.png', nom: 'Profil', id: 3}
+];

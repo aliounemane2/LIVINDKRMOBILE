@@ -1,0 +1,80 @@
+page-login {
+	.body-home{
+		width: 100%;
+		background-size: contain;
+    	*background-repeat: no-repeat;
+    	background-image: url(../assets/images/Background.jpg);
+	}
+	.logo-login{
+		margin-top: 40%;
+		width: 100%;
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+
+	.barre-login{
+		width: 100%;
+		height: 50px;
+		background-color: #c6324a;
+		margin-top: 5px;
+		opacity: 0.8;
+		padding-left: 10%;
+		padding-right: 10%;
+		*padding-top: 5%;
+		color: #ffffff;
+		font-size: 15px;
+		line-height: 50px;
+	}
+
+	.barre-login-facebook{
+		width: 100%;
+		height: 50px;
+		background-color: #3f7ab4;
+		margin-top: 3px;
+		opacity: 0.8;
+		padding-left: 10%;
+		padding-right: 10%;
+		*padding-top: 5%;
+		color: #ffffff;
+		font-size: 13px;
+		line-height: 50px;
+    	
+	}
+
+	.barre-login-google{
+		width: 100%;
+		height: 50px;
+		background-color: #e86867;
+		margin-top: 3px;
+		opacity: 0.8;
+		padding-left: 10%;
+		padding-right: 10%;
+		*padding-top: 5%;
+		color: #ffffff;
+		font-size: 13px;
+		line-height: 50px;
+    	
+	}
+
+	.barre-login-ins{
+		width: 100%;
+		height: 50px;
+		background-color: #c6324a;
+		margin-top: 3px;
+		opacity: 0.8;
+		padding-left: 10%;
+		padding-right: 10%;
+		*padding-top: 5%;
+		color: #ffffff;
+		font-size: 13px;
+		line-height: 50px;
+    	
+	}
+	.cadre-login{
+		position: absolute;
+		bottom: 0;
+		*top: 71%;
+		width: 100%
+	}
+
+}

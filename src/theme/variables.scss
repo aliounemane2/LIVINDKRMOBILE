@@ -41,6 +41,9 @@ $colors: (
   dark:       #222
 );
 
+$pad-notation : 100px 30px 220px 30px;
+$pad-dec : 0px 0px 0px 0px;
+
 
 // App iOS Variables
 // --------------------------------------------------
@@ -86,3 +89,6 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@import "../assets/fonts/ZapfinoLinotypeOne.ttf";
+@import "../assets/fonts/linotypezapfino-one.ttf";
+

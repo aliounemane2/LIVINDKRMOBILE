@@ -1,0 +1,40 @@
+<!--
+  Generated template for the RechercheDecouvertePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+
+    <!--ion-title>Adresse</ion-title-->
+    <ion-searchbar  (ionInput)="getItemsDecouverte($event)" [showCancelButton]="true" (ionCancel)="dismiss()" autofocus></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!--ion-list>
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+      {{ item }}
+    </ion-item>
+  </ion-list-->
+
+  	<ion-list *ngIf ="valrech =='0'">
+	  <ion-item *ngFor="let item of categorie" tappable (click)="chooseItem(item)">
+	    <ion-avatar item-start>
+	      <img *ngIf ="item.photoTagDecouverte" src="{{item.photoTagDecouverte}}">
+	      <img *ngIf ="!item.photoTagDecouverte" src="assets/images/film.jpg">
+	    </ion-avatar>
+	    <h2>{{item.nomTagDecouverte}}</h2>
+	  </ion-item>
+	</ion-list>
+
+	<ion-list *ngIf ="valrech =='1'">
+	  <ion-item *ngFor="let item of catRech" tappable (click)="chooseItem(item)">
+	    <ion-avatar item-start>
+	      <img *ngIf ="item.photoTagDecouverte" src="{{item.photoTagDecouverte}}">
+	      <img *ngIf ="!item.photoTagDecouverte" src="assets/images/film.jpg">
+	    </ion-avatar>
+	    <h2>{{item.nomTagDecouverte}}</h2>
+	  </ion-item>
+	</ion-list>
+</ion-content>

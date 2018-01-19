@@ -1,0 +1,10 @@
+[
+      {"image": "assets/images/guide.jpg", "nom": "Guides", "id": 1},
+      {"image": "assets/images/art.jpg", "nom": "Art", "id": 2},
+      {"image": "assets/images/culture.jpg", "nom": "Culture", "id": 4},
+      {"image": "assets/images/film.jpg", "nom": "Film et télévision", "id": 5},
+      {"image": "assets/images/litterature.png", "nom": "Littérature", "id": 6},
+      {"image": "assets/images/lifestile.jpg", "nom": "Lifestyle", "id": 7},
+      {"image": "assets/images/technologies.jpg", "nom": "Technologie", "id": 8},
+      {"image": "assets/images/gastro.jpg", "nom": "Gastronomie", "id": 9}
+]

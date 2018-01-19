@@ -14,3 +14,217 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+@font-face {
+    font-family: LinotypeZapfino One;
+    src: url($font-path + "/linotypezapfino-one.ttf");
+}
+
+.toolbar-background-md {
+    border-color: #b2b2b2;
+    background: #000000;
+}
+.toolbar-background-ios {
+    background: #000000;
+}
+.toolbar-title-ios{
+	color: #ffffff;
+}
+.toolbar-title-md{
+	color: #ffffff;
+}
+
+.r-sociaux{
+	*width: 10%;
+	*height: 10%;
+	float: left;
+	margin-left: 3%;
+}
+.powered{
+	font-size: 12px;
+	color:#015b80;
+	margin-left: 19%;
+}
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
+    color: #ffffff;
+    background-color: transparent;
+}
+.full-image{
+	width: 100%;
+	height: 100%;
+}
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+    color: #ffffff;
+    background-color: transparent;
+}
+.item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner {
+    background-image: none;
+    padding-right: 32px;
+    background-position: right 14px center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+}
+.item-ios{
+	color:  #015b7e;
+}
+.item-md{
+	color:  #015b7e;
+}
+.list-ios .item-block .item-inner {
+    /* border-bottom: 0.55px solid #c8c7cc; */
+}
+button.item-ios.item-block .item-inner {
+    padding-right: 8px;
+   border-bottom: none;
+    /* border-bottom: 0.55px solid #c8c7cc; */
+}
+.item-md.item-block .item-inner{
+	*border-bottom: none;
+}
+.list-ios{
+	margin: -1px 0 0px;
+}
+.bg-menu{
+	width:100%;
+	*height: 124px;
+	background-repeat: no-repeat;
+	*background-size: contain;
+	background-image: url(../assets/images/baniere-home.png);
+}
+.bg-logo{
+	*width:100%;
+	*height: 15%;
+	margin-left:10%;
+	margin-right: 10%;
+}
+.name{
+	width:100%;
+	height: 30px;
+	background-color: #c81437;
+	color: #ffffff;
+    padding-top: 5px;
+    *padding-left: 10px;
+    margin-top: -1px;
+    text-align: center;
+}
+.image-user{
+		width: 80%;
+		width: 80%;
+        color: #000;
+        position: absolute;
+        left: 35%;
+        top: 39.5%;
+
+}
+
+.image-user ion-avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+	}
+	.image-user ion-avatar{
+		padding-bottom: 10px;
+	}
+
+	.icone-photo {
+        position: absolute;
+        top: 33%;
+        /* left: 70%; */
+    }
+.bg-footer{
+	background-color: #ffffff; 
+	height: 30px;
+	padding-top: 5px;
+}
+
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    border-color: #ffffff;
+    border-width: 1px;
+    border-style: solid;
+    opacity: 1;
+}
+
+.segment-ios .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 3.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffffff; 
+    font-size: 1.3rem;
+    line-height: 3rem;
+    *color: #488aff;
+    background-color: transparent;
+}
+
+.bg-footer-accueil{
+	background-color: #ffffff; 
+	height: 110px;
+	padding-top: 5px;
+	color:#c81437;
+}
+
+ion-slides {
+    display: block;
+    width: 100%;
+    /* height: 100%; */
+}
+
+.settings-modal  {
+  padding: 30px 15px 150px 0px;
+    background: rgba(0,0,0,0.7);
+}
+.settings-modal-pub {
+    padding: 100px 25px 50px 25px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.toast-class {
+   opacity: 0.5;
+   margin-left: 5%;
+   margin-right: 5%;
+}
+
+.searchbar-ios {
+    padding: 0 8px;
+    min-height: 44px;
+    margin-left: 2%;
+    width: 96%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.3);
+    border-top: 0.55px solid transparent;
+    border-bottom: 0.55px solid rgba(0, 0, 0, 0.05);
+    background: none; 
+}
+.searchbar-ios{
+    background: none; 
+}
+
+.toolbar .searchbar-ios {
+    border-bottom-width: 0;
+    background: #FFFFFF;
+}
+
+.searchbar-ios .searchbar-input {
+    padding: 0 28px;
+    border-radius: 5px;
+    height: 4rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #000;
+    background-color: #fff;
+}
+
+.searchbar-ios .searchbar-search-icon {
+    left: 9px;
+    top: 14px;
+}
+
+

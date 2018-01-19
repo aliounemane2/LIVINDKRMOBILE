@@ -1,0 +1,29 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header-->
+
+
+<ion-content class = "body-home">
+  <div class="logo-login">
+    <img src="assets/images/LivinDakar_LogoWhite.png" class="full-image" />
+  </div>
+
+  <div class="cadre-login">
+    <div class="barre-login" (click)= "goToHomePage()"><ion-icon name="mail"></ion-icon>&nbsp; &nbsp; Se connecter avec mes identifiants</div>
+    <div class="barre-login-facebook" (click)="facebookLogin()"><ion-icon name="logo-facebook">&nbsp; &nbsp;Se connecter avec Facebook</ion-icon></div>
+    <div class="barre-login-google"><ion-icon name="logo-googleplus">&nbsp; &nbsp;Se connecter avec Google</ion-icon></div>
+    <div class="barre-login-ins" (click)= "goToInscription()"> <ion-icon name="person">&nbsp; &nbsp;Pas de compte ? | S'inscrire</ion-icon></div>
+  </div>
+  
+
+</ion-content>

@@ -1,0 +1,42 @@
+<!--
+  Generated template for the DetailsDecouvertePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{titre}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<div class="baniere-decouverte">
+		<img *ngIf="decouverte.image" src="{{decouverte.image}}" class="full-image" />
+		<img *ngIf="!decouverte.image" src="assets/images/decouverte1.jpg" class="full-image"/>
+	</div>
+	<div class="tagdecouverte">
+  		<div class="tagg">{{decouverte.idTagDecouverte.nomTagDecouverte}}</div>
+
+	  	<ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold; text-align: left;" >
+	      {{decouverte.titreArticle}}
+	    </ion-card-title>
+
+	    <ion-item style="padding-left: 0px;">
+		    <ion-avatar item-start>
+		      <img src="assets/images/profil.png">
+		    </ion-avatar>
+		    <ion-label class="label-md">
+		    	<h2>{{decouverte.dateArticle}}</h2>
+		    	<p>{{decouverte.iduser}}</p>
+			</ion-label>
+		    
+		</ion-item>
+
+		<div class="contenu">{{decouverte.contenuArticle}}</div>
+  	</div>
+
+</ion-content>

@@ -1,0 +1,267 @@
+<!--
+  Generated template for the EvenementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Evénements</ion-title>
+    <!--button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button-->
+
+    <ion-buttons end>
+    <!--button (click)="afficherMenu()" style="background-color: #000000;">
+        <ion-icon name="more" style="color: #ffffff;"></ion-icon>
+      </button-->
+      <button (click)="openRecherche()" style="background-color: #000000;">
+        <ion-icon name="search" style="color: #ffffff;"></ion-icon>
+      </button>
+
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<!--ion-item>
+    <ion-label>Evenements par </ion-label>
+    <ion-select [(ngModel)]="typeEvent" >
+      <ion-option  value="0">Tous</ion-option>
+      <ion-option  value="1">Centre d'interet</ion-option>
+      <ion-option  value="2">Ma position</ion-option>
+    </ion-select>
+  </ion-item-->
+  <div class="body-evenement">
+    <ion-searchbar *ngIf="value == '2' && val=='0'" (ionInput)="getItemsJour($event)" placeholder="Par centre d'intérêt">
+    </ion-searchbar>
+
+    <ion-searchbar *ngIf="value == '2' && val=='1'" (ionInput)="getItemsSemaine($event)" placeholder="Par centre d'intérêt">
+    </ion-searchbar>
+
+    <ion-searchbar *ngIf="value == '2' && val=='2'" (ionInput)="getItemsMois($event)" placeholder="Par centre d'intérêt">
+    </ion-searchbar>
+
+    <ion-segment [(ngModel)]="filterVal" style="background-color:#ffffff;">
+
+        <ion-segment-button value="today" style="color: #ffffff; background-color: #c81437;" (click)="clickJour()">
+          Aujourd'hui
+        </ion-segment-button>
+
+        <ion-segment-button value="week" style="color: #ffffff; background-color: #c81437;" (click)="clickSemaine()">
+          Cette semaine
+        </ion-segment-button>
+
+        <ion-segment-button value="month" style="color: #ffffff; background-color: #c81437;" (click)="clickMois()">
+          Ce mois +
+        </ion-segment-button>
+
+    </ion-segment>
+
+    <div [ngSwitch]="filterVal">
+      <div *ngSwitchCase="'today'">
+        
+        <h1 [hidden]="!valueSms" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{sms}}
+        </h1>
+        <h1 [hidden]="valueJour" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{messageJour}}
+        </h1>
+        <div *ngIf ="valjour =='0'" >
+          <div *ngFor="let ev of jour">
+            <div class="image-event1" (click)= "goToDetailsEvent(ev)">
+              <div class="texte-event">
+              <div class="evtexte">
+                {{ev.idEvent.nomEvent}}
+              </div>
+              <div class="evimage" style="line-height: 40px;">
+                <!--img src="assets/images/pintexte.png" class="full-image" /-->
+                 {{ev.heureDebut}}
+              </div>
+            </div>
+            
+              <img *ngIf ="ev.idEvent.photoEvent" src="{{url}}/{{ev.idEvent.photoEvent}}" class="full-image" />
+              <img *ngIf ="!ev.idEvent.photoEvent" src="assets/images/978.jpg"  class="full-image" />
+
+            </div>  
+          </div>
+        </div>
+
+        <div *ngIf ="valjour =='1'" >
+          <h1 [hidden]="vv" style="color:#ac0203;
+            
+            text-align:center;
+            clear: both;
+            font-size: 16px;
+            margin-top: 25px;">
+              {{message}}
+          </h1>
+          <div *ngFor="let ev of insJour">
+            <div class="image-event1" (click)= "goToDetailsEvent(ev)">
+              <div class="texte-event" >
+              <div class="evtexte">
+                {{ev.idEvent.nomEvent}}
+              </div>
+              <div class="evimage" style="line-height: 40px;">
+                <!--img src="assets/images/pintexte.png" class="full-image" /-->
+                 {{ev.heureDebut}}
+              </div>
+              </div>
+              
+              <img *ngIf ="ev.idEvent.photoEvent" src="{{url}}/{{ev.idEvent.photoEvent}}" class="full-image" />
+              <img *ngIf ="!ev.idEvent.photoEvent" src="assets/images/978.jpg"  class="full-image" />
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div *ngSwitchCase="'week'">
+        <h1 [hidden]="!valueSms" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{sms}}
+        </h1>
+        <h1 [hidden]="valueSemaine" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{messageSemaine}}
+        </h1>
+        <div *ngIf ="valSemaine =='0'" >
+          <div *ngFor="let eve of semaine ">
+            <div class="image-event1" (click)= "goToDetailsEvent(eve)">
+              <div class="texte-event" >
+            <div class="evtexte">
+              {{eve.idEvent.nomEvent}}
+            </div>
+            <div class="evimage" style="line-height: 40px;">
+              <!--img src="assets/images/pintexte.png" class="full-image" /-->
+              {{eve.idEvent.dateEvent | date:'dd-MMM'}}
+            </div>
+            </div>
+            
+              <img *ngIf ="eve.idEvent.photoEvent" src="{{url}}/{{eve.idEvent.photoEvent}}" class="full-image" />
+              <img *ngIf ="!eve.idEvent.photoEvent" src="assets/images/978.jpg" class="full-image" />
+
+            </div>
+            
+            
+          </div>
+        </div>
+
+        <div *ngIf ="valSemaine =='1'" >
+          <h1 [hidden]="vv" style="color:#ac0203;
+            
+            text-align:center;
+            clear: both;
+            font-size: 16px;
+            margin-top: 25px;">
+              {{message}}
+          </h1>
+          <div *ngFor="let eve of insSemaine ">
+            <div class="image-event1" (click)= "goToDetailsEvent(eve)">
+            
+              <div class="texte-event" >
+              <div class="evtexte">
+                {{eve.idEvent.nomEvent}}
+              </div>
+              <div class="evimage" style="line-height: 40px;">
+                <!--img src="assets/images/pintexte.png" class="full-image" /-->
+                {{eve.idEvent.dateEvent | date:'dd-MMM'}}
+              </div>
+              </div>
+              
+                <img *ngIf ="eve.idEvent.photoEvent" src="{{url}}/{{eve.idEvent.photoEvent}}" class="full-image" />
+                <img *ngIf ="!eve.idEvent.photoEvent" src="assets/images/978.jpg" class="full-image" />
+
+            </div>
+            
+           
+          </div>
+        </div>
+        
+      </div>
+      <div *ngSwitchCase="'month'">
+
+        <h1 [hidden]="!valueSms" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{sms}}
+        </h1>
+        <h1 [hidden]="valueMois" style="color:#ac0203;
+        margin-top:30%;
+        text-align:center">
+        {{messageMois}}
+        </h1>
+        <div *ngIf ="valmois =='0'" >
+          <div *ngFor="let even of mois ">
+            <div class="image-event1" (click)= "goToDetailsEvent(even)">
+              <div class="texte-event" >
+                <div class="evtexte">
+                  {{even.idEvent.nomEvent}}
+                </div>
+                <div class="evimage" style="line-height: 40px;">
+                  <!--img src="assets/images/pintexte.png" class="full-image" /-->
+                  {{even.idEvent.dateEvent | date:'dd-MMM'}}
+                </div>
+              </div>
+              
+                <img *ngIf ="even.idEvent.photoEvent" src="{{url}}/{{even.idEvent.photoEvent}}" class="full-image" />
+                <img *ngIf ="!even.idEvent.photoEvent" src="assets/images/978.jpg" class="full-image" />
+              </div>
+            
+            
+          </div>
+        </div>
+
+        <div *ngIf ="valmois =='1'" >
+          <h1 [hidden]="vv" style="color:#ac0203;
+            
+            text-align:center;
+            clear: both;
+            font-size: 16px;
+            margin-top: 25px;">
+              {{message}}
+          </h1>
+          <div *ngFor="let even of insMois ">
+            <div class="image-event1" (click)= "goToDetailsEvent(even)">
+            
+              <div class="texte-event" >
+                <div class="evtexte">
+                  {{even.idEvent.nomEvent}}
+                </div>
+                <div class="evimage" style="line-height: 40px;">
+                  <!--img src="assets/images/pintexte.png" class="full-image" /-->
+                  {{even.idEvent.dateEvent | date:'dd-MMM'}}
+                </div>
+              </div>
+              
+                <img *ngIf ="even.idEvent.photoEvent" src="{{url}}/{{even.idEvent.photoEvent}}" class="full-image" />
+                <img *ngIf ="!even.idEvent.photoEvent" src="assets/images/978.jpg" class="full-image" />
+              </div>
+            
+            
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+    
+  </div>
+
+</ion-content>
+<!--ion-footer class="bg-footer">
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+</ion-footer-->

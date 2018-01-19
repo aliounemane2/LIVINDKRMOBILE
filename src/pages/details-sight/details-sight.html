@@ -1,0 +1,55 @@
+<!--
+  Generated template for the DetailsSightPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{titre}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<div class="body-details">
+	  	<div class="baniere-details">
+	  		<!--img src="{{evenement.image}}" class="full-image" /-->
+	  		<ion-slides  pager="true">
+				<ion-slide *ngFor="let vign of institution.photos" >
+					<img src="{{vign.photo1}}" class="full-image" style="width: 100%; height: 200px;"/>
+				</ion-slide >
+			</ion-slides >
+	  	</div>
+
+	  	<div class="details">
+	  		<div class="titre-event">
+				{{institution.nom}}
+			</div>
+	  	</div>
+
+	  	<div class="details">
+	  		<div class="descsight">
+				{{institution.description}}
+			</div>
+	  	</div>
+
+	  	
+	</div>
+
+</ion-content>
+
+<ion-footer class="footer-sight" >
+  
+	  		<div class="route" (click)="goToCarteMap(institution)">
+				<div class="cadre-pin">
+					<ion-icon name="pin"></ion-icon>
+				</div>
+
+				<div class="texte-pin"> 
+					&nbsp; &nbsp; Localiser | me rendre à l’endroit
+				</div>	
+			</div>
+</ion-footer>

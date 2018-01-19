@@ -1,0 +1,83 @@
+page-recommendation {
+	.body-evenement{
+		width: 100%;
+		*position: absolute;
+    	*top: -40px;
+	}
+	.bloc-evenement{
+		width: 100%;
+		height: 90px;
+		*box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+		margin-top: 5px;
+		border-bottom: 2px solid #99bdcd;
+	}
+	.image-evenement{
+		width: 30%;
+		float: left;
+		height: 88px;
+	}
+	.texte-evenement{
+		width: 70%;
+		float: left;
+		padding-left: 10px;
+		padding-top: 5px;
+		color: #000000;
+		line-height: 20px;
+
+	}
+
+	.image-event{
+		width:100%;
+		height: 170px;
+		position:relative;
+		*margin-bottom: 2%;
+		*background-color: #cde87u;
+	}
+
+	.texte-event{
+		width: 60%;
+		left: 40%;
+		height: 40px;
+		color: #ffffff;
+		background-color: #c81437;
+		position: absolute;
+    	top: 130px;
+    	border-radius: 10px;
+    	*background-image: url(../assets/images/bg-texte-event.png);
+	}
+	.evtexte{
+		float: left;
+		width: 70%;
+		height: 40px;
+		text-align: center;
+		*padding-top: 5px;
+		text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    line-height: 40px;
+	}
+	.evimage{
+		float: left;
+		width: 20%;
+		height: 40px;
+		line-height: 40px;
+	}
+
+	.note-ins{
+		position: absolute;
+    	top: 20px;
+    	color: #ffffff;
+	    font-size: 10px;
+	    left: 30px;
+	    width: 20%;
+    	height: 20px;
+	    line-height: 20px;
+	    text-align: center;
+	    background-color: #cccccc;
+	    border-radius: 10px;
+	}
+	.note-ins rating ul li{
+		color: #ffffff;
+	}
+
+}

@@ -1,0 +1,87 @@
+<!--
+  Generated template for the InscriptionIneterestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Centre d'interets</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h1 [hidden]="!nointe" style="color:#ac0203;
+    font-size: 16px;
+    text-align:center;
+    margin-top: 25%;">
+      {{messages}}
+  </h1>
+
+<form [formGroup]="myFormulaire" style="margin-top: 15%;" (ngSubmit)="addInterestUser()">
+  <div class="bloc-ineteret" formArrayName="idInterests">
+    <div *ngFor="let interet of inte ; let i = index">
+      <div class="ineteret1" (click)= "photoClicked(interet)" >
+        <div class="ineteret-image" >
+          <img src="{{interet.photoInterest}}" class="full-image" style="border-radius: 50%; border: solid 1px #000000;" *ngIf="!interet.val"  />  
+
+          <img src="{{interet.photo}}" class="full-image" style="border-radius: 50%;" *ngIf="interet.val" [style.backgroundColor] ="color" /> 
+        </div>
+        <div class="ineteret-texte" *ngIf="!interet.val">
+          
+          
+          {{interet.nomInterest}}
+        </div>
+
+        <div class="ineteret-texte" *ngIf="interet.val" [style.color] ="color">
+          
+          
+          {{interet.nomInterest}}
+        </div>
+      </div>
+    </div>
+
+    <div class="separateur">Centres d'interets </div>
+    <ion-slides slidesPerView="7" spaceBetween="0">
+      <ion-slide class="ineteret1" *ngFor="let int of categorieInteret ; let i = index" style="width: 16%;">
+        <div (click)= "tofClicked(int)"  >
+        <div class="ineteret-image" >
+          <img src="{{int.image}}" class="full-image" style="border-radius: 50%; border: solid 1px #000000;"   />    
+
+          <!--img src="{{int.photo}}" class="full-image" style="border-radius: 50%;" *ngIf="int.val" [style.backgroundColor] ="color" /--> 
+        </div>
+        <div class="ineteret-texte" *ngIf="!int.val" >
+         {{int.nomInteret}}
+        </div>
+
+        <div class="ineteret-texte" *ngIf="int.val" [style.color] ="color">
+         {{int.nomInteret}}
+        </div>
+      </div>
+      </ion-slide>  
+      <ion-slide>
+        <!-- need a empty slide to avoid last item to be inaccessible -->
+    </ion-slide>    
+    </ion-slides>
+
+    
+
+  </div>
+  <button type="submit" class="btnconnexion1" ><img src="assets/images/next.png" class="full-image" /></button>
+</form>
+
+
+</ion-content>
+
+<!--ion-footer class="bg-footer" >
+  
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+  
+</ion-footer-->

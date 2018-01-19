@@ -1,0 +1,141 @@
+page-profil {
+	.body-profil{
+		width: 100%;
+	}
+	.baniere-profil{
+		width:100%;
+		height: 170px;
+		margin-bottom: -4px;
+		background-repeat: no-repeat;
+		*background-size: contain;
+		*background-image: url(../assets/images/baniere-home.png);
+		position: relative;
+	}
+	.btnsuivant{
+		padding-left: 7%;
+	    padding-right: 6%;
+	    margin-left: 25%;
+	    margin-right: 25%;
+	    *padding-top: 10px;
+	    margin-top: 4%;
+	    height: 40px;
+	    font-size: 14px;
+	    background: #67a7cb;
+	    color: #ffffff;
+	    border-radius: 25px;
+	    width: 50%;
+	    margin-bottom: 3%;
+	}
+
+	.champannonce{
+	    *border-bottom: solid 1px #ccc;
+	    padding: 5px 10px 5px 0px;
+	    *background-color: #ffffff;
+	    height : 38px;  
+	    color: #000000;    
+	}
+
+	.image-user {
+	    width: 80%;
+	    color: #000;
+	    position: absolute;
+	    left: 35%;
+	   	top: 39.5%;
+    }
+
+    .infos{
+    	width: 100%;
+    	padding-left: 15%;
+    	padding-right: 15%;
+    	height: 40px;
+
+    }
+
+    .avis{
+    	float: left;
+    	height: 40px;
+    	width: 50%;
+    	text-align: center;
+    	line-height: 40px;
+    }
+
+    .nbphoto{
+    	float: right;
+    	height: 40px;
+    	width: 50%;
+    	text-align: center;
+    	line-height: 40px;
+    }
+
+    .texte-institution{
+		margin-top: 10px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    margin-left: 10px;
+	    padding-left: 10px;
+	    margin-right: 10px;
+	    padding-right: 10px;
+	    background-color: #ffffff;
+	    color: #000000;
+	    
+	    text-align: justify;
+	    box-shadow: 1px 1px 7px #888888;
+	    *font-weight: bold;
+	    line-height: 24px;
+	}
+	.level{
+		position: absolute;
+	    left: 28%;
+	    top: 125%;
+	}
+	.contenu-bar{
+		width: 90%;
+	    height: 10px;
+	    background-color: #cccccc;
+	    top: 145%;
+	    position: absolute;
+	    margin-left: 5%;
+		
+	}
+	.conten-con{
+		width: 90%;
+	    height: 20px;
+	    background-color: #cccccc;
+	    top: 145%;
+	    position: absolute;
+	    margin-left: 5%;
+	}
+	.bar-level{
+		width: 10%;
+		height:10px;
+		background-color: #cccccc;
+		float: left;
+
+	}
+
+	.bar-level-color{
+		width: 10%;
+		height:10px;
+		background-color: #c81437;
+		float: left;
+	}
+
+	.bar-level-jaune{
+		width: 1%;
+	    height: 40px;
+	    background-color: #ffa500;
+	    float: left;
+	    position: relative;
+	    top: -30px;
+	}
+	.cadre-level-jaune{
+		background-color: #ffa500;
+	    float: left;
+	    position: relative;
+	    top: -60px;
+	    border-radius:10px;
+	    width: 30%;
+
+	}
+
+}

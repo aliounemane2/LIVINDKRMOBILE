@@ -1,0 +1,191 @@
+<!--
+  Generated template for the DetailsEventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages andf navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{evenement.nom}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color:#ededed;">
+	<div class="body-details">
+	  	<div class="baniere-details">
+	  		<!--img src="{{evenement.image}}" class="full-image" /-->
+	  		<ion-slides  pager="true" *ngIf ="photos">
+				<ion-slide *ngFor="let vign of photos" >
+					<img *ngIf ="vign.photoEvent" src="{{vign.photoEvent}}" class="full-image" />
+
+					<img *ngIf ="!vign.photoEvent" src="{{url}}/{{evenement.idEvent.photoEvent}}" class="full-image" />
+				</ion-slide >
+			</ion-slides >
+
+			<ion-slides  pager="true" *ngIf ="!photos">
+				<ion-slide >
+					<img src="{{url}}/{{evenement.idEvent.photoEvent}}" class="full-image" />
+				</ion-slide >
+			</ion-slides >
+	  	</div>
+
+		<!--ion-segment [(ngModel)]="eventdetails" style="background-color:#ffffff;">
+		    <ion-segment-button value="description" style="color: #ffffff; background-color: #c81437;">
+		      Infos
+		    </ion-segment-button>
+		</ion-segment-->
+		    <!--ion-segment-button value="date" style="color: #ffffff; background-color: #c81437;">
+		      Date
+		    </ion-segment-button-->
+
+		    <!--ion-segment-button value="lieu" style="color: #ffffff; background-color: #c81437;">
+		      Localisation
+		    </ion-segment-button-->
+		    <!--ion-segment-button value="foto"  style="color: #ffffff; background-color: #c81437;">
+		      Photos
+		    </ion-segment-button-->
+		    <!--ion-segment-button value="avi" *ngIf ="evenement.statut =='0'" style="color: #ffffff; background-color: #c81437;">
+		      Avis
+		    </ion-segment-button-->
+
+		
+		<!--div [ngSwitch]="eventdetails">
+			<div *ngSwitchCase="'description'">
+			</div>
+		</div-->
+				<!--div class ="cadre">
+					<div class="texte-details">
+						<div class="titre-event">
+							{{evenement.nom}} entre Mbalakh men et Rappeurs
+						</div>
+
+						<div class="date-event">
+							Date: {{evenement.date}}
+						</div>
+					</div>
+
+					<div class="texte-details">
+
+						<div class="cadre-pp-event">
+							<div class="pp-event"><img src="assets/images/bienetre1.png" class="full-image" style="border-radius: 50%;"  /></div>
+							<div class="texte-pp-event">PSG FanClub</div>
+						</div>
+
+						<div class="tag-event">Foot ball</div>
+						<div class="tag-event">Sacre coeur</div>
+						<div class="tag-event">Tournoi</div>
+					</div>
+
+					
+					
+				</div-->
+				<div class="details">
+					<div class="titre-event">
+						{{evenement.idEvent.nomEvent}} à {{evenement.idEvent.idPlace.adressePlace}}
+					</div>
+
+					<div class="date-event">
+						Date: {{evenement.idEvent.dateEvent | date:'dd/MM/yyyy'}}  à {{evenement.heureDebut }}
+					</div>
+
+					<div class="btn-calendar" (click)="scheduleEvents(evenement)">
+						<ion-icon name="calendar"></ion-icon> &nbsp;&nbsp;Ajouter au calendrier
+					</div>
+
+					<div class="cadre-pp-event">
+							<!--div class="pp-event"><img src="assets/images/profil.png" style="border-radius: 50%; border: solid 1px #000000;" class="full-image"  /></div>
+							<div class="texte-pp-event">{{evenement.user}}</div-->
+
+							<ion-item style="padding-left: 0px;">
+							    <ion-avatar item-start>
+							      <img src="assets/images/profil.png">
+							    </ion-avatar>
+							    <h2>{{evenement.idEvent.idUser.pseudo}}</h2>
+							</ion-item>
+					</div>
+					<!--div class="cadre-tag">
+						<div class="tag-event">{{evenement.tag1}}</div>
+						<div class="tag-event">{{evenement.tag2}}</div>
+						<div class="tag-event">{{evenement.tag3}}</div>
+					</div-->
+						
+				</div>
+
+				<div class="texte-details1">
+					<div>
+						{{evenement.idEvent.descriptionEvent}}
+					</div>
+					
+
+					<div class="route" (click)="goToCarteMap(evenement)">
+						<div class="cadre-pin">
+							<ion-icon name="pin"></ion-icon>
+						</div>
+
+						<div class="texte-pin"> 
+							&nbsp; &nbsp; Localiser | me rendre à l’évènement
+						</div>
+						
+					</div>
+				</div>
+			
+
+			<!--div *ngSwitchCase="'date'">
+				<div class="texte-details">
+					{{evenement.date}}<br/>
+
+					
+
+					
+				</div>
+				
+			</div-->
+
+			<!--div *ngSwitchCase="'lieu'">
+				
+				<div class="texte-details">
+					{{evenement.lieu}}
+				</div>
+
+				<div class="route" (click)="goToCarteMap(evenement)"><ion-icon name="pin"></ion-icon>&nbsp; &nbsp; Comment m'y rendre</div>
+			</div-->
+
+			<!--div *ngSwitchCase="'foto'">
+				
+				<div class="texte-det">
+					<div style="margin-left:20px;">
+						<ion-icon name="camera"></ion-icon>
+						Ajouter des photos
+					</div>
+					<ion-slides  >
+						<ion-slide *ngFor="let vign of vignette" >
+							<img src="{{vign.image}}" class="full-image" />
+						</ion-slide >
+					</ion-slides >
+				</div>
+			</div-->
+
+			<!--div *ngSwitchCase="'avi'">
+				
+				<div class="texte-details">
+					<rating score="{{averageRating}}" max="5" (update)="onRatingChange($event)"></rating><br/>
+				</div>
+			</div-->
+
+		
+  	</div>
+  	
+</ion-content>
+
+<!--ion-footer class="bg-footer" >
+  
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+ 
+</ion-footer-->

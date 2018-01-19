@@ -1,0 +1,44 @@
+<!--
+  Generated template for the InscriptionValidationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar style="color: #ffffff;">
+    <ion-title>Inscription</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="body-home">
+    <div class="baniere-inscription1"><img src="assets/images/LivinDakar_LogoBlack.png" class="full-image" />
+    </div>
+    <div class="form-inscription1">
+      <form [formGroup]="myFormulaire" (ngSubmit)="codeValidation()">
+
+      <ion-item>
+        <ion-label floating class="labelins">Code de validation</ion-label>
+        <ion-input formControlName="code" type="number" class="champins"></ion-input>
+      </ion-item>
+
+      <button class="btnconnexion1" type="submit" ><img src="assets/images/next.png" class="full-image" /></button>
+
+    </form>
+    </div>
+  </div>
+	
+
+</ion-content>
+<!--ion-footer class="bg-footer" >
+  
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+
+</ion-footer-->

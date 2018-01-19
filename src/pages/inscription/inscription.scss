@@ -1,0 +1,69 @@
+page-inscription {
+	.body-inscription{
+		width: 100%;
+	}
+	.baniere-inscription{
+		width:100%;
+		*height: 15%;
+		margin-bottom: 2%;
+		background-repeat: no-repeat;
+    	background-image: url(../assets/images/Background.jpg);
+	}
+	.full-image{
+		width: 100%;
+		height: 100%;
+	}
+	.logo-liv{
+		width: 100%;
+		height: 10%;
+		padding-left: 20%;
+    	padding-right: 20%;
+	}
+
+	.form-inscription{
+		width: 100%;
+		padding-left: 5%;
+    	padding-right: 5%;
+
+	}
+
+	.btnconnexion{
+		padding-left: 7%;
+	    padding-right: 6%;
+	    margin-left: 25%;
+	    margin-right: 25%;
+	    *padding-top: 10px;
+	    margin-top: 5%;
+	    height: 40px;
+	    font-size: 14px;
+	    *background: #c81437;
+	    color: #ffffff;
+	    border-radius: 25px;
+	    *width: 50%;
+	    margin-bottom: 3%;
+	    background-repeat: no-repeat;
+    	background-image: url(../assets/images/Background.jpg);
+	}
+	.champins{
+	    *border-bottom: solid 1px #ccc;
+	    padding: 5px 10px 5px 0px;
+	    *background-color: #ffffff;
+	    height : 38px;  
+	    color: #000000;    
+	}
+	.btnsuivant{
+		width: 20%;
+	    *height: 20%;
+	    float: right;
+	    margin-top: 20px;
+	} 
+	.datetime-md .datetime-placeholder {
+	    color: #999;
+	    padding: 10px 10px 5px 10px;
+	}
+
+	.datetime-text{
+		padding: 10px 10px 5px 10px;
+	}
+
+}

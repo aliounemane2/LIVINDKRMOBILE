@@ -1,14 +1,55 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Connexion
     </ion-title>
+    
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <div class="body-home">
+  	<div class="baniere-home"><img src="assets/images/LivinDakar_LogoBlack.png" class="full-image" />
+  	</div>
+  	<!--div class="logo-liv"> <img src="assets/images/logo-livindakar.png" class="full-image" />
+  	</div-->
+  	<div class="form-login">
+  		<form [formGroup]="myFormulaire" >
+			<ion-item>
+		        <!--ion-label floating class="labelins">  &nbsp; &nbsp;Login</ion-label-->
+		        <ion-input formControlName="login" type="text" class="champins" placeholder="Login"></ion-input>
+      		</ion-item>
+
+      		
+	        <ion-item>
+	        	
+		        <!--ion-label floating class="labelins"> &nbsp; &nbsp;Mot de passe</ion-label-->
+		        <ion-input formControlName="motpasse" type="password" class="champins" placeholder="Mot de passe"></ion-input>
+	        </ion-item>
+
+
+	        <!--ion-item>
+                <ion-label stacked-label>Se souvenir de moi</ion-label>
+                <ion-checkbox dark formControlName="rememberMe" ></ion-checkbox>
+            </ion-item-->
+	        
+	        <button class="btnconnexion" (click)= "loginJson()"  >
+	        	Se connecter
+      		</button>
+      		<!--button class="btninscri" (click)= "goToInscription()"  >
+	        	S'inscrire
+      		</button-->
+		</form>	
+  	</div>
+  	<div class="passe-oublie">Mot de passe oublié</div>
+  </div>
 </ion-content>
+<ion-footer class="bg-footer" >
+  <!--ion-toolbar style="background-color: #ffffff;"-->
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered" style="color: #015b80;">Liv'in Dakar by Qualshore</span>
+  <!--/ion-toolbar-->
+</ion-footer>

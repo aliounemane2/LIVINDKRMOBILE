@@ -1,0 +1,13 @@
+[
+  {"id":1,"nom":"Plomberie","image":"assets/images/Plumber2.png"},
+  {"id":2,"nom":"Peintre","image":"assets/images/Painter2.png"},
+  {"id":3,"nom":"Maçonnerie","image":"assets/images/Macon2.png"},
+  {"id":4,"nom":"Menuiserie","image":"assets/images/Carpenter2.png"},
+  {"id":5,"nom":"Transport","image":"assets/images/Trans2.png"},
+  {"id":6,"nom":"Photographie","image":"assets/images/Photo2.png"},
+  {"id":7,"nom":"Professeur","image":"assets/images/Prof2.png"},
+  {"id":8,"nom":"Technicien","image":"assets/images/Tech2.png"},
+  {"id":10,"nom":"Divers","image":"assets/images/Misc2.png"},
+  {"id":11,"nom":"Electricien","image":"assets/images/Elec2.png"},
+  {"id":12,"nom":"Personnel de Maison","image":"assets/images/Maid2.png"}
+]

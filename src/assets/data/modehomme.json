@@ -1,0 +1,5 @@
+[
+	{"image":"assets/images/celio.jpg","id":"1","nom":"celio","adresse":"5 Rue Aime Cesaire, Dakar","lattitude":"14.6932983","longitude":"-17.474591099999998","telephone":"776665511","description":"Chaîne dédiée à la mode masculine (vêtements, sous-vêtements et accessoires) au look décontracté et coloré."},
+	{"image":"assets/images/mondialsport.jpg","id":"2","nom":"MONDIAL SPORT","adresse":"Mondial sport, 118 Avenue André Peytavin. Galerie Commerciale, Dakar","lattitude":"14.6691453","longitude":"-17.43923570000004","telephone":"33 860 30 00.","description":"Chaîne offrant prêt-à-porter tendance, chaussures, accessoires et linge de maison pour enfants de 0 à 14 ans."},
+	{"image":"assets/images/citysport.jpg","id":"3","nom":"City Sport","adresse":"Avenue G. Pompidou, Dakar","lattitude":"14.6695263","longitude":"-17.43404110000006","telephone":"33 860 30 00.","description":"Chaîne offrant prêt-à-porter tendance, chaussures, accessoires et linge de maison pour enfants de 0 à 14 ans."}
+]

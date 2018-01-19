@@ -1,0 +1,385 @@
+<!--
+  Generated template for the ListeBusinessPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{titre}}</ion-title>
+    <ion-buttons end>
+	  <!--button (click)="afficherMenu()" style="background-color: #000000;">
+      	<ion-icon name="more" style="color: #ffffff;"></ion-icon>
+      </button-->
+      <button (click)="openRecherche(institution)" style="background-color: #000000; font-size: 18px;" *ngIf="rec == '0'">
+      	<ion-icon name="search" style="color: #ffffff;"></ion-icon>
+      </button>
+     
+      <button (click)="afficherMenu(institution)"  style="background-color: #000000; font-size: 18px;" *ngIf="pr == '0'">
+      	<ion-icon name="funnel" style="color: #ffffff;"></ion-icon>
+      </button>
+
+      <button (click)="openMap(titre,institution,categorie)" style="background-color: #000000; font-size: 18px;" *ngIf="map == '0'">
+      	<ion-icon name="pin" style="color: #ffffff;"></ion-icon>
+      </button>
+
+      <button (click)= "filtreByNote(institution)" style="background-color: #000000; font-size: 18px;" *ngIf="nota == '0'">
+      	<ion-icon name="star" style="color: #ffffff;"></ion-icon>
+      </button>
+
+	</ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+	<div class="body-evenement">
+		<div *ngIf="titleCat == 'Shopping'" >
+			<!--ul *ngIf="val1 == '1'"  class="menu-right">
+		      	<li *ngFor="let pr of price1" (click)="flitreByprice(institution,pr.price)">
+		      		{{pr.price}}
+		      	</li>
+	      		
+     		</ul-->
+
+     		<div class="content-menu-price" *ngIf="val1 == '1'">
+	      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
+	      			{{pr.price}}
+	      		</div>
+	      	</div>
+
+     		<ion-searchbar *ngIf="value == '2'"  (ionInput)="getItemsFleuriste($event)"></ion-searchbar>
+
+     		<div *ngIf ="valrech =='0'">
+     			<h1 [hidden]="vall" style="color:#ac0203;
+			       font-size: 16px;
+			        text-align:center;
+			        margin-top: 25%;
+			        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message1}}
+		        </h1>
+     			<div *ngFor="let evenement of institution" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+				          {{ evenement.price }}
+				        </div>
+				      </div>
+				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+				      <div class="note-ins" *ngIf ="note =='1'">
+		      			<rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
+		      		  </div>
+			        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+     		</div>
+
+     		<div *ngIf ="valrech =='1'">
+     			<h1 [hidden]="valueJour" style="color:#ac0203;
+		       font-size: 16px;
+		        text-align:center;
+		        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message}}
+		        </h1>
+     			<div *ngFor="let evenement of insRecherche" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+				          {{ evenement.price }}
+				        </div>
+				      </div>
+				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+			         <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+     		</div>
+
+     		<div *ngIf ="valrech =='2'">
+     			<h1 [hidden]="valueJour" style="color:#ac0203;
+		        font-size: 16px;
+		        text-align:center;
+		        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message}}
+		        </h1>
+     			<div *ngFor="let evenement of insPrice" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+				          {{ evenement.price }}
+				        </div>
+				      </div>
+			         <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+     		</div>
+
+		    
+		</div>
+
+		<div *ngIf="titleCat == 'Things To Do'" >
+			<!--ul *ngIf="val == '1'"  class="menu-right">
+		      	<li (click)= "openMap(titre)"><ion-icon name='pin'></ion-icon></li>
+	      		<li (click)= "openRecherche()"><ion-icon name='search'></ion-icon></li>
+     		</ul-->
+     		<div *ngIf="titre == 'Sight-seeing'" >
+     			<div class="content-menu-price" *ngIf="val1 == '1'">
+		      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
+		      			{{pr.price}}
+		      		</div>
+		      	</div>
+		      	<div class="bgsight" *ngIf="valrech == '0'"> 
+		      		<div *ngFor="let evenement of institution" class="bg-texte">
+	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
+	     				<div class="descsight">{{evenement.descriptionEvent}}</div>
+	     			</div>
+		      	</div>	
+
+		      	<div class="bgsight" *ngIf="valrech == '2'"> 
+		      		<div *ngFor="let evenement of insPrice" class="bg-texte">
+	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
+	     				<div class="descsight">{{evenement.descriptionEvent}}</div>
+	     			</div>
+		      	</div>	
+     		</div>
+
+     		<div *ngIf="titre != 'Sight-seeing'">
+
+     			<div class="content-menu-price" *ngIf="val1 == '1'">
+		      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
+		      			{{pr.price}}
+		      		</div>
+		      	</div>
+		      	
+     			<ion-searchbar *ngIf="value == '2'"  (ionInput)="getItemsFleuriste($event)"></ion-searchbar>
+
+     		<div *ngIf ="valrech =='0'">
+     			<h1 [hidden]="vall" style="color:#ac0203;
+			       font-size: 16px;
+			        text-align:center;
+			        margin-top: 25%;
+			        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message1}}
+		    	</h1>
+
+			    <div *ngFor="let evenement of institution" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+				          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+				        </div>
+				      </div>
+				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+				      <div class="note-ins" *ngIf ="note =='1'">
+		      			<rating  score="{{evenement.note}}"  max="{{evenement.note}}" ></rating>
+		      		  </div>
+			        	<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+	     	</div>
+
+	     	<div *ngIf ="valrech =='1'">
+     			<h1 [hidden]="valueJour" style="color:#ac0203;
+		       font-size: 16px;
+		        text-align:center;
+		        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message}}
+		        </h1>
+     			<div *ngFor="let evenement of insRecherche" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+				          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+				        </div>
+				      </div>
+				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+			        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+     		</div>
+
+     		<div *ngIf ="valrech =='2'">
+     			<h1 [hidden]="valueJour" style="color:#ac0203;
+		        font-size: 16px;
+		        text-align:center;
+		        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message}}
+		        </h1>
+     			<div *ngFor="let evenement of insPrice" >
+			       
+			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			      	<div class="texte-event" >
+				        <div class="evtexte">
+				          {{evenement.nomIns}}
+				        </div>
+				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+				          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+				          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+				          
+				        </div>
+				      </div>
+				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+			        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			      </div>
+			    </div>
+     		</div>
+     	</div>
+
+     		
+
+		</div>
+
+		<div *ngIf="titleCat == 'Prestataires'" >
+			<!--ul *ngIf="val == '1'"  class="menu-right">
+		      	<li (click)= "openMap(titre)"><ion-icon name='pin'></ion-icon></li>
+	      		<li (click)= "openRecherche()"><ion-icon name='search'></ion-icon></li>
+     		</ul-->
+
+     		<ion-searchbar *ngIf="value == '2'"  (ionInput)="getItemsFleuriste($event)"></ion-searchbar>
+
+     		<div *ngIf ="valrech =='0'">
+     			<h1 [hidden]="vall" style="color:#ac0203;
+			       font-size: 16px;
+			        text-align:center;
+			        margin-top: 25%;
+			        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message1}}
+		    	</h1>
+
+     			
+	     		<!--div *ngFor="let evenement of institution" >
+				    
+				    <div class="image-event1" (click)= "goToInstitu(evenement)">
+					    <div class="texte-event" (click)=  "goToInstitu(evenement)">
+					        <div class="evtexte">
+					          {{evenement.nom}}
+					        </div>
+					        <div class="evimage">
+					          <img src="assets/images/pintexte.png" class="full-image" />
+					        </div>
+					    </div>
+				        <img src="{{evenement.image}}" class="full-image" />
+
+				    </div>
+			    </div-->
+			    <div class="body-presta" *ngFor="let evenement of institution">
+			    	<div class="titre-pres"> 
+			    		<div class="titre">{{evenement.nomIns}}</div>
+			    		<div class="adresse">Adresse: {{evenement.adresseIns}}</div>
+			    		<div class="adresse">Téléphone: {{evenement.telephoneIns}}</div>
+			    	</div>
+			    	<div class="avis-pres" (click)= "openModal(evenement)">
+			    		<div class="avis">A</div>
+			    		<div class="review" *ngIf ="evenement.note <= '1'"> {{evenement.note}} review</div>
+			    		<div class="review" *ngIf ="evenement.note > '1'"> {{evenement.note}} reviews</div>
+			    	</div>
+			    </div>
+     		</div>
+
+     		<div *ngIf ="valrech =='1'">
+     			<h1 [hidden]="valueJour" style="color:#ac0203;
+			       font-size: 16px;
+			        text-align:center;
+			        margin-top: 25%;
+			        padding-left: 5%;
+    				padding-right: 5%;">
+		        	{{message}}
+		    	</h1>
+     			<div class="body-presta" *ngFor="let evenement of insRecherche">
+			    	<div class="titre-pres"> 
+			    		<div class="titre">{{evenement.nomIns}}</div>
+			    		<div class="adresse">Adresse: {{evenement.adresseIns}}</div>
+			    		<div class="adresse">Téléphone: {{evenement.telephone}}</div>
+			    	</div>
+			    	<div class="avis-pres" (click)= "openModal(evenement)">
+			    		<div class="avis">A</div>
+			    		<div class="review" *ngIf ="evenement.note <= '1'"> {{evenement.note}} review</div>
+			    		<div class="review" *ngIf ="evenement.note > '1'"> {{evenement.note}} reviews</div>
+			    	</div>
+			    </div>
+	     		<!--div *ngFor="let evenement of insRecherche" >
+				    
+				    <div class="image-event1" (click)= "goToInstitu(evenement)">
+				    	<div class="texte-event" (click)=  "goToInstitu(evenement)">
+					        <div class="evtexte">
+					          {{evenement.nom}}
+					        </div>
+					        <div class="evimage">
+					          <img src="assets/images/pintexte.png" class="full-image" />
+					        </div>
+					    </div>
+				        <img src="{{evenement.image}}" class="full-image" />
+
+				    </div>
+			    </div-->
+     		</div>
+
+     		<!--div *ngIf ="valrech =='2'">
+	     		<div *ngFor="let evenement of insPrice" >
+				    
+				    <div class="image-event1" (click)= "goToInstitu(evenement)">
+				    	<div class="texte-event" (click)=  "goToInstitu(evenement)">
+					        <div class="evtexte">
+					          {{evenement.nom}}
+					        </div>
+					        <div class="evimage">
+					          <img src="assets/images/pintexte.png" class="full-image" />
+					        </div>
+					    </div>
+				        <img src="{{evenement.image}}" class="full-image" />
+
+				    </div>
+			    </div>
+     		</div-->
+		</div>
+		
+    </div>
+
+</ion-content>

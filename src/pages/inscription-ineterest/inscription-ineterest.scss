@@ -1,0 +1,77 @@
+page-inscription-ineterest {
+	.ineteret{
+		float:left;
+		width:48%;	 
+		padding-bottom: 10px;
+		margin-left: 2%;
+		
+	}
+
+	.ineteret-image{
+		*height: 60px;
+	}
+	.ineteret-texte{
+		color: #000000;
+		padding-top: 5%;
+		padding-bottom: 4%;
+		padding-left: 6%;
+		font-size: 8px;
+		text-align: center;
+		*background-color: #c81437;
+		*-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+     	*box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.bloc-ineteret{
+		width:100%;
+		margin-top: 3%;
+	}
+	.centre{
+		background-color: #ffffff;
+	}
+	.btnsuivant{
+		padding-left: 7%;
+	    padding-right: 6%;
+	    margin-left: 25%;
+	    margin-right: 25%;
+	    *padding-top: 10px;
+	    margin-top: 4%;
+	    height: 40px;
+	    font-size: 14px;
+	    background: #67a7cb;
+	    color: #ffffff;
+	    border-radius: 25px;
+	    width: 50%;
+	    margin-bottom: 3%;
+	}
+	.btnconnexion1{
+		width: 20%;
+		*height: 20%;
+	    margin-left: 40%;
+	    margin-right: 25%;
+	    *margin-top: 5%;
+	    *height: 40px;
+	    font-size: 14px;
+	    background: none;
+	}
+
+	.ineteret1{
+		float:left; 
+		padding-bottom: 10%;
+		width:16%;	
+		margin-left: 10%;
+    	margin-right: 5%;
+		
+	}
+	.separateur{
+		clear: both;
+		text-align: center;
+		color: #c81437;
+		margin-top: 10%;
+		margin-bottom: 5%;
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	
+}

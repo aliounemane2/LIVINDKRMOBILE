@@ -1,0 +1,8 @@
+[
+	  {"image": "../assets/images/restau.png", "nom": "Defilé de mode", "id": 1, "date": "12-10-2017 a 21h00", "lieu": "Radisson blue", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.75298634345", "longitude": "-17.463354667","note":"3"},     
+      {"image": "../assets/images/restau.png", "nom": "Match de foot ball", "id": 2, "date": "12-10-2017 a 21h00", "lieu": "Terrain Dakar Sacre Coeur", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.697852", "longitude": "-17.47538765","note":"4"},
+      {"image": "../assets/images/restau.png", "nom": "Concert live Pape Diouf", "id": 3, "date": "12-10-2017 a 00h00", "lieu": "Grand Theatre", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.78336169", "longitude": "-17.396423","note":"2.5"},
+      {"image": "../assets/images/restau.png", "nom": "Randonne pedestre", "id": 4, "date": "12-10-2017 a 09h00", "lieu": "Place de l\"obelisque", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.75486169", "longitude": "-17.3767423","note":"4"},
+      {"image": "../assets/images/restau.png", "nom": "Diner de gala", "id": 5, "date": "12-10-2017 a 09h00", "lieu": "King Fahad Palace", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.772186169", "longitude": "-17.366423","note":"5"},
+      {"image": "../assets/images/restau.png", "nom": "Combat de lutte", "id": 6, "date": "12-10-2017 a 17h00", "lieu": "Stade demba DIOP", "description": "Ce defile est organise par Adama Paris", "lattitude": "14.78766169", "longitude": "-17.378423","note":"3.5"}
+]

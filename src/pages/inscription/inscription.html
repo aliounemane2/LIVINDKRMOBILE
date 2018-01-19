@@ -1,0 +1,99 @@
+<!--
+  Generated template for the InscriptionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar style="color: #ffffff;">
+    <ion-title>Inscription</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="body-inscription">
+    <div class="baniere-inscription"><img src="assets/images/LivinDakar_LogoBlack.png" class="full-image" />
+    </div>
+    <!--div class="logo-liv"> <img src="assets/images/logo-livindakar.png" class="full-image" />
+    </div-->
+    <div class="form-inscription">
+      <form [formGroup]="myFormulaire" (ngSubmit)="goToInscription()">
+
+      <ion-item>
+        
+        <ion-input formControlName="prenom" type="text" class="champins" placeholder="Prenom"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        
+        <ion-input formControlName="nom" type="text" class="champins" placeholder="Nom"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="email" type="text" class="champins" placeholder="Email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MMM-DD" formControlName="myDate" class="champins" placeholder="Date de naissance"></ion-datetime>
+      </ion-item>
+
+      <ion-item style="width: 50%; float:left;">
+      <!--ion-label>Indicatif</ion-label-->
+        <ion-select formControlName="indicatif"  class="champins" interface="popover">
+          <ion-option  value="+221" class="selectannonce">Senegal(+221)</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item style="width: 50%; float:left;">
+        <ion-input formControlName="telephone" type="tel" class="champins" placeholder="Telephone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <ion-label>Sexe</ion-label>
+        <ion-select formControlName="sexe"  class="champins" interface="popover">
+          <ion-option  value="homme" class="selectannonce">Homme</ion-option>
+          <ion-option  value="femme" class="selectannonce">Femme</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="username" type="text" class="champins" placeholder="Pseudonyme"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="motpasse" type="password" class="champins" placeholder="Mot de passe"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="confirmmotpasse" type="password" class="champins" placeholder="Confirmer mot de passe"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked-label>Je reside a Dakar
+        </ion-label>
+        <ion-checkbox dark formControlName="residant" ></ion-checkbox>
+      </ion-item>
+
+      <button type="submit" class="btnsuivant"><img src="assets/images/next.png" class="full-image" /></button>
+
+      <!--div class="btnsuivant" (click)="goToInscription()" ><img src="assets/images/next.png" class="full-image" /></div-->
+      
+      <!--button class="btnconnexion" (click)="goToInscription()">Suivant</button-->
+
+    </form>
+
+    </div>
+  </div>
+</ion-content>
+<!--ion-footer class="bg-footer" >
+  
+    <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+    <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+    <span class="powered">Liv'in Dakar by Qualshore</span>
+  
+</ion-footer-->

@@ -1,1 +1,89 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!--ion-nav [root]="rootPage"></ion-nav-->
+<ion-menu side="left" [content]="content">
+  <ion-header>
+    <ion-navbar>
+    
+    <ion-title>
+      Menu
+    </ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+  <div class="bg-menu">
+    <!--ion-avatar item-start -->
+              <img src="assets/images/users.png" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+      <!--/ion-avatar-->
+  </div>
+  <div class="name">Amadou NIASS</div>
+  <div class="bg-logo"><img src="assets/images/LivinDakar_LogoWhite.png" class="full-image" /></div>
+    <ion-list style="border-bottom: 2px solid #015b7e; padding-bottom: 5px;">
+      <div *ngFor="let p of pages" >
+        <button ion-item   (click)="openPage(p)" *ngIf ="p.visible == '1'" style="border-bottom: none;height: 30px;"> 
+          <ion-icon name="{{p.icon}}"></ion-icon>&nbsp;&nbsp; {{p.title}} 
+        </button>
+
+        <button ion-item  (click)="openPage(p)" *ngIf ="p.visible == '0' && token != null" style="border-bottom: none;height: 30px;"> 
+          <ion-icon name="{{p.icon}}"></ion-icon>&nbsp;&nbsp;{{p.title}} 
+        </button>
+
+      </div>
+      
+    </ion-list>
+    <ion-list>
+      <div *ngFor="let p2 of pages2">
+        <button ion-item  (click)="openPage(p2)" *ngIf ="p2.visible == '1'" style="border-bottom: none; height: 30px;"> 
+          <ion-icon name="{{p2.icon}}"></ion-icon>&nbsp;&nbsp; {{p2.title}} 
+        </button>
+      </div>
+      <button ion-item   (click)="logout()"><ion-icon name="log-out" style="border-bottom: none;height: 30px;"></ion-icon> &nbsp;&nbsp; {{'Deconnexion'}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-menu side="right" [content]="content">
+  <ion-header>
+    <ion-navbar>
+    
+    <ion-title>
+      Menu
+    </ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-list style="border-bottom: 2px solid #015b7e; padding-bottom: 5px;">
+      <div *ngFor="let p of pages" >
+        <button ion-item   (click)="openPage(p)" *ngIf ="p.visible == '1'" style="border-bottom: none;height: 30px;"> 
+          <ion-icon name="{{p.icon}}"></ion-icon>&nbsp;&nbsp; {{p.title}} 
+        </button>
+
+        <button ion-item  (click)="openPage(p)" *ngIf ="p.visible == '0' && token != null" style="border-bottom: none;height: 30px;"> 
+          <ion-icon name="{{p.icon}}"></ion-icon>&nbsp;&nbsp;{{p.title}} 
+        </button>
+
+      </div>
+      
+    </ion-list>
+    <ion-list>
+      <div *ngFor="let p2 of pages2">
+        <button ion-item  (click)="openPage(p2)" *ngIf ="p2.visible == '1'" style="border-bottom: none; height: 30px;"> 
+          <ion-icon name="{{p2.icon}}"></ion-icon>&nbsp;&nbsp; {{p2.title}} 
+        </button>
+      </div>
+      <button ion-item   (click)="logout()"><ion-icon name="log-out" style="border-bottom: none;height: 30px;"></ion-icon> &nbsp;&nbsp; {{'Deconnexion'}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
