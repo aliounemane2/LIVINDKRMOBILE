@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,Load
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { LocationsProvider } from '../../providers/locations/locations';
 import * as _ from 'lodash';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+
 
 
 /**
@@ -75,7 +77,7 @@ export class EvenementPage {
   
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
     this.typeEvents = 
     [
       {id: 0, val:"Tous"},
@@ -106,7 +108,7 @@ export class EvenementPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EvenementPage');
 
-    //this.getEvenements();
+    this.connectivityService.checkNetwork();
     this.getEvents();
     
   }
@@ -250,99 +252,6 @@ export class EvenementPage {
     this.masque = !this.masque;
   }
 
-  getEvenements(){
-    //this.evenements = this.eventService.getEvenements();
-    //console.log(this.evenements)
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getEvenements().subscribe(
-        data => {
-            this.evenements = data; 
-            console.log(this.evenements);
-                if(this.evenements == 0){
-                  let titre ="Pas de evenements  a afficher";
-                  console.log(this.evenements+' 1');
-
-                }
-                else
-                {
-                  this.jour = [];
-                  this.semaine = [];
-                  this.mois = [];
-                  var i,
-                  tempTime,
-                  now = new Date(),
-                  lastDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (7 - now.getDay()));
-                  console.log(lastDayOfWeek);
-                  this.filterVal = 'today';
-                  this.customRange = [new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5), new Date(now.getFullYear(), now.getMonth(), now.getDate() + 10)];
-                  console.log(this.customRange);
-                  
-
-                  for (i = 0; i < this.evenements.length; ++i) {
-                    tempTime = this.evenements[i].date;
-                    this.evenements[i].date = new Date(tempTime);
-                    console.log(this.evenements[i].date);
-                    //this.filterItems(this.evenements[i]);
-                    if(this.evenements[i].date.getMonth() == now.getMonth() && this.evenements[i].date.getDate() == now.getDate()) {
-                      console.log("ppppppppppppp");
-                      this.jour.push(this.evenements[i]);
-                      console.log(this.jour.length);
-                    }
-                    else if (now <= this.evenements[i].date && this.evenements[i].date <= lastDayOfWeek) {
-                        console.log("cccccccccc");
-                        this.semaine.push(this.evenements[i]);
-                        console.log(this.semaine.length);
-                    }
-                    else{
-                      console.log("bbbbbbbbbbb");
-                      this.mois.push(this.evenements[i]);
-                      console.log(this.mois.length);
-
-                    }
-                    
-                  }
-
-                  if(this.jour.length == 0){
-                    this.valueJour =0;
-                    let titre ="Pas d'événements pour aujourd'hui";           
-                    this.messageJour = titre;
-                    console.log(titre);
-                    console.log(this.valueJour);
-                  }
-
-                  if(this.semaine.length == 0){
-                      let titre ="Pas d'événements pour cette semaine";  
-                      this.valueSemaine =0;         
-                      this.messageSemaine = titre;
-                      console.log(titre);
-                      console.log(this.valueSemaine);
-                  }
-
-                  if(this.mois.length == 0){
-                      let titre ="Pas d'événements pour ce mois"; 
-                      this.valueMois =0;          
-                      this.messageMois = titre;
-                      console.log(titre);
-                      console.log(this.valueMois);
-                  }
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
   getEvents(){
     let loader = this.loading.create({
     content: 'Chargement en cours...',
@@ -351,107 +260,94 @@ export class EvenementPage {
     loader.present().then(() => {
       this.eventService.getEvents().subscribe(
         data => {
-            this.evenements = data.article; 
-            this.url = data.urls; 
-           // this.evenements = data; 
+          this.evenements = data.article; 
+          this.url = data.urls; 
+          // this.evenements = data; 
+          console.log(this.evenements);
+          if(data.status == 0){
             console.log(this.evenements);
-              if(data.status == 0){
+            this.jour = [];
+            this.semaine = [];
+            this.mois = [];
+            var i,
+            tempTime,lastDayOfMonth,
+            now = new Date(),
+            lastDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (7 - now.getDay()));
+            console.log(lastDayOfWeek);
+
+            lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+            console.log(lastDayOfMonth);
+
+            this.filterVal = 'today';
+            this.customRange = [new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5), new Date(now.getFullYear(), now.getMonth(), now.getDate() + 10)];
+            console.log(this.customRange);
+            for (i = 0; i < this.evenements.length; ++i) 
+            {
+              console.log(this.evenements[0].idEvent);
+              tempTime = this.evenements[i].idEvent.dateEvent;
+              console.log(tempTime);
+              this.evenements[i].dateEvent = new Date(tempTime);
+              console.log(this.evenements[i].dateEvent);
+              if(this.evenements[i].dateEvent.getMonth() == now.getMonth() && this.evenements[i].dateEvent.getDate() == now.getDate()) {
+                console.log("ppppppppppppp");
+                this.jour.push(this.evenements[i]);
+                console.log(this.jour.length);
                 
-
-                console.log(this.evenements);
-                this.jour = [];
-                this.semaine = [];
-                this.mois = [];
-                var i,
-                tempTime,lastDayOfMonth,
-                now = new Date(),
-                lastDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (7 - now.getDay()));
-                console.log(lastDayOfWeek);
-
-                lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-                console.log(lastDayOfMonth);
-
-                this.filterVal = 'today';
-                this.customRange = [new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5), new Date(now.getFullYear(), now.getMonth(), now.getDate() + 10)];
-                console.log(this.customRange);
-                for (i = 0; i < this.evenements.length; ++i) 
-                {
-                  console.log(this.evenements[0].idEvent);
-                    tempTime = this.evenements[i].idEvent.dateEvent;
-                    console.log(tempTime);
-                    this.evenements[i].dateEvent = new Date(tempTime);
-                    console.log(this.evenements[i].dateEvent);
-                    if(this.evenements[i].dateEvent.getMonth() == now.getMonth() && this.evenements[i].dateEvent.getDate() == now.getDate()) {
-                      console.log("ppppppppppppp");
-                      this.jour.push(this.evenements[i]);
-                      console.log(this.jour.length);
-                      
-                    }
-                    else if (now <= this.evenements[i].dateEvent && this.evenements[i].dateEvent <= lastDayOfWeek) {
-                        console.log("cccccccccc");
-                        this.semaine.push(this.evenements[i]);
-                        console.log(this.semaine.length);
-                        
-                    }
-                    else if (now > this.evenements[i].dateEvent && this.evenements[i].dateEvent > lastDayOfWeek && this.evenements[i].dateEvent <= lastDayOfMonth) {
-                      console.log("bbbbbbbbbbb");
-                      this.mois.push(this.evenements[i]);
-                      console.log(this.mois.length);
-                      
-
-                    }
-                    
-                  }
-                  console.log(this.jour);
-                  console.log(this.semaine);
-                  console.log(this.mois);
-
-                  if(this.jour.length == 0){
-                    this.valueJour =0;
-                    let titre ="Pas d'événements pour aujourd'hui";           
-                    this.messageJour = titre;
-                    console.log(titre);
-                    console.log(this.valueJour);
-                    
-                  }
-
-                  if(this.semaine.length == 0){
-                      let titre ="Pas d'événements pour cette semaine";  
-                      this.valueSemaine =0;         
-                      this.messageSemaine = titre;
-                      console.log(titre);
-                      console.log(this.valueSemaine);
-                      
-                  }
-
-                  if(this.mois.length == 0){
-                      let titre ="Pas d'événements pour ce mois"; 
-                      this.valueMois =0;          
-                      this.messageMois = titre;
-                      console.log(titre);
-                      console.log(this.valueMois);
-
-                  }
               }
-              else{
-
-                
-                  let titre ="Pas de categories  a afficher";
-                  this.sms ="Pas d'événement disponible";
-                  this.valueSms = true;  
-                  console.log(this.sms);
+              else if (now <= this.evenements[i].dateEvent && this.evenements[i].dateEvent <= lastDayOfWeek) {
+                console.log("cccccccccc");
+                this.semaine.push(this.evenements[i]);
+                console.log(this.semaine.length);
                   
-                
-                
               }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
+              else if (now > this.evenements[i].dateEvent && this.evenements[i].dateEvent > lastDayOfWeek && this.evenements[i].dateEvent <= lastDayOfMonth) {
+                console.log("bbbbbbbbbbb");
+                this.mois.push(this.evenements[i]);
+                console.log(this.mois.length);
+              }        
+            }
+            console.log(this.jour);
+            console.log(this.semaine);
+            console.log(this.mois);
+
+            if(this.jour.length == 0){
+              this.valueJour =0;
+              let titre ="Pas d'événements pour aujourd'hui";           
+              this.messageJour = titre;
+              console.log(titre);
+              console.log(this.valueJour); 
+            }
+
+            if(this.semaine.length == 0){
+              let titre ="Pas d'événements pour cette semaine";  
+              this.valueSemaine =0;         
+              this.messageSemaine = titre;
+              console.log(titre);
+              console.log(this.valueSemaine);  
+            }
+
+            if(this.mois.length == 0){
+              let titre ="Pas d'événements pour ce mois"; 
+              this.valueMois =0;          
+              this.messageMois = titre;
+              console.log(titre);
+              console.log(this.valueMois);
+            }
+          }
+          else{
+            let titre ="Pas de categories  a afficher";
+            this.sms ="Pas d'événement disponible";
+            this.valueSms = true;  
+            console.log(this.sms);  
+          }
+        },
+        err => {
+            console.log(err);
+            loader.dismiss();
+            let titre ="Une erreur est survenue reessayer plus tard ";
+            //this.presentPromptOk(titre);
+        },
+        () => {loader.dismiss()}
       );
     })
   }

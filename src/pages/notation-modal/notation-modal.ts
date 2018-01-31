@@ -4,6 +4,9 @@ import { LocationTrackerProvider } from '../../providers/location-tracker/locati
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { LocationsProvider } from '../../providers/locations/locations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Toast } from '@ionic-native/toast';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+//private toast : Toast,
 
 /**
  * Generated class for the NotationModalPage page.
@@ -24,7 +27,7 @@ export class NotationModalPage {
   public locationTracker: LocationTrackerProvider
   myFormulaire: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public EventService: EventServiceProvider, public loading: LoadingController, private toastCtrl: ToastController, public formBuilder: FormBuilder) {
+  constructor(public connectivityService:ConnectvityServiceProvider,private toast : Toast, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public EventService: EventServiceProvider, public loading: LoadingController, private toastCtrl: ToastController, public formBuilder: FormBuilder) {
   	this.averageRating = 0;
     this.myFormulaire = formBuilder.group({
       avis: ['', Validators.compose([Validators.maxLength(255), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
@@ -67,13 +70,20 @@ export class NotationModalPage {
 
     toast.present();
   }
+  showToast(titre){
+    this.toast.show(titre, '5000', 'center').subscribe(
+      toast => {
+        //console.log(toast);
+      }
+    );
+  }
 
   addNoteIns(){
+    this.connectivityService.checkNetwork();
     if(!this.myFormulaire.valid){
       console.log("Remplissez tous les champs!");
       let message = "Remplissez tous les champs!";
-      //this.showToast("Remplissez tous les champs!");
-      //this.presentToast(message);
+      this.showToast(message);
     }
     else{
       let loader = this.loading.create({
@@ -84,18 +94,20 @@ export class NotationModalPage {
 
         var json = this.myFormulaire.value;
 
-        var note ={idInstitution:this.inst.idInstitution, idUser:6, note:this.averageRating, avis:json.avis, idEvent:null};
+        var note ={idInstitution:this.inst.idInstitution, note:this.averageRating, avis:json.avis, idEvent:null};
         console.log(note);
         
         this.EventService.addNoteInstitution(note).subscribe(
             data => {
               console.log(data);
               if(data.note){
+                this.showToast("Note ajoutée avec succés");
                 this.presentToast(data.message);
                 this.viewCtrl.dismiss();
                 
               }
               else{
+                this.showToast(data.message);
                 this.presentToast(data.message);
 
               }
@@ -104,6 +116,7 @@ export class NotationModalPage {
             err => {
                 //console.log(err);
                 loader.dismiss();
+                this.showToast("UUne erreur est survenue réessayer plus tard" );
             },
             () => {loader.dismiss()}
 

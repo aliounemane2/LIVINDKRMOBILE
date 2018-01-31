@@ -6,6 +6,7 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { HomePage } from '../home/home';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 
 /**
  * Generated class for the InscriptionIneterestPage page.
@@ -42,7 +43,7 @@ export class InscriptionIneterestPage {
   nointe: any;
   messages: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider, public eventService:EventServiceProvider, private toastCtrl: ToastController) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider, public eventService:EventServiceProvider, private toastCtrl: ToastController) {
 
     if(navParams.get("user") !== "undefined")
     {
@@ -53,9 +54,8 @@ export class InscriptionIneterestPage {
   	this.centre = {};
     this.nointe = false;
     this.interet={image:''};
+    this.connectivityService.checkNetwork();
     this.getCentreInteret();
-    this.getCategoriesInteret();
-  	//this.getInterest();
     this.tabcentre=[];
   	console.log(this.centreInteret);
     this.value = 0;
@@ -168,6 +168,8 @@ export class InscriptionIneterestPage {
 
                    console.log(this.centreInteret);
 
+                   this.getCategoriesInteret();
+
                   
                 }
             },
@@ -183,49 +185,7 @@ export class InscriptionIneterestPage {
 
   }
 
-  getInterest(){
-  	this.interests = this.eventService.getCentreInteret();
-    console.log(this.interests);
-    console.log(this.idTypeCat);
-    for (var i=0; i<this.interests.length; i++)
-    {
-        this.interests[i] ={
-          id: this.interests[i].id,
-          nomInteret: this.interests[i].nomInteret,
-          image: this.interests[i].image,
-          photo: this.interests[i].photo,
-          val: false,
-          idcat: this.interests[i].idcat
-        };        
-    }
-    console.log(this.inte);
-      //this.connectivityService.checkNetwork();
-      /*let loader = this.loading.create({
-      content: 'Chargement en cours...',
-      });
-	    loader.present().then(() => {
-	    this.userService.getInterest().subscribe(
-	        data => {
-		        if(data.ok=='ok'){
-		          //this.presentPromptOk(data.message);
-		          //this.showToast(data.message);
-		        }
-		        else{
-		        	var subTitle ="Creation de compte";
-		          //this.popup(subTitle, data.message);
-		          //this.viewCtrl.dismiss();
-		          //this.showToast(data.message);
-		        }
-	        },
-	        err => {
-	            //console.log(err);
-	            loader.dismiss();
-	        },
-	        () => {loader.dismiss()}
-
-	      );
-	    });*/
-  }
+  
 
   addInterestUser(){
     let loader = this.loading.create({
@@ -458,7 +418,8 @@ export class InscriptionIneterestPage {
                 else{
                   console.log(this.categorieInteret);
                   //this.interests = this.eventService.getCentreInteret();
-                  this.interests  = this.centreInteret
+                  this.interests  = this.centreInteret;
+                  console.log(this.centreInteret);
                   console.log(this.interests);
                   console.log(this.idTypeCat);
 

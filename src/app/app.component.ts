@@ -7,13 +7,17 @@ import { ProfilPage } from '../pages/profil/profil';
 import { AccueilPage } from '../pages/accueil/accueil';
 import { LoginPage } from '../pages/login/login';
 import { StorageUtils } from '../Utils/storage.utils';
+import { User } from '../Classes/user';
 import firebase from 'firebase';
 import { RecommendationPage } from '../pages/recommendation/recommendation';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 //import {OrderByPipe} from "../pages/evenement/evenement";
 import {OrderByPipe} from "./orderby.pipe";
 
 import { HomePage } from '../pages/home/home';
 import { Storage } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 declare var FCMPlugin;
 
@@ -27,11 +31,16 @@ export class MyApp {
   pages2: Array<{icon: string, title: string, component: any, visible: string}>;
   token: any;
   isPub: any;
+  use:User 
+  utilisateur: any;
+  photo: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menu: MenuController, private events: Events, public storage: Storage) {
+  constructor(private googlePlus: GooglePlus, private facebook: Facebook, public userService:UserServiceProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menu: MenuController, private events: Events, public storage: Storage) {
 
     this.token = StorageUtils.getToken();
     console.log(this.token);
+    this.use = StorageUtils.getAccount();
+    console.log(this.use);
     
 
     if(this.token != null){
@@ -41,14 +50,21 @@ export class MyApp {
         this.isPub = val;
       })
       this.rootPage = AccueilPage;
+      this.getUserInfos();
+
     }
     else{
       this.rootPage = LoginPage;
     }
 
-    /*setTimeout(() => { // <=== 
-      StorageUtils.setToken('');
-    }, 10000);*/
+    if(this.token != null){
+      setTimeout(() => { // <=== 
+        StorageUtils.removeToken();
+        StorageUtils.removeAccount();
+        this.nav.setRoot(LoginPage);
+      }, +this.use.expireTime);
+    }
+    
 
     firebase.initializeApp({
         apiKey: "AIzaSyCgQIx5LtwALH3ctsIkqkKo-f8n2PpdVfE",
@@ -114,8 +130,59 @@ export class MyApp {
 
   logout():void {
     StorageUtils.removeToken();
+    StorageUtils.removeAccount();
     this.nav.setRoot(LoginPage);
     this.menu.close();
+  }
+
+  doFbLogout(){
+		this.facebook.logout()
+		.then(function(response) {
+			//user logged out so we will remove him from the NativeStorage
+      StorageUtils.removeToken();
+      StorageUtils.removeAccount();
+      this.nav.setRoot(LoginPage);
+		}, function(error){
+			console.log(error);
+		});
+  }
+  
+  doGoogleLogout(){
+    this.googlePlus.logout()
+    .then(function (response) {
+      StorageUtils.removeToken();
+      StorageUtils.removeAccount();
+      this.nav.setRoot(LoginPage);
+    },function (error) {
+      console.log(error);
+    })
+  }
+
+  getUserInfos(){
+    //loader.present().then(() => {
+      this.userService.getInfoUser().subscribe(
+        data => {
+            this.utilisateur = data.user; 
+            console.log(this.utilisateur);
+                if(data.status == 0){
+                  console.log(this.utilisateur);
+                  this.photo = this.utilisateur.photo;
+                }
+                else{
+                  let titre ="Pas d'utilisateu  a afficher";
+                  
+                }
+            },
+            err => {
+                console.log(err);
+                
+                let titre ="Une erreur est survenue reessayer plus tard ";
+                //this.presentPromptOk(titre);
+            },
+            () => {}
+      );
+    //})
+
   }
 }
 

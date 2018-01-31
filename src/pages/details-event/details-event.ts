@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController, Platform, Alert
 import { CarteMapPage } from '../carte-map/carte-map';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { Calendar } from '@ionic-native/calendar';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+
 
 declare var plugins;
 
@@ -26,7 +28,7 @@ export class DetailsEventPage {
   photos: any;
   url: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider, public loading: LoadingController, public platform: Platform,private calendar: Calendar, private alertCtrl: AlertController) {
+  constructor(public connectivityService:ConnectvityServiceProvider,public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider, public loading: LoadingController, public platform: Platform,private calendar: Calendar, private alertCtrl: AlertController) {
   	this.eventdetails ='description';
   	if(navParams.get("evenement") !== "undefined")
   	{
@@ -62,7 +64,7 @@ export class DetailsEventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsEventPage');
-    this.getVignetteIns();
+    this.connectivityService.checkNetwork();
     this.getPhotoByEvent(this.evenement);
   }
   goToCarteMap(evenement){
@@ -133,36 +135,7 @@ export class DetailsEventPage {
     return tmpDate;
   };
 
-  getVignetteIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getVignetteIns().subscribe(
-        data => {
-            this.vignette = data; 
-            console.log(this.vignette);
-                if(this.vignette == 0){
-                  let titre ="Pas de vignette  a afficher";
-                  console.log(this.vignette+' 1');
-
-                }
-                else{
-                  console.log(this.vignette);
-                  
-                }
-            },
-            err => {
-                //console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
+  
 
   getPhotoByEvent(event){
     let loader = this.loading.create({

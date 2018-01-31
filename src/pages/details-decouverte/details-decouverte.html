@@ -15,7 +15,7 @@
 
 <ion-content>
 	<div class="baniere-decouverte">
-		<img *ngIf="decouverte.image" src="{{decouverte.image}}" class="full-image" />
+		<img *ngIf="decouverte.image" src="{{url}}/{{decouverte.image}}" class="full-image" />
 		<img *ngIf="!decouverte.image" src="assets/images/decouverte1.jpg" class="full-image"/>
 	</div>
 	<div class="tagdecouverte">

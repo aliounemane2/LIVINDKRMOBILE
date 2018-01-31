@@ -1,10 +1,9 @@
-import { DetailsEventPage } from '../details-event/details-event';
-import { Component, Pipe } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams,LoadingController, ViewController } from 'ionic-angular';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { LocationsProvider } from '../../providers/locations/locations';
-import * as _ from 'lodash';
 import { InstitutionPage } from '../institution/institution';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 /**
  * Generated class for the RecommendationPage page.
  *
@@ -23,13 +22,16 @@ export class RecommendationPage {
   location: any;
   typeEvent: any;
   institution: any;
+  value: any;
+  message: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
+    this.value = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecommendationPage');
-    this.getEvenements();
+    this.connectivityService.checkNetwork();
     this.getRecommendation();
   }
 
@@ -39,38 +41,6 @@ export class RecommendationPage {
     });
   }
 
-  getEvenements(){
-    //this.evenements = this.eventService.getEvenements();
-    //console.log(this.evenements)
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getRecommendations().subscribe(
-        data => {
-            this.evenements = data; 
-            console.log(this.evenements);
-                if(this.evenements == 0){
-                  let titre ="Pas de evenements  a afficher";
-                  console.log(this.evenements+' 1');
-
-                }
-                else{
-                  console.log(this.evenements);
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
 
   getRecommendation(){
     let loader = this.loading.create({
@@ -78,7 +48,7 @@ export class RecommendationPage {
     });
 
     loader.present().then(() => {
-      this.eventService.getRecommendation(10).subscribe(
+      this.eventService.getRecommendation().subscribe(
         data => {
             this.institution = data.sous_category; 
             console.log(this.institution);
@@ -93,9 +63,12 @@ export class RecommendationPage {
                 }
             },
             err => {
+                this.value = true;
                 console.log(err);
                 loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
+                let titre ="Fonctionnalité non disponible pour le moment";
+                this.message = titre;
+                console.log(this.message );
                 //this.presentPromptOk(titre);
             },
             () => {loader.dismiss()}

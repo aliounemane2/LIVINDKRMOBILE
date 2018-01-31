@@ -59,14 +59,14 @@ export class ConnectvityServiceProvider {
           subTitle: states[networkState],
           message: "Impossible de se connecter. Voulez vous activer votre connexion Internet?",
           buttons: [
-            {
+            /*{
               text: 'NON',
               role: 'cancel',
               handler: () => {
                 console.log('Cancel clicked');
                 navigator.app.exitApp();
               }
-            },
+            },*/
             {
               text: 'OUI',
               handler: () => {
@@ -87,7 +87,7 @@ export class ConnectvityServiceProvider {
     } else {
       cordova.plugins.diagnostic.switchToSettings();
     }
-    navigator.app.exitApp();
+    //navigator.app.exitApp();
   }
 
 }

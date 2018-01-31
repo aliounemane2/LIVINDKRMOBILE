@@ -5,6 +5,7 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 import { InstitutionPage } from '../institution/institution';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 
 
 
@@ -44,9 +45,10 @@ export class CarteMapPage {
   institutio: any;
   cat: any;
   ca: any;
+  url: any;
 
 
-  constructor(private diagnostic: Diagnostic, public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private geolocation: Geolocation, private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locationTracker: LocationTrackerProvider,private alertCtrl: AlertController) {
+  constructor(public connectivityService:ConnectvityServiceProvider, private diagnostic: Diagnostic, public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private geolocation: Geolocation, private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locationTracker: LocationTrackerProvider,private alertCtrl: AlertController) {
     /*if(navParams.get("accueil") !== "undefined" && navParams.get("data") !== "undefined" )
     {
       this.parent = navParams.get("accueil");
@@ -69,12 +71,14 @@ export class CarteMapPage {
       this.titre = navParams.get("titre");
       this.cat = navParams.get("cat");
       this.ca = navParams.get("ca");
+      this.url = navParams.get("url");
       console.log(this.ca);
       console.log(this.parent);
       console.log(this.event);
       console.log(this.categorie);
       console.log(this.cat);
       console.log(this.titre);
+      console.log(this.url);
     }
 
     if(this.parent=='accueil'){
@@ -91,14 +95,14 @@ export class CarteMapPage {
 
   checkLocationA(){
     //this.locationTracker.stopTracking();
-    //this.platform.ready().then((readySource) => {
+    this.platform.ready().then((readySource) => {
 
-      //this.diagnostic.isLocationEnabled().then((isAvailable) => {
+      this.diagnostic.isLocationEnabled().then((isAvailable) => {
       
-      /*if(!isAvailable){
+      if(!isAvailable){
         this.presentPromptOk("Veillez activer votre position GPS");
       }
-      else{*/
+      else{
       
           //this.getIns();
           if(this.ca == 'ca'){
@@ -108,28 +112,25 @@ export class CarteMapPage {
             this.getInstitutionBySousCategorie(this.cat);
           }
           console.log(this.institution);
-      //}
+      }
         
         //this.locationTracker.startTracking(); 
       //alert('Is available? ' + isAvailable);
-      /*}).catch( (e) => {
+      }).catch( (e) => {
       console.log(e);
       //alert(JSON.stringify(e));
       let titre =e;
       this.presentPromptOk(titre);
-      });*/
+      });
 
 
-    //});
+    });
   }
 
   checkLocationB(){
-    //this.locationTracker.stopTracking();
     this.platform.ready().then((readySource) => {
 
       this.diagnostic.isLocationEnabled().then((isAvailable) => {
-      //console.log('Is available? ' + isAvailable);
-      //this.locationTracker.stopTracking();
       if(!isAvailable){
         this.presentPromptOk("Veillez activer votre position GPS");
       }
@@ -138,11 +139,8 @@ export class CarteMapPage {
         this.startNavigating();
       }
         
-        //this.locationTracker.startTracking(); 
-      //alert('Is available? ' + isAvailable);
       }).catch( (e) => {
       console.log(e);
-      //alert(JSON.stringify(e));
       let titre =e;
       this.presentPromptOk(titre);
       });
@@ -170,11 +168,11 @@ export class CarteMapPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarteMapPage');
+    this.connectivityService.checkNetwork();
     
     
     if(this.parent=='accueil'){
        this.checkLocationA();
-       //this.getClient();
     }
     else{
        this.checkLocationB();
@@ -262,115 +260,6 @@ export class CarteMapPage {
  
     
   }
-  getClient(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getClient().subscribe(
-        data => {
-            this.client = data; 
-            console.log(this.client);
-                if(this.client == 0){
-                  let titre ="Pas de client  a afficher";
-                  console.log(this.client+' 1');
-
-                }
-                else{
-                  //this.loadMap();
-                  this.avis= this.client.avis;
-                  this.vignette= this.client.photo;
-                  console.log(this.client);
-                  console.log(this.avis);
-                  console.log(this.vignette);
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
-  getIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getIns().subscribe(
-        data => {
-            this.institutio = data; 
-            console.log(this.institutio);
-                if(this.institutio == 0){
-                  let titre ="Pas de institution  a afficher";
-                  console.log(this.institutio+' 1');
-
-                }
-                else{
-                  console.log(this.institutio);
-                  console.log(this.titre); 
-                  for(var i = 0; i < this.institutio.length; i++)
-                  {
-                    if(this.institutio[i].typeins == this.titre)
-                    {
-                      this.institution.push(this.institutio[i]);
-                    }
-
-                  }
-                  console.log(this.institution);  
-                  this.loadMap();
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
-  /*getInstitution(){
-    //this.institution = this.eventService.getAllInstitution();
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getResto().subscribe(
-        data => {
-            this.institution = data; 
-            console.log(this.institution);
-                if(this.institution == 0){
-                  let titre ="Pas de institution  a afficher";
-                  console.log(this.institution+' 1');
-
-                }
-                else{
-                  this.loadMap();
-                  console.log(this.institution);
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }*/
 
   addInfoWindow(marker, message, record) {
     var infoWindow = new google.maps.InfoWindow({
@@ -385,32 +274,14 @@ export class CarteMapPage {
       }    
     });
 
-    /*google.maps.event.addListener(marker, 'click', function () {
-      infoWindow.open(this.map, marker);
-      document.getElementById("click").addEvent("click", function(e) {
-        console.log("hello world");
-        //e.stop();
-        this.goToInstitu(record);
-        });
-      //console.log(record);
-      //this.tracerIntineraire(record);
-    });*/
-
-    /*google.maps.event.addListener(marker, 'domready', () => {
-      //now my elements are ready for dom manipulation
-      infoWindow.open(this.map, marker);
-      var clickableItem = document.getElementById('clickableItem');
-      clickableItem.addEventListener('click', () => {
-        this.goToInstitu();
-      });
-    });*/
 
   }
 
   goToInstitu(institution){
     this.navCtrl.push(InstitutionPage, {
       'ins': institution,
-      'categorie': this.titre
+      'categorie': this.titre,
+      'url': this.url
     });
   }
 
@@ -444,7 +315,7 @@ export class CarteMapPage {
     })
   }
  
-    startNavigating(){
+  startNavigating(){
         this.geolocation.getCurrentPosition().then((position) => {
           this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           console.log(position.coords.latitude, position.coords.longitude);

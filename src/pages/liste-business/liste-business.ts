@@ -5,6 +5,7 @@ import { CarteMapPage } from '../carte-map/carte-map';
 import { InstitutionPage } from '../institution/institution';
 import { DetailsSightPage } from '../details-sight/details-sight';
 import { NotationModalPage } from '../notation-modal/notation-modal';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 
 /**
  * Generated class for the ListeBusinessPage page.
@@ -55,7 +56,7 @@ export class ListeBusinessPage {
   url: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public modalCtrl: ModalController) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public modalCtrl: ModalController) {
   	this.masque =false;
     this.msq = false;
     this.val =0;
@@ -83,8 +84,7 @@ export class ListeBusinessPage {
       {"id":"1","price":"$$$$"}
     ];
     console.log(this.price1[0].price);
-  	if(navParams.get("data") !== "undefined" )
-    {
+  	if(navParams.get("data") !== "undefined" ){
       this.categorie = navParams.get("data");
       this.titre = navParams.get("titre");
       this.titleCat = navParams.get("titleCat"); 
@@ -137,6 +137,7 @@ export class ListeBusinessPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeBusinessPage');
+    this.connectivityService.checkNetwork();
     //this.getIns();
     this.getInstitutionBySousCategorie(this.categorie);
   }
@@ -159,7 +160,7 @@ export class ListeBusinessPage {
   }
 
   openModal(data){
-    let texte = 'voulez-vous laisser un avis à '+data.nom +' ?';
+    let texte = 'voulez-vous laisser un avis à '+data.nomIns +' ?';
       let obj = {ins: data, ret: texte};
       this.openMod(obj);
   }
@@ -201,7 +202,8 @@ export class ListeBusinessPage {
         'accueil': 'accueil',
         'titre':this.titre,
         'cat':categorie,
-        'ca': 'sca'
+        'ca': 'sca',
+        'url': this.url
       });
     }
     
@@ -220,7 +222,8 @@ export class ListeBusinessPage {
     this.navCtrl.push(DetailsSightPage, {
       'accueil': 'listeins',
       'data': sight,
-      'titre':sight.nom
+      'titre':sight.nomIns,
+      'url': this.url
     });
   
   }
@@ -277,56 +280,7 @@ export class ListeBusinessPage {
     console.log(this.valrech);
   }
 
-  getIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getIns().subscribe(
-        data => {
-            this.institutio = data; 
-            console.log(this.institutio);
-                if(this.institutio == 0){
-                  let titre ="Pas de institution  a afficher";
-                  console.log(this.institutio+' 1');
-
-                }
-                else{
-                  console.log(this.institutio);
-                  console.log(this.titre); 
-                  for(var i = 0; i < this.institutio.length; i++)
-                  {
-                    if(this.institutio[i].typeins == this.titre)
-                    {
-                      this.institution.push(this.institutio[i]);
-                    }
-                  }
-                  console.log(this.valrech);
-                  if(this.institution == 0){
-                    this.vall =0;
-                    this.message1 = "Aucune institution pour la categorie "+this.titre;
-                    console.log(this.message1);
-
-                  }
-                  else{
-                    this.vall =1;
-                    this.message1 = "";
-                    console.log('this.message1');
-                  }
-                  console.log(this.institution);  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
+  
 
   flitreByprice(ins,price){
     this.insPrice =[];
@@ -386,6 +340,40 @@ export class ListeBusinessPage {
             () => {loader.dismiss()}
       );
     })
+  }
+
+  doRefresh(refresher){
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.eventService.getInstitutionBySousCategory(this.categorie.idSousCategory).subscribe(
+        data => {
+            this.institution = data.sous_category; 
+            this.url = data.urls;
+            console.log(this.institution);
+                if(this.institution == null){
+                  let titre ="Pas de categories  a afficher";
+                  this.vall =0;
+                  this.message1 = "Aucune institution pour la categorie "+this.titre;
+                  console.log(this.message1);
+                }
+                else{
+                  console.log(this.institution);
+                  this.vall =1;
+                  this.message1 = "";
+                  console.log('this.message1');
+                  
+                }
+            },
+            err => {
+                console.log(err);
+                
+                let titre ="Une erreur est survenue reessayer plus tard ";
+                //this.presentPromptOk(titre);
+            }
+      );
+      refresher.complete();
+    }, 50000);
+    
   }
 
 }

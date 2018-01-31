@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events, Platform } from 'ionic-angular';
 import { CarteMapPage } from '../carte-map/carte-map';
-//import { InstitutionPage } from '../institution/institution';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { CallNumber } from '@ionic-native/call-number';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 
 /**
  * Generated class for the InstitutionPage page.
@@ -33,7 +33,7 @@ export class InstitutionPage {
   valuePhoto: any;
   valueAvis: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, private callNumber: CallNumber) {
+  constructor(public platform: Platform, public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, private callNumber: CallNumber) {
   	this.inst ='description';
     if(navParams.get("ins") !== "undefined")
     {
@@ -42,6 +42,7 @@ export class InstitutionPage {
       this.categroie = navParams.get("categorie");
       this.url = navParams.get("url");
       console.log(this.institution);
+      console.log(this.url);
       console.log(this.categroie);
       this.valuePhoto = false;
       this.valueAvis = false;
@@ -54,6 +55,7 @@ export class InstitutionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InstitutionPage');
+    this.connectivityService.checkNetwork();
     //this.getVignetteIns();
     this.getVignetteByInstitution(this.institution);
     //this.getAvisIns();
@@ -61,90 +63,20 @@ export class InstitutionPage {
   }
 
   callNumeroTelephone(telephone){
-    this.callNumber.callNumber(telephone, true)
-    .then(() => console.log('Launched dialer!'))
-    .catch(() => console.log('Error launching dialer'));
-  }
+    this.platform.ready().then(() => {
+      this.callNumber.callNumber(telephone, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
 
-  getAvisIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getAvisIns().subscribe(
-        data => {
-            this.avis = data; 
-            console.log(this.avis);
-                if(this.avis == 0){
-                  let titre ="Pas de avis  a afficher";
-                  console.log(this.avis+' 1');
-
-                }
-                else{
-                  let lnote;
-                  let nbAvis = 0;
-                  console.log(this.avis);
-                  this.allNote = 0;
-                  for(var i = 0; i < this.avis.length; i++ )
-                  {
-                    lnote = this.avis[i].note;
-                    nbAvis = nbAvis + 1;
-                    console.log(lnote);
-                    this.allNote = this.allNote + lnote;
-                  }
-                  this.moyenne = this.allNote/nbAvis;
-                  console.log(this.moyenne);
-                  
-                }
-            },
-            err => {
-                //console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
     })
   }
 
-  getVignetteIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getVignetteIns().subscribe(
-        data => {
-            this.vignette = data; 
-            console.log(this.vignette);
-                if(this.vignette == 0){
-                  let titre ="Pas de vignette  a afficher";
-                  console.log(this.vignette+' 1');
-
-                }
-                else{
-                  console.log(this.vignette);
-                  
-                }
-            },
-            err => {
-                //console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
 
   goToCarteMap(inst){
     this.navCtrl.push(CarteMapPage, {
       'accueil': 'event',
       'data': inst,
-      'titre':inst.nom
+      'titre':inst.nomIns
     });
   }
 

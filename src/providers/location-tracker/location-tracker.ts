@@ -9,6 +9,7 @@ import { IonicPage, NavController, Platform, NavParams,AlertController,Alert,Ion
 import { NotationModalPage } from '../../pages/notation-modal/notation-modal';
 import { ConnectvityServiceProvider } from '../connectvity-service/connectvity-service';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { StorageUtils } from '../../Utils/storage.utils';
 
 /*
   Generated class for the LocationTrackerProvider provider.
@@ -26,54 +27,27 @@ export class LocationTrackerProvider {
   note: any;
   notes: any;
   val: any;
+  token: any;
 
   constructor(private diagnostic: Diagnostic, public http: Http, public zone: NgZone, public eventService:EventServiceProvider, public loading: LoadingController, private backgroundGeolocation: BackgroundGeolocation, private geolocation: Geolocation, public alertCtrl: AlertController, public modalCtrl: ModalController, public connectivityService:ConnectvityServiceProvider, public platform: Platform) {
     this.connectivityService.checkNetwork();
     this.val = 0;
     console.log('Hello LocationTrackerProvider Provider');
-    this.checkLocation();
-    //this.getNotes();
+    this.token = StorageUtils.getToken();
+    if(this.token != null){
+      this.checkLocation();
+    }
+    
+
     
   }
 
-  getInstitution(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getIns().subscribe(
-        data => {
-            this.institution = data; 
-            console.log(this.institution);
-                if(this.institution == 0){
-                  let titre ="Pas de institution  a afficher";
-                  console.log(this.institution+' 1');
-
-                }
-                else{
-                  console.log(this.institution);
-                  this.startTracking();
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
   getAllInstitutions(){
-    let loader = this.loading.create({
+    /*let loader = this.loading.create({
     content: 'Chargement en cours...',
-    });
+    });*/
 
-    loader.present().then(() => {
+    //loader.present().then(() => {
       this.eventService.getAllInstitutions().subscribe(
         data => {
             this.institution = data.institution; 
@@ -91,52 +65,19 @@ export class LocationTrackerProvider {
             },
             err => {
                 console.log(err);
-                loader.dismiss();
+                //loader.dismiss();
                 let titre ="Une erreur est survenue reessayer plus tard ";
                 //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
-
-  getNotes(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getNotes().subscribe(
-        data => {
-            this.note = data; 
-            console.log(this.note);
-                if(this.note == 0){
-                  let titre ="Pas de note  a afficher";
-                  console.log(this.note+' 1');
-
-                }
-                else{
-                  console.log(this.note);
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-                
             },
             () => {
-                loader.dismiss();
-            }
+              //loader.dismiss()
+             }
       );
-    })
+    //})
   }
 
-  checkLocation()
-  {
+
+  checkLocation(){
     //this.platform.ready().then((readySource) => {
 
       //this.diagnostic.isLocationEnabled().then((isAvailable) => {
@@ -207,7 +148,7 @@ export class LocationTrackerProvider {
 
 		    this.data = this.applyHaversine(this.institution, this.lat, this.lng);
 		    for(var i = 0; i < this.data.length; i++){
-		    	if(this.data[i].distance == '6.82'){
+		    	if(this.data[i].distance == '0.00'){
             
             if(this.val == 0){
               console.log('pppppkkkk');

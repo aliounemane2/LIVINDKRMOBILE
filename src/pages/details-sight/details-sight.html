@@ -17,22 +17,43 @@
 	<div class="body-details">
 	  	<div class="baniere-details">
 	  		<!--img src="{{evenement.image}}" class="full-image" /-->
-	  		<ion-slides  pager="true">
-				<ion-slide *ngFor="let vign of institution.photos" >
-					<img src="{{vign.photo1}}" class="full-image" style="width: 100%; height: 200px;"/>
+	  		<!--ion-slides  pager="true">
+				<ion-slide *ngFor="let vign of vignette" >
+
+						<img *ngIf ="vign" src="{{vign.cheminVignette}}" class="full-image" />
+
+						<img *ngIf ="!vign" src="{{institution.photoIns}}" class="full-image" />
+
 				</ion-slide >
 			</ion-slides >
+
+			<img src="{{evenement.image}}" class="full-image" /-->
+			<ion-slides  pager="true" *ngIf ="vignette">
+					<ion-slide *ngFor="let vign of photos" >
+						<img *ngIf ="vign.cheminVignette" src="{{vign.cheminVignette}}" class="full-image" />
+	
+						<img *ngIf ="!vign.cheminVignette" src="{{url}}/{{institution.photoIns}}" class="full-image" />
+					</ion-slide >
+			</ion-slides >
+	
+				<ion-slides  pager="true" *ngIf ="!vignette">
+					<ion-slide >
+						<img src="{{url}}/{{institution.photoIns}}" class="full-image" />
+					</ion-slide >
+				</ion-slides >
+
+
 	  	</div>
 
 	  	<div class="details">
 	  		<div class="titre-event">
-				{{institution.nom}}
+				{{institution.nomIns}}
 			</div>
 	  	</div>
 
 	  	<div class="details">
 	  		<div class="descsight">
-				{{institution.description}}
+				{{institution.descriptionIns}}
 			</div>
 	  	</div>
 

@@ -14,7 +14,7 @@
   	<!--div class="logo-liv"> <img src="assets/images/logo-livindakar.png" class="full-image" />
   	</div-->
   	<div class="form-login">
-  		<form [formGroup]="myFormulaire" >
+  		<form [formGroup]="myFormulaire" (ngSubmit)="doLogin()">
 			<ion-item>
 		        <!--ion-label floating class="labelins">  &nbsp; &nbsp;Login</ion-label-->
 		        <ion-input formControlName="login" type="text" class="champins" placeholder="Login"></ion-input>
@@ -33,10 +33,10 @@
                 <ion-checkbox dark formControlName="rememberMe" ></ion-checkbox>
             </ion-item-->
 	        
-	        <button class="btnconnexion" (click)= "loginJson()"  >
+	        <button class="btnconnexion"  >
 	        	Se connecter
       		</button>
-      		<!--button class="btninscri" (click)= "goToInscription()"  >
+      		<!--button class="btninscri" (click)= "goToInscription()"  (click)= "loginJson()">
 	        	S'inscrire
       		</button-->
 		</form>	

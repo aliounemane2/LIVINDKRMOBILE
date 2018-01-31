@@ -15,10 +15,18 @@
   <ion-content>
   <div class="bg-menu">
     <!--ion-avatar item-start -->
-              <img src="assets/images/users.png" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+    <div *ngIf="utilisateur">
+        <img *ngIf="!utilisateur.photo" src="assets/images/profil.png" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+        <img *ngIf="utilisateur.photo" src="{{utilisateur.photo}}" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+    </div>
+
+    <div *ngIf="!utilisateur">
+      <img src="assets/images/profil.png" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+    </div>
+              
       <!--/ion-avatar-->
   </div>
-  <div class="name">Amadou NIASS</div>
+  <div class="name"><div *ngIf ="use">{{use.email}}</div></div>
   <div class="bg-logo"><img src="assets/images/LivinDakar_LogoWhite.png" class="full-image" /></div>
     <ion-list style="border-bottom: 2px solid #015b7e; padding-bottom: 5px;">
       <div *ngFor="let p of pages" >
@@ -39,14 +47,15 @@
           <ion-icon name="{{p2.icon}}"></ion-icon>&nbsp;&nbsp; {{p2.title}} 
         </button>
       </div>
-      <button ion-item   (click)="logout()"><ion-icon name="log-out" style="border-bottom: none;height: 30px;"></ion-icon> &nbsp;&nbsp; {{'Deconnexion'}}
+      <button ion-item   (click)="logout()" style="border-bottom: none;height: 30px;">
+        <ion-icon name="log-out" ></ion-icon>&nbsp;&nbsp;{{'Deconnexion'}}
       </button>
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
-<ion-menu side="right" [content]="content">
+<!--ion-menu side="right" [content]="content">
   <ion-header>
     <ion-navbar>
     
@@ -85,5 +94,5 @@
     </ion-list>
   </ion-content>
 
-</ion-menu>
+</ion-menu-->
 <ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

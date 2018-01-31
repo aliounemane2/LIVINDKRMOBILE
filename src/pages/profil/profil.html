@@ -23,11 +23,26 @@
         <img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
         <div class="image-user">
          
-        <ion-avatar item-start >
+        <ion-avatar item-start (click)="getPicture()">
           <ion-icon name="camera" class="icone-photo"></ion-icon>
-                <img src="assets/images/niass.jpg"  class="full-image"/>
+            <div *ngIf="utilisateur">
+              <!--div *ngIf="!vpci"-->
+                  <img *ngIf="!utilisateur.photo" src="assets/images/profil.png"  class="full-image"/>
+                  
+                  <img *ngIf="utilisateur.photo" src="{{utilisateur.photo}}"  class="full-image"/>
+              <!--/div-->
+
+              <!--div *ngIf="vpci">
+                  <img *ngIf="utilisateur.photo" src="{{base64Image}}"  class="full-image"/>
+              </div-->
+              
+            </div>
+
+            <div *ngIf="!utilisateur">
+              <img  src="assets/images/profil.png"  class="full-image"/>
+            </div>
         </ion-avatar>
-         Amadou Niass
+         {{use.email}}
         </div>
 
         <div class="level">Local Guide Niveau {{moyenne}}/10</div>
@@ -71,9 +86,12 @@
               {{messageAvis}}
               </h1>
             <div *ngFor="let avis of avis" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;">
-              {{avis.idInstitution.nomIns}}<br/>
-              <rating score="{{avis.note}}" max="5"></rating><br/>
-              {{avis.avis}}
+              <div (click)= "openModal(avis)">
+                {{avis.idInstitution.nomIns}}<br/>
+                <rating score="{{avis.note}}" max="5"></rating><br/>
+                {{avis.avis}}
+              </div>
+              
             </div>  
         </div>
       </div>
@@ -92,37 +110,37 @@
 
       <div *ngSwitchCase="'profil'">
         
-        <form [formGroup]="myFormulaire" style="background-color: #fff;" *ngFor="let user of users">
+        <form [formGroup]="myFormulaire" style="background-color: #fff;">
 
           <ion-item>
-            <ion-input formControlName="prenom" type="text" class="champannonce" value="{{user.prenom}}"  placeholder="Prenom"></ion-input>
+            <ion-input formControlName="prenom" type="text" class="champannonce"  placeholder="Prenom"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input formControlName="nom" type="text" class="champannonce" value="{{user.nom}}" placeholder="Nom"></ion-input>
+            <ion-input formControlName="nom" type="text" class="champannonce"  placeholder="Nom"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input formControlName="username" type="text" class="champannonce" value="{{user.username}}" disabled="true" placeholder="Username"></ion-input>
+            <ion-input formControlName="username" type="text" class="champannonce" disabled="true" placeholder="Username"></ion-input>
           </ion-item>
 
           <!--ion-item>
             <ion-label floating class="labelins">Numero de telephone</ion-label>
             <ion-input formControlName="telephone" type="text" class="champannonce" ></ion-input>
-          </ion-item-->
+          </ion-item>
 
           <ion-item style="width: 50%; float:left;">
             <ion-select formControlName="indicatif"  class="champannonce" interface="popover" placeholder="Indicatif">
               <ion-option  value="+33" class="selectannonce">France(+33)</ion-option>
             </ion-select>
-          </ion-item>
+          </ion-item-->
 
-          <ion-item style="width: 50%; float:left;">
-            <ion-input formControlName="telephone" type="tel" class="champannonce" value="{{user.telephone}}" placeholder="Telephone"></ion-input>
+          <ion-item >
+            <ion-input formControlName="telephone" type="tel" class="champannonce" placeholder="Telephone"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input formControlName="email" type="text" class="champannonce" disabled="true" value="{{user.email}}" placeholder="Email"></ion-input>
+            <ion-input formControlName="email" type="text" class="champannonce" disabled="true"  placeholder="Email"></ion-input>
           </ion-item>
 
           <ion-item>

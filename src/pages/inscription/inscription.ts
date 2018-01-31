@@ -5,6 +5,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import {StorageUtils} from '../../Utils/storage.utils';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { InscriptionValidationPage } from '../inscription-validation/inscription-validation';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Toast } from '@ionic-native/toast';
+import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+//private toast : Toast,
 
 /**
  * Generated class for the InscriptionPage page.
@@ -20,9 +24,12 @@ import { InscriptionValidationPage } from '../inscription-validation/inscription
 })
 
 export class InscriptionPage {
-	myFormulaire: FormGroup;
+  myFormulaire: FormGroup;
+  val: any;
+  file: any;
+  photo: any;
 
-  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider,public viewCtrl: ViewController, private toastCtrl: ToastController) {
+  constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider,public viewCtrl: ViewController, private toastCtrl: ToastController, private transfer: FileTransfer) {
   	this.myFormulaire = formBuilder.group({
       prenom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       nom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -35,13 +42,35 @@ export class InscriptionPage {
       residant: [''],
       indicatif: [''],
       sexe: [''],
+      //file: [''],
       myDate: ['', Validators.compose([Validators.maxLength(30), Validators.required])]
     });
+    this.val = false;
+    this.photo = "assets/images/profil.png";
+    this.file = this.photo;
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'assets/images/profil.png',
+      mimeType: "multipart/form-data"
+    }
+    this.photo = options;
+    console.log(this.photo);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InscriptionPage');
   }
+  fileChange(event) {
+    let fileList: FileList = this.photo;
+    if (fileList.length > 0) 
+    {
+      this.file = fileList[0];
+    }
+    console.log(this.file);
+  }
+
 
   presentToast(message) {
     let toast = this.toastCtrl.create({
@@ -70,71 +99,95 @@ export class InscriptionPage {
   }
 
   createUser(){
+    //this.connectivityService.checkNetwork();
     if(!this.myFormulaire.valid){
       console.log("Remplissez tous les champs!");
       let message = "Remplissez tous les champs!";
       //this.showToast("Remplissez tous les champs!");
       this.presentToast(message);
+      this.showToast(message);
     }
     else{
 
       var json = this.myFormulaire.value;
       var valid = this.isValid(new FormControl(json.email));
-      console.log(valid);
       if(valid == null){
 
 
-      if(json.motpasse != json.confirmmotpasse){
-        var message ="Les mots de passes ne sont pas identiques";
-        var subTitle ="Mot de passe";
-        this.presentToast(message);
-        console.log("Les mots de passes ne sont pas identiques");
-      }
-      else{
-        let loader = this.loading.create({
-          content: 'Chargement en cours...',
-        });
-        loader.present().then(() => {
+        if(json.motpasse != json.confirmmotpasse){
+          var message ="Les mots de passes ne sont pas identiques";
+          var subTitle ="Mot de passe";
+          this.showToast(message);
+          this.presentToast(message);
+          console.log("Les mots de passes ne sont pas identiques");
+        }
+        else{
+          let loader = this.loading.create({
+            content: 'Chargement en cours...',
+          });
+          loader.present().then(() => {
+          console.log(json);
 
-        let user = {email: json.email, nom: json.nom, prenom: json.prenom, dateNaissance: json.myDate,telephone: json.indicatif+json.telephone, pseudo:json.username, sexe: json.sexe, isDakar: json.residant, idUserProfil:1,password: json.motpasse} ;
-        this.userService.createUser(user).subscribe(
-            data => {
-              console.log(data);
-            if(data.status == 0){
-              this.goToValidationPage(data.user);
-              
-            }
-            else{
-              var subTitle ="Creation de compte";
-              this.presentToast(data.message);
-              
-            }
-
-            },
-            err => {
-                //console.log(err);
+          let user = 
+          {
+            email: json.email, 
+            nom: json.nom, 
+            prenom: json.prenom, 
+            dateNaissance: json.myDate,
+            telephone: json.indicatif+json.telephone, 
+            pseudo:json.username, 
+            sexe: json.sexe, 
+            isDakar: json.residant, 
+            password: json.motpasse,
+            photo: ""
+          };
+          console.log(user);
+          this.userService.createUser(this.photo,user).subscribe(
+              data => {
+                console.log(data);
+                if(data.message == 2){
+                  console.log(data);
+                  this.goToValidationPage();  
+                }
+                else{
+                  loader.dismiss();
+                  console.log(data);
+                  var subTitle ="Creation de compte";
+                  this.presentToast(data.corps); 
+                  this.showToast(data.corps);
+                }
+              },
+              err => {
                 loader.dismiss();
-            },
-            () => {loader.dismiss()}
-
-          );
-        
-        });
-      }
-        
+                console.log(err);
+                this.showToast("Une erreur est survenue réessayer plus tard");
+              },
+              () => {loader.dismiss()}
+            );     
+          });
+        }     
       }
       else{
         console.log('Email non valide');
         this.presentToast("Email non valide");
+        this.showToast("Email non valide");
       }
       
     }
   }
 
-  goToValidationPage(user){
+  goToValidationPage(){
     this.navCtrl.push(InscriptionValidationPage, {
-      'user': user
+      //'user': user
     });
+  }
+
+  showToast(titre){
+    this.toast.show(titre, '5000', 'center').subscribe(
+      toast => {
+        //console.log(toast);
+      }
+    );
   }
 
   goToInscription(){

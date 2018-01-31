@@ -10,6 +10,8 @@ import { InscriptionPage } from '../inscription/inscription';
 import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
 import { AccueilPage } from '../accueil/accueil';
+import { Toast } from '@ionic-native/toast';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 /**
@@ -29,7 +31,12 @@ export class LoginPage {
   	user : any;
     userProfile: any = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder ,private alertCtrl: AlertController,private userService:UserServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider,private facebook: Facebook) {
+  constructor(private googlePlus: GooglePlus, private toast : Toast, 
+    public navCtrl: NavController, public navParams: NavParams,
+    public formBuilder: FormBuilder ,
+    private alertCtrl: AlertController,private userService:UserServiceProvider, 
+    public loading: LoadingController,public viewCtrl: ViewController, 
+    public locations: LocationsProvider,private facebook: Facebook) {
   	
   }
 
@@ -70,6 +77,54 @@ export class LoginPage {
     }).catch((error) => { console.log(error);
       //alert(error+' 33');
        });
-}
+  }
+
+  doGoogleLogin(){
+    let nav = this.navCtrl;
+    let env = this;
+    let loading = this.loading.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.googlePlus.login({
+      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+      'webClientId': 'webClientId.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'offline': true
+    })
+    .then(function (user) {
+      loading.dismiss();
+      this.showToast(user);
+      if(user){
+        StorageUtils.setToken(JSON.stringify(user.displayName));
+        this.navCtrl.setRoot(AccueilPage);
+      }
+      else{
+        this.showToast("Une erreur s'est produite réessayer plus tard");
+
+      }
+  
+      /*env.nativeStorage.setItem('user', {
+        name: user.displayName,
+        email: user.email,
+        picture: user.imageUrl
+      })
+      .then(function(){
+        nav.push(AccueilPage);
+      }, function (error) {
+        console.log(error);
+      })*/
+    }, function (error) {
+      loading.dismiss();
+      this.showToast(error);
+    });
+  }
+
+  showToast(titre){
+    this.toast.show(titre, '5000', 'center').subscribe(
+      toast => {
+        //console.log(toast);
+      }
+    );
+  }
 
 }

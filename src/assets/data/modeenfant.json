@@ -1,5 +1,0 @@
-[
-	{"image":"assets/images/chicco.jpg","id":"1","nom":"Chicco","adresse":"5 Rue Aime Cesaire, Dakar","lattitude":"14.6935091","longitude":"-17.474430100000063","telephone":"776665511","description":"Chaîne offrant prêt-à-porter tendance, chaussures, accessoires et linge de maison pour enfants de 0 à 14 ans."},
-	{"image":"assets/images/Andy.jpg","id":"2","nom":"Andy E Helen","adresse":"Mondial sport, 118 Avenue André Peytavin. Galerie Commerciale, Dakar","lattitude":"14.7441621","longitude":"-17.51205559999994","telephone":"33 860 30 00.","description":"Chaîne offrant prêt-à-porter tendance, chaussures, accessoires et linge de maison pour enfants de 0 à 14 ans."},
-	{"image":"assets/images/citysport.jpg","id":"3","nom":"Catimini - Multimarques","adresse":"Avenue du president lamine GUEYE, Dakar","lattitude":"14.67267","longitude":"-17.43741","telephone":"33 860 30 00.","description":"Chaîne offrant prêt-à-porter tendance, chaussures, accessoires et linge de maison pour enfants de 0 à 14 ans."}
-]

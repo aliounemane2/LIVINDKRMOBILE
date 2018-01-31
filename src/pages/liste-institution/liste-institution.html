@@ -200,7 +200,7 @@
 		        <div class="image-event1" (click)="goToInstitu(ins)">
 		        	<div class="texte-event" >
 				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nom}}
+				          {{ins.nomIns}}
 				        </div>
 				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
 				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
@@ -413,16 +413,16 @@
 	        	{{message}}
 	        </h1>
 	      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='0'" >
-	      			<ion-slide class="ineteret1" *ngFor="let night of institution ; let i = index"  >
-						<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
+	      			<ion-slide class="ineteret1" *ngFor="let night of institution ; let i = index"  style="height: 20vh;">
+								<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
 					        <div class="ineteret-image" >
-					          <img src="{{night.image}}" class="full-image" style="border-radius: 50%;"  />    
+					          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
 					        </div>
 					        <div class="ineteret-texte">
-					         {{night.nom}}
+					         {{night.nomIns}}
 					        </div>
-					    </div>
-					</ion-slide >
+					    	</div>
+							</ion-slide >
 
 					<ion-slide>
 				        <!-- need a empty slide to avoid last item to be inaccessible -->
@@ -437,10 +437,10 @@
 	      			<ion-slide class="ineteret1" *ngFor="let night of insRecherche ; let i = index"  >
 						<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
 					        <div class="ineteret-image" >
-					          <img src="{{night.image}}" class="full-image" style="border-radius: 50%;"  />    
+					          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
 					        </div>
 					        <div class="ineteret-texte">
-					         {{night.nom}}
+					         {{night.nomIns}}
 					        </div>
 					    </div>
 					</ion-slide >
@@ -599,7 +599,7 @@
         <div class="texte-accueil" [style.top] ="top">      
             {{categorie.nomSousCategory}}
         </div>
-  		<img *ngIf="categorie.imageSousCategory" src="{{url}}/{{categorie.imageSousCategory}}" class="full-image" />
+  		<img *ngIf="categorie.imageSousCategory" src="{{urll}}/{{categorie.imageSousCategory}}" class="full-image" />
   		<img *ngIf="!categorie.imageSousCategory" src="assets/images/evenement.jpg" class="full-image" />
   		</div>
     	</div>

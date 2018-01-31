@@ -46,6 +46,10 @@ import { DetailsSightPage } from '../pages/details-sight/details-sight';
 //import {OrderByPipe} from "../pages/evenement/evenement";
 import {OrderByPipe} from "./orderby.pipe";
 import { IonicStorageModule } from '@ionic/storage';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Toast } from '@ionic-native/toast';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 @NgModule({
   declarations: [
@@ -125,7 +129,10 @@ import { IonicStorageModule } from '@ionic/storage';
     Facebook,
     Calendar,
     OrderByPipe,
-    CallNumber
+    CallNumber,
+    FileTransfer,
+    Toast,
+    GooglePlus
   ]
 })
 export class AppModule {}

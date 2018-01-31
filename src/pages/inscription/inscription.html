@@ -20,7 +20,7 @@
     <!--div class="logo-liv"> <img src="assets/images/logo-livindakar.png" class="full-image" />
     </div-->
     <div class="form-inscription">
-      <form [formGroup]="myFormulaire" (ngSubmit)="goToInscription()">
+      <form [formGroup]="myFormulaire" enctype="multipart/form-data" (ngSubmit)="createUser()">
 
       <ion-item>
         
@@ -76,6 +76,12 @@
         </ion-label>
         <ion-checkbox dark formControlName="residant" ></ion-checkbox>
       </ion-item>
+
+      <!--ion-item>
+        <ion-input formControlName="file"  type="file" name="file"></ion-input>
+      </ion-item-->
+
+      
 
       <button type="submit" class="btnsuivant"><img src="assets/images/next.png" class="full-image" /></button>
 

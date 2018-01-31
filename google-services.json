@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "358136605028",
+    "firebase_url": "https://livindakar.firebaseio.com",
+    "project_id": "livindakar",
+    "storage_bucket": "livindakar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358136605028:android:eb4d17d0e64c7e93",
+        "android_client_info": {
+          "package_name": "com.qualshore.livindakar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358136605028-5vif4rbj4scv6b7i60bgnhsk66a0jer8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDflH2i-ELk8v0ZX2l8Yv7sekufFWOOYHQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

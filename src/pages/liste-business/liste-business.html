@@ -36,6 +36,10 @@
 
 <ion-content>
 
+		<!--ion-refresher (ionRefresh)="doRefresh($event)">
+				<ion-refresher-content></ion-refresher-content>
+		</ion-refresher-->
+
 	<div class="body-evenement">
 		<div *ngIf="titleCat == 'Shopping'" >
 			<!--ul *ngIf="val1 == '1'"  class="menu-right">
@@ -149,7 +153,7 @@
 		      	<li (click)= "openMap(titre)"><ion-icon name='pin'></ion-icon></li>
 	      		<li (click)= "openRecherche()"><ion-icon name='search'></ion-icon></li>
      		</ul-->
-     		<div *ngIf="titre == 'Sight-seeing'" >
+     		<div *ngIf="titre == 'Sight-Seeing'" >
      			<div class="content-menu-price" *ngIf="val1 == '1'">
 		      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
 		      			{{pr.price}}
@@ -158,19 +162,19 @@
 		      	<div class="bgsight" *ngIf="valrech == '0'"> 
 		      		<div *ngFor="let evenement of institution" class="bg-texte">
 	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
-	     				<div class="descsight">{{evenement.descriptionEvent}}</div>
+	     				<div class="descsight">{{evenement.descriptionIns}}</div>
 	     			</div>
 		      	</div>	
 
 		      	<div class="bgsight" *ngIf="valrech == '2'"> 
 		      		<div *ngFor="let evenement of insPrice" class="bg-texte">
 	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
-	     				<div class="descsight">{{evenement.descriptionEvent}}</div>
+	     				<div class="descsight">{{evenement.descriptionIns}}</div>
 	     			</div>
 		      	</div>	
      		</div>
 
-     		<div *ngIf="titre != 'Sight-seeing'">
+     		<div *ngIf="titre != 'Sight-Seeing'">
 
      			<div class="content-menu-price" *ngIf="val1 == '1'">
 		      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">

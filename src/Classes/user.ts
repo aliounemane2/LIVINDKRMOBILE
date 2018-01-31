@@ -11,6 +11,7 @@ export class User {
     lastName:string;
     username:string;
     password:string;
+    expireTime:string;
     rememberMe:boolean;
     lastConnection:Date;
     roles:Array<Profile>;

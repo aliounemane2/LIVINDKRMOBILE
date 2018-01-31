@@ -4,6 +4,7 @@
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
+$font-path1: "../assets";
 
 
 // The app direction is used to include
@@ -91,4 +92,6 @@ $pad-dec : 0px 0px 0px 0px;
 @import "noto-sans";
 @import "../assets/fonts/ZapfinoLinotypeOne.ttf";
 @import "../assets/fonts/linotypezapfino-one.ttf";
+//@import "../assets/fonts/linotypezapfino-One.woff";
+@import "../assets/linotypezapfino-one.ttf";
 

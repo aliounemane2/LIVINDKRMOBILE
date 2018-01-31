@@ -10,6 +10,8 @@ import {OrderByPipe} from "../../app/orderby.pipe"
 import {RateComponent} from '../../components/rate/rate';
 import { RechercheDecouvertePage } from '../recherche-decouverte/recherche-decouverte';
 import { DetailsSightPage } from '../details-sight/details-sight';
+import { Toast } from '@ionic-native/toast';
+//private toast : Toast,
 
 //declare _ : any;
 declare var _;
@@ -81,9 +83,10 @@ export class ListeInstitutionPage {
   PrePopulaires: any;
   inss: any;
   instii: any;
+  urll: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public connectivityService:ConnectvityServiceProvider,private modalCtrl: ModalController, private toastCtrl: ToastController) {
+  constructor( private toast : Toast, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public connectivityService:ConnectvityServiceProvider,private modalCtrl: ModalController, private toastCtrl: ToastController) {
     this.masque =false;
     this.val =0;
     this.msq = false;
@@ -120,15 +123,16 @@ export class ListeInstitutionPage {
       this.categorie = navParams.get("data");
       this.titre = navParams.get("titre");
       this.titre1 = navParams.get("titre1");
+      this.urll = navParams.get("urlsc");
       this.souscat = navParams.get("souscat");
       this.scat1 = navParams.get("scat");
-      this.url = navParams.get("url");
-      console.log(this.url);
+      console.log(this.urll);
+      console.log(this.souscat);
       this.titleCat = this.titre;
       console.log(this.categorie);
       console.log(this.titre);
       console.log(this.titre1);
-      console.log(this.souscat);
+      
       console.log(this.scat1);
     }
     if(this.souscat != null){
@@ -185,6 +189,7 @@ export class ListeInstitutionPage {
       if (data == '' || !data){
         console.log("Nous n'avons rien trouve");
         this.presentToast("Aucun résultat trouvé");
+        this.showToast("Aucun résultat trouvé");
       }
       else{
         console.log(this.titre1);
@@ -211,36 +216,6 @@ export class ListeInstitutionPage {
     });
 
     toast.present();
-  }
-
-  getCategorieDecouverte(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getCategorieDecouverte().subscribe(
-        data => {
-            this.catDecouverte = data; 
-            console.log(this.catDecouverte);
-                if(this.catDecouverte == 0){
-                  let titre ="Pas de catDecouverte  a afficher";
-                  console.log(this.catDecouverte+' 1');
-
-                }
-                else{
-                  console.log(this.catDecouverte);  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
   }
 
   getCatDecouverte(){
@@ -364,6 +339,7 @@ export class ListeInstitutionPage {
     }
     if (val == '' || !val){
       this.valrech = 0;
+      //this.valueJour =0;
       this.insRecherche = this.institution;
     }
     console.log(this.insRecherche);
@@ -395,17 +371,26 @@ export class ListeInstitutionPage {
     console.log(this.valrech);
   }
 
+  showToast(titre){
+    this.toast.show(titre, '5000', 'center').subscribe(
+      toast => {
+        //console.log(toast);
+      }
+    );
+  }
+
   ionViewDidLoad() {
     //this.connectivityService.checkNetwork();
     console.log('ionViewDidLoad ListeInstitutionPage');
+    this.connectivityService.checkNetwork();
     
     
     
     if(this.titre == 'Prestataires'){
-      this.getCatPrestataires();
       this.getVignetteIns();
-      this.getPrestataires();
-      this.getPrestatairesEnVedette(this.categorie);
+      this.getInstitutionByCategorie(this.categorie);
+      //this.getPrestataires();
+      //this.getPrestatairesEnVedette(this.categorie);
       this.color = '#ffffff';
     }
     
@@ -414,7 +399,6 @@ export class ListeInstitutionPage {
       this.getCatDecouverte();
     }
     else{
-      //this.getIns();
       this.getInstitutionByCategorie(this.categorie);
     }
   }
@@ -429,7 +413,8 @@ export class ListeInstitutionPage {
       'accueil': 'accueil',
       'titre':titre,
       'cat':categorie,
-      'ca': 'ca'
+      'ca': 'ca',
+      'url': this.url
     });
     }
   }
@@ -543,61 +528,6 @@ export class ListeInstitutionPage {
     });
   }
 
-
-  getIns(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getIns().subscribe(
-        data => {
-            this.institutio = data; 
-            console.log(this.institutio);
-                if(this.institutio == 0){
-                  let titre ="Pas de institution  a afficher";
-                  console.log(this.institutio+' 1');
-
-                }
-                else{
-                  console.log(this.institutio);
-                  console.log(this.titre); 
-                  this.ins.push(this.institutio[0]);
-                  for(var i = 0; i < this.institutio.length; i++)
-                  {
-                    if(this.institutio[i].typeins == this.titre)
-                    {
-                      this.institution.push(this.institutio[i]);
-                    }
-
-                  }
-
-                  if(this.institution == 0){
-                    this.vall =0;
-                    this.message1 = "Aucune institution pour la categorie "+this.titre;
-                    console.log(this.message1);
-
-                  }
-                  else{
-                    this.vall =1;
-                    this.message1 = "";
-                    console.log('this.message1');
-                  }
-                  console.log(this.institution);  
-                  console.log(this.vall);  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
   getInstitutionByCategorie(categorie){
     let loader = this.loading.create({
     content: 'Chargement en cours...',
@@ -674,40 +604,6 @@ export class ListeInstitutionPage {
       );
     })
   }
-
-
-  getCatPrestataires(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getCatPrestataires().subscribe(
-        data => {
-            this.catprestaiares = data; 
-            console.log(this.catprestaiares);
-                if(this.mode == 0){
-                  let titre ="Pas de catprestaiares  a afficher";
-                  console.log(this.catprestaiares+' 1');
-
-                }
-                else{
-                 
-                  console.log(this.catprestaiares);
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
   
 
   getVignetteIns(){
@@ -741,76 +637,6 @@ export class ListeInstitutionPage {
     })
   }
 
-  getPrestataires(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getPrestataires().subscribe(
-        data => {
-            this.institution = data; 
-            console.log(this.institution);
-                if(this.institution == 0){
-                  let titre ="Pas de prestataires  a afficher";
-                  console.log(this.institution+' 1');
-                  this.vall =0;
-                  this.message1 = "Aucune institution pour la categorie "+this.titre;
-                  console.log(this.message1);
-
-                }
-                else{
-                  console.log(this.institution);
-                  this.vall =1;
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
-
-  getDecouverte(){
-    let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });
-
-    loader.present().then(() => {
-      this.eventService.getDecouverte().subscribe(
-        data => {
-            this.institution = data; 
-            console.log(this.institution);
-                if(this.institution == 0){
-                  let titre ="Pas de Decouverte  a afficher";
-                  console.log(this.institution+' 1');
-                  this.vall =0;
-                  this.message1 = "Aucune institution pour la categorie "+this.titre;
-                  console.log(this.message1);
-
-                }
-                else{
-                 
-                  console.log(this.institution);
-                  this.vall =1;
-                  
-                }
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-                let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
-            },
-            () => {loader.dismiss()}
-      );
-    })
-  }
 
   getArticleDecouverte(){
     let loader = this.loading.create({
