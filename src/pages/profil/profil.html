@@ -29,7 +29,7 @@
               <!--div *ngIf="!vpci"-->
                   <img *ngIf="!utilisateur.photo" src="assets/images/profil.png"  class="full-image"/>
                   
-                  <img *ngIf="utilisateur.photo" src="{{utilisateur.photo}}"  class="full-image"/>
+                  <img *ngIf="utilisateur.photo" src="{{url}}/{{utilisateur.photo}}"  class="full-image"/>
               <!--/div-->
 
               <!--div *ngIf="vpci">
@@ -110,7 +110,7 @@
 
       <div *ngSwitchCase="'profil'">
         
-        <form [formGroup]="myFormulaire" style="background-color: #fff;">
+        <form [formGroup]="myFormulaire" style="background-color: #fff;" (ngSubmit)="editUser()">
 
           <ion-item>
             <ion-input formControlName="prenom" type="text" class="champannonce"  placeholder="Prenom"></ion-input>

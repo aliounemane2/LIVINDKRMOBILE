@@ -17,7 +17,7 @@
     <!--ion-avatar item-start -->
     <div *ngIf="utilisateur">
         <img *ngIf="!utilisateur.photo" src="assets/images/profil.png" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
-        <img *ngIf="utilisateur.photo" src="{{utilisateur.photo}}" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
+        <img *ngIf="utilisateur.photo" src="{{url}}/{{utilisateur.photo}}" style="padding-left: 40%; padding-top: 6%; padding-bottom: 6%;"/>
     </div>
 
     <div *ngIf="!utilisateur">

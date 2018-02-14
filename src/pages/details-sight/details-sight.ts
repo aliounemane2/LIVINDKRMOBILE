@@ -40,7 +40,7 @@ export class DetailsSightPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsSightPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getVignetteByInstitution(this.institution);
   }
 

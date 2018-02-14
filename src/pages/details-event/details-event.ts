@@ -64,7 +64,7 @@ export class DetailsEventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsEventPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getPhotoByEvent(this.evenement);
   }
   goToCarteMap(evenement){
@@ -78,10 +78,10 @@ export class DetailsEventPage {
   addEvent(evenement){
     //var success = function(message) { alert("Success: " + JSON.stringify(message)); };
     //var error = function(message) { alert("Error: " + message); };
-    var endDate = this.incrementDate(evenement.date, 1)
+    var endDate = this.incrementDate(evenement.idEvent.dateEvent, 1)
     //alert(evenement.nom+" _ "+endDate);
 
-    this.calendar.createEvent(evenement.nom,evenement.adresse, evenement.nom, evenement.date,endDate).then(
+    this.calendar.createEvent(evenement.idEvent.nomEvent, evenement.idEvent.idPlace.adressePlace, evenement.idEvent.nomEvent, evenement.idEvent.dateEvent, endDate).then(
       (msg) => { 
         let titre ="Evénement ajouté avec succés dans le calendrier";
         this.presentPromptOk(titre);

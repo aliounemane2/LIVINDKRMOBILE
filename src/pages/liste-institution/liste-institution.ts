@@ -84,6 +84,8 @@ export class ListeInstitutionPage {
   inss: any;
   instii: any;
   urll: any;
+  randomQuote: string;
+  testIns: any;
 
 
   constructor( private toast : Toast, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public connectivityService:ConnectvityServiceProvider,private modalCtrl: ModalController, private toastCtrl: ToastController) {
@@ -125,15 +127,12 @@ export class ListeInstitutionPage {
       this.titre1 = navParams.get("titre1");
       this.urll = navParams.get("urlsc");
       this.souscat = navParams.get("souscat");
-      this.scat1 = navParams.get("scat");
       console.log(this.urll);
       console.log(this.souscat);
       this.titleCat = this.titre;
       console.log(this.categorie);
       console.log(this.titre);
       console.log(this.titre1);
-      
-      console.log(this.scat1);
     }
     if(this.souscat != null){
       if(this.souscat.length == 3){
@@ -176,6 +175,28 @@ export class ListeInstitutionPage {
       this.rech = 1;
     }
 
+  }
+
+  private buildArray(array) {
+    return new Promise(resolve => {
+      let m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      this.testIns = array;
+      console.log(this.testIns);
+      resolve(true);
+    });
   }
 
   showAddressModal () {
@@ -382,15 +403,11 @@ export class ListeInstitutionPage {
   ionViewDidLoad() {
     //this.connectivityService.checkNetwork();
     console.log('ionViewDidLoad ListeInstitutionPage');
-    this.connectivityService.checkNetwork();
-    
-    
     
     if(this.titre == 'Prestataires'){
       this.getVignetteIns();
       this.getInstitutionByCategorie(this.categorie);
-      //this.getPrestataires();
-      //this.getPrestatairesEnVedette(this.categorie);
+      console.log("ppp");
       this.color = '#ffffff';
     }
     
@@ -400,6 +417,8 @@ export class ListeInstitutionPage {
     }
     else{
       this.getInstitutionByCategorie(this.categorie);
+      console.log("p");
+
     }
   }
 
@@ -549,6 +568,9 @@ export class ListeInstitutionPage {
                   
                 }
                 else{
+                  //this.institution[Math.floor(Math.random() * this.institution.length)];
+                  this.testIns = this.institution;
+                  this.buildArray(this.testIns);
                   console.log(this.institution);
                   this.vall =1;
                   this.message1 = "";
@@ -565,6 +587,46 @@ export class ListeInstitutionPage {
             () => {loader.dismiss()}
       );
     })
+  }
+
+  forceReload(refresher) {
+    this.loadInstitutionByCategorie(refresher);
+  }
+
+
+
+  loadInstitutionByCategorie(refresher?){
+      this.eventService.getInstitutionByCategory(this.categorie.idCategory).subscribe(
+        data => {
+            this.institution = data.sous_category; 
+            this.url = data.urls;
+            console.log(this.institution);
+            console.log(this.url);
+                if(this.institution == null){
+                  let titre ="Pas de institution  a afficher";
+                  console.log(this.institution+' 1');
+                  this.vall =0;
+                  this.message1 = "Aucune institution pour la categorie "+this.titre;
+                  console.log(this.message1);
+                  
+                }
+                else{
+                  //this.institution[Math.floor(Math.random() * this.institution.length)];
+                  console.log(this.institution);
+                  this.vall =1;
+                  this.message1 = "";
+                  console.log('this.message1');
+                  
+                }
+            },
+            err => {
+                console.log(err);
+               
+                let titre ="Une erreur est survenue reessayer plus tard ";
+                //this.presentPromptOk(titre);
+            }
+      );
+      refresher.complete();
   }
 
   getPrestatairesEnVedette(categorie){
@@ -709,5 +771,7 @@ export class ListeInstitutionPage {
       );
     })
   }
+
+ 
 
 }

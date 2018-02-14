@@ -37,695 +37,728 @@
 
 <ion-content [style.backgroundColor] ="color">
 	<div class="body-evenement" >
+		<!--ion-refresher (ionRefresh)="forceReload($event)">
+		    <ion-refresher-content refreshingText="Reload from API...">
+		    </ion-refresher-content>
+		 </ion-refresher-->
 		
-	<div *ngIf="titre1 == 'Restaurants'">
-		<!--ul *ngIf="val == '1'"  class="menu-right">
-		    <li (click)= "openPrix()" ><ion-icon name='logo-euro'></ion-icon></li>
-	      	<li (click)= "openMap(titre)"><ion-icon name='pin'></ion-icon></li>
-	      	<li (click)= "openRecherche()"><ion-icon name='search'></ion-icon></li>
-     	</ul-->
-
-     	<!--ul class="menu-right">
-	      	<li *ngFor="let pr of price1" (click)="flitreByprice(institution,pr.price)">
-	      		{{pr.price}}
-	      	</li>	
-		</ul-->
-
-     	<!--ion-item >
-      	<ion-label floating class="labelins">  &nbsp; &nbsp;Prix</ion-label-->
-	      <!--ion-range (ionChange)="getRestoByPrix(institution)" [(ngModel)]="prix" min="2000" max="30000" pin="true"  color="secondary" *ngIf="value == '1'" style="margin-top: 20%; height: 20px;">
-	        <ion-icon range-left small name="logo-euro"></ion-icon>
-	        <ion-icon range-right name="logo-euro"></ion-icon>
-	      </ion-range-->
-    	<!--/ion-item-->
-
-    	
-      	<ion-searchbar *ngIf="value == '2'"  (ionInput)="getItemsRestau($event)">
-      	</ion-searchbar>
-
-      	<div class="content-menu-price" *ngIf="val1 == '1'">
-      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
-      			{{pr.price}}
-      		</div>
-      		<br/>
-      	</div>
-
-      	<div *ngIf ="valrech =='0'" >
-      		<h1 [hidden]="vall" style="color:#ac0203;
-			    font-size: 16px;
-			    text-align:center;
-			    margin-top: 25%;">
-		        {{message1}}
-		    </h1>
-      		<div *ngFor="let ins of institution " >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event">
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		      		<div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
-		      		</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-	     <div *ngFor="let ins of institution" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event" >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		      		<div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
-		      		</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-         	   
-	     </div>
-
-	     <div *ngFor="let ins of institution" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event"  >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-			      	<div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
-		      		</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-      	</div>
-
-
-      	<div *ngIf ="valrech =='1'" >
-      		<h1 [hidden]="valueJour" style="color:#ac0203;
-	        
-	        text-align:center ;
-	        clear: both;
-	        font-size: 16px;">
-	        	{{message}}
-	        </h1>
-      		<div *ngFor="let ins of insRecherche" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event" >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-	     <div *ngFor="let ins of insRecherche" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event" >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-
-
-
-		         	   
-	     </div>
-
-	     <div *ngFor="let ins of insRecherche" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event"  >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-      	</div>
-
-
-      	<div *ngIf ="valrech =='2'" >
-      			<h1 [hidden]="valueJour" style="color:#ac0203;
-		       
-		        text-align:center;
-		        clear: both;
-		        font-size: 16px;">
-		        	{{message}}
-	        	</h1>
-      		<div *ngFor="let ins of insPrice" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event" >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-	     <div *ngFor="let ins of insPrice" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event" >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-
-
-
-		         	   
-	     </div>
-
-	     <div *ngFor="let ins of insPrice" >
-
-	     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event"  >
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-			      	</div>
-			      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-		         	   
-	     </div>
-
-      	</div>
-
-      	<div *ngIf ="valrech =='3'" >
-      		<div *ngFor="let ins of institution " >
-	     		
-		        <div class="image-event1" (click)="goToInstitu(ins)">
-		        	<div class="texte-event">
-				        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
-				          {{ins.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ ins.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
-		      		<div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
-		      		</div>
-		        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>    	   
-	     	</div>
-      	</div>
-      	
- 	</div>
-
- 	<div *ngIf="titre1 == 'Prestataires'">
- 		<div *ngIf="titre == 'Prestataires'" class="bg-prestataires">
-
-	     	<ion-slides  class="image-event" *ngIf="vignette && vignette.length" autoplay="5000" loop="true" speed="3000" pager="true">
-				<ion-slide *ngFor="let vign of vignette" >
-					<div >
-	        			<img src="{{vign.image}}" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
-	      			</div>
-				</ion-slide >
-			</ion-slides >
-
-	      	<div class="bloc-cat">
-	      		<ion-slides slidesPerView="4.5" spaceBetween="0" >
-	      			<ion-slide class="ineteret1" *ngFor="let int of souscat ; let i = index"  >
-						<div (click)="goToListeBus(int)">
-					        <div class="ineteret-image" >
-					          <!--img src="{{int.image}}" class="full-image" style="border-radius: 50%;" *ngIf="!int.val"  /--> 
-
-					          <img *ngIf="int.imageSousCategory" src="{{url}}/{{int.imageSousCategory}}" class="full-image" style="border-radius: 50%;"  />
-
-					          <img *ngIf="!int.imageSousCategory" src="assets/images/Plumber2.png" class="full-image" style="border-radius: 50%;"  />   
-					        </div>
-					        <div class="ineteret-texte">
-					         {{int.nomSousCategory}}
-					        </div>
-					    </div>
-					</ion-slide >
-
-					<ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
-
-				    <ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
-	      		</ion-slides >
-	      	</div>
+		<div *ngIf="titre1 == 'Restaurants'">
 			
-      	</div>
-      	<div *ngIf="titre == 'Prestataires'">
-      		<div class="recherche">
-	      		<ion-searchbar (ionInput)="getItemsRestau($event)"></ion-searchbar>
+	      	<ion-searchbar *ngIf="value == '2'"  (ionInput)="getItemsRestau($event)">
+	      	</ion-searchbar>
+
+	      	<div class="content-menu-price" *ngIf="val1 == '1'">
+	      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
+	      			{{pr.price}}
+	      		</div>
+	      		<br/>
 	      	</div>
-      	</div>
-      	<div *ngIf="titre == 'Prestataires'" class="vedette">En vedette</div>
 
-      	<div class="bloc-cat" *ngIf="titre == 'Prestataires'">
-      		<h1 [hidden]="valueJour" style="color:#ac0203;
-	        text-align:center ;
-	        clear: both;
-	        font-size: 16px;">
-	        	{{message}}
-	        </h1>
-	      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='0'" >
-	      			<ion-slide class="ineteret1" *ngFor="let night of institution ; let i = index"  style="height: 20vh;">
-								<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
-					        <div class="ineteret-image" >
-					          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
-					        </div>
-					        <div class="ineteret-texte">
-					         {{night.nomIns}}
-					        </div>
-					    	</div>
-							</ion-slide >
+	      	<div *ngIf ="valrech =='0'" >
+	      		<h1 [hidden]="vall" style="color:#ac0203;
+				    font-size: 16px;
+				    text-align:center;
+				    margin-top: 25%;">
+			        {{message1}}
+			    </h1>
+	      		
 
-					<ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
+		     <div *ngFor="let ins of institution" >
 
-				    <ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
-	      		</ion-slides >
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event" >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			      		<div class="note-ins" *ngIf ="note =='1'">
+			      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
+			      		</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
 
-	      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='1'" >
-	      			<ion-slide class="ineteret1" *ngFor="let night of insRecherche ; let i = index"  >
-						<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
-					        <div class="ineteret-image" >
-					          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+	         	   
+		     </div>
+
+		     <div *ngFor="let ins of institution " >
+
+			     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
+			     		
+				        <div class="image-event1" (click)="goToInstitu(ins)">
+				        	<div class="texte-event">
+						        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+						          {{ins.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+						          {{ ins.price }}
+						        </div>
+				      		</div>
+				      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+				      		<div class="note-ins" *ngIf ="note =='1'">
+				      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
+				      		</div>
+				        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+				        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+				        </div>
+			     	</div>
+			         	   
+		     	</div>
+
+		     <div *ngFor="let ins of institution" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event"  >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
 					        </div>
-					        <div class="ineteret-texte">
-					         {{night.nomIns}}
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
 					        </div>
-					    </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+				      	<div class="note-ins" *ngIf ="note =='1'">
+			      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
+			      		</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+			         	   
+		     </div>
+
+	      	</div>
+
+
+	      	<div *ngIf ="valrech =='1'" >
+	      		<h1 [hidden]="valueJour" style="color:#ac0203;
+		        
+		        text-align:center ;
+		        clear: both;
+		        font-size: 16px;">
+		        	{{message}}
+		        </h1>
+	      		<div *ngFor="let ins of insRecherche" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event" >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+			         	   
+		     </div>
+
+		     <div *ngFor="let ins of insRecherche" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event" >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+
+
+
+			         	   
+		     </div>
+
+		     <div *ngFor="let ins of insRecherche" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event"  >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+			         	   
+		     </div>
+
+	      	</div>
+
+
+	      	<div *ngIf ="valrech =='2'" >
+	      			<h1 [hidden]="valueJour" style="color:#ac0203;
+			       
+			        text-align:center;
+			        clear: both;
+			        font-size: 16px;">
+			        	{{message}}
+		        	</h1>
+	      		<div *ngFor="let ins of insPrice" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Premiums'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event" >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+			         	   
+		     </div>
+
+		     <div *ngFor="let ins of insPrice" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event" >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+
+
+
+			         	   
+		     </div>
+
+		     <div *ngFor="let ins of insPrice" >
+
+		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Silver'">  
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event"  >
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+				      	</div>
+				      	<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+			         	   
+		     </div>
+
+	      	</div>
+
+	      	<div *ngIf ="valrech =='3'" >
+	      		<div *ngFor="let ins of institution " >
+		     		
+			        <div class="image-event1" (click)="goToInstitu(ins)">
+			        	<div class="texte-event">
+					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					          {{ins.nomIns}}
+					        </div>
+					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+					          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+					          {{ ins.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="ins.ensolde =='oui'">En solde</div>
+			      		<div class="note-ins" *ngIf ="note =='1'">
+			      			<rating  score="{{ins.note}}" max="{{ins.note}}" ></rating>
+			      		</div>
+			        	<img *ngIf ="ins.photoIns"  src="{{url}}/{{ins.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!ins.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>    	   
+		     	</div>
+	      	</div>
+	      	
+	 	</div>
+
+	 	<div *ngIf="titre1 == 'Prestataires'">
+	 		<div *ngIf="titre == 'Prestataires'" class="bg-prestataires">
+
+		     	<ion-slides  class="image-event" *ngIf="vignette && vignette.length" autoplay="5000" loop="true" speed="3000" pager="true">
+					<ion-slide *ngFor="let vign of vignette" >
+						<div >
+		        			<img src="{{vign.image}}" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
+		      			</div>
 					</ion-slide >
+				</ion-slides >
 
-					<ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
+		      	<div class="bloc-cat">
+		      		<ion-slides slidesPerView="4.5" spaceBetween="0" >
+		      			<ion-slide class="ineteret1" *ngFor="let int of souscat ; let i = index"  >
+							<div (click)="goToListeBus(int)">
+						        <div class="ineteret-image" >
+						          <!--img src="{{int.image}}" class="full-image" style="border-radius: 50%;" *ngIf="!int.val"  /--> 
 
-				    <ion-slide>
-				        <!-- need a empty slide to avoid last item to be inaccessible -->
-				    </ion-slide> 
-	      		</ion-slides >
+						          <img *ngIf="int.imageSousCategory" src="{{url}}/{{int.imageSousCategory}}" class="full-image" style="border-radius: 50%;"  />
+
+						          <img *ngIf="!int.imageSousCategory" src="assets/images/Plumber2.png" class="full-image" style="border-radius: 50%;"  />   
+						        </div>
+						        <div class="ineteret-texte">
+						         {{int.nomSousCategory}}
+						        </div>
+						    </div>
+						</ion-slide >
+
+						<ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+
+					    <ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+		      		</ion-slides >
+		      	</div>
+				
+	      	</div>
+	      	<div *ngIf="titre == 'Prestataires'">
+	      		<div class="recherche">
+		      		<ion-searchbar (ionInput)="getItemsRestau($event)"></ion-searchbar>
+		      	</div>
+	      	</div>
+	      	<div *ngIf="titre == 'Prestataires'" class="vedette">En vedette</div>
+
+	      	<div class="bloc-cat" *ngIf="titre == 'Prestataires'">
+	      		<h1 [hidden]="valueJour" style="color:#ac0203;
+		        text-align:center ;
+		        clear: both;
+		        font-size: 16px;">
+		        	{{message}}
+		        </h1>
+		      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='0'" >
+		      			<ion-slide class="ineteret1" *ngFor="let night of institution ; let i = index"  style="height: 20vh;">
+									<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
+						        <div class="ineteret-image" >
+						          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
+						        </div>
+						        <div class="ineteret-texte">
+						         {{night.nomIns}}
+						        </div>
+						    	</div>
+								</ion-slide >
+
+						<ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+
+					    <ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+		      		</ion-slides >
+
+		      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='1'" >
+		      			<ion-slide class="ineteret1" *ngFor="let night of insRecherche ; let i = index"  >
+							<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
+						        <div class="ineteret-image" >
+						          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
+						        </div>
+						        <div class="ineteret-texte">
+						         {{night.nomIns}}
+						        </div>
+						    </div>
+						</ion-slide >
+
+						<ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+
+					    <ion-slide>
+					        <!-- need a empty slide to avoid last item to be inaccessible -->
+					    </ion-slide> 
+		      		</ion-slides >
+		    </div>
+	 	</div>
+
+	 	<div *ngIf="titre1 == 'Non Sous categorie'">
+
+			<div class="content-menu-price" *ngIf="val1 == '1'">
+	      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
+	      			{{pr.price}}
+	      		</div>
+	      	</div>
+
+	     	<ion-searchbar *ngIf="value == '2'"  
+	     	(ionInput)="getItemsRestau($event)">
+	      	</ion-searchbar>
+	      	<div *ngIf ="valrech =='0'" >
+	      		<h1 [hidden]="vall" style="color:#ac0203;
+				    font-size: 16px;
+				    text-align:center;
+				    margin-top: 25%;">
+			        {{message1}}
+			    </h1>
+	      		<div *ngFor="let night of institution"  >
+	      			<div *ngIf ="night.idTypeoffre.nomTypeOffre =='Gold'"> 
+	      				<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+			      		
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+
+	      			</div>
+		     	
+		     	</div>
+
+		     	<div *ngFor="let night of institution"  >
+	      			<div *ngIf ="night.idTypeoffre.nomTypeOffre =='Premiums'"> 
+	      				<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+			      		
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+
+	      			</div>
+		     	</div>
+
+		     	<div *ngFor="let night of institution"  >
+	      			<div *ngIf ="night.idTypeoffre.nomTypeOffre =='Silver'"> 
+	      				<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+			      		
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+
+	      			</div>
+		     	</div>
+	      	</div>
+
+	      	<div *ngIf ="valrech =='1'" >
+	      			<h1 [hidden]="valueJour" style="color:#ac0203;
+			        
+			        text-align:center;
+			        clear: both;
+			        font-size: 16px;">
+			        	{{message}}
+		        </h1>
+	      		<div *ngFor="let night of insRecherche" >
+		     	
+			       	<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+	      	</div>
+
+	      	<div *ngIf ="valrech =='2'" >
+	      		<h1 [hidden]="valueJour" style="color:#ac0203;
+			        
+			        text-align:center;
+			        clear: both;
+			        font-size: 16px;">
+			        	{{message}}
+		        </h1>
+	      		<div *ngFor="let night of insPrice" >
+		     	
+			       	<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+	      	</div>
+
+	      	<div *ngIf ="valrech =='3'" >
+	      		<h1 [hidden]="valueJour" style="color:#ac0203;
+			        
+			        text-align:center;
+			        clear: both;
+			        font-size: 16px;">
+			        	{{message}}
+		        </h1>
+	      		<div *ngFor="let night of institution" >
+		     	
+			       	<div class="image-event1" (click)="goToInstitu(night)">
+			        	<div class="texte-event" >
+					        <div class="evtexte">
+					          {{night.nomIns}}
+					        </div>
+					        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+					          {{ night.price }}
+					        </div>
+			      		</div>
+			      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
+			      		<div class="note-ins" *ngIf ="note =='1'">
+			      			<rating  score="{{night.note}}" max="{{night.note}}" ></rating>
+			      		</div>
+
+			        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+			        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+			        </div>
+		     	</div>
+	      	</div>
+		     
+	 	</div>
+
+
+
+
+	    <div *ngIf="titre1 == 'Sous categorie'">
+	     	<div *ngFor="let categorie of souscat">
+	  		<div class="baniere-acc" (click)= "goToListeBusiness(categorie)" [style.height] ="height" >
+	        <div class="texte-accueil" [style.top] ="top">      
+	            {{categorie.nomSousCategory}}
+	        </div>
+	  		<img *ngIf="categorie.imageSousCategory" src="{{urll}}/{{categorie.imageSousCategory}}" class="full-image" />
+	  		<img *ngIf="!categorie.imageSousCategory" src="assets/images/evenement.jpg" class="full-image" />
+	  		</div>
+	    	</div>
 	    </div>
- 	</div>
-
- 	<div *ngIf="titre1 == 'Non Sous categorie'">
-
- 		
-
-		<div class="content-menu-price" *ngIf="val1 == '1'">
-      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">
-      			{{pr.price}}
-      		</div>
-      	</div>
-
-     	<ion-searchbar *ngIf="value == '2'"  
-     	(ionInput)="getItemsRestau($event)">
-      	</ion-searchbar>
-      	<div *ngIf ="valrech =='0'" >
-      		<h1 [hidden]="vall" style="color:#ac0203;
-			    font-size: 16px;
-			    text-align:center;
-			    margin-top: 25%;">
-		        {{message1}}
-		    </h1>
-      		<div *ngFor="let night of institution"  >
-	     	
-		        <div class="image-event1" (click)="goToInstitu(night)">
-		        	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{night.nomIns}}
-				        </div>
-				        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
-				          {{ night.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
-		      		
-
-		        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-      	</div>
-
-      	<div *ngIf ="valrech =='1'" >
-      			<h1 [hidden]="valueJour" style="color:#ac0203;
-		        
-		        text-align:center;
-		        clear: both;
-		        font-size: 16px;">
-		        	{{message}}
-	        </h1>
-      		<div *ngFor="let night of insRecherche" >
-	     	
-		       	<div class="image-event1" (click)="goToInstitu(night)">
-		        	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{night.nomIns}}
-				        </div>
-				        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
-				          {{ night.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
-
-		        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-      	</div>
-
-      	<div *ngIf ="valrech =='2'" >
-      		<h1 [hidden]="valueJour" style="color:#ac0203;
-		        
-		        text-align:center;
-		        clear: both;
-		        font-size: 16px;">
-		        	{{message}}
-	        </h1>
-      		<div *ngFor="let night of insPrice" >
-	     	
-		       	<div class="image-event1" (click)="goToInstitu(night)">
-		        	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{night.nomIns}}
-				        </div>
-				        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
-				          {{ night.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
-
-		        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-      	</div>
-
-      	<div *ngIf ="valrech =='3'" >
-      		<h1 [hidden]="valueJour" style="color:#ac0203;
-		        
-		        text-align:center;
-		        clear: both;
-		        font-size: 16px;">
-		        	{{message}}
-	        </h1>
-      		<div *ngFor="let night of institution" >
-	     	
-		       	<div class="image-event1" (click)="goToInstitu(night)">
-		        	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{night.nomIns}}
-				        </div>
-				        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
-				          {{ night.price }}
-				        </div>
-		      		</div>
-		      		<div class="en-solde" *ngIf ="night.ensolde =='oui'">En solde</div>
-		      		<div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{night.note}}" max="{{night.note}}" ></rating>
-		      		</div>
-
-		        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
-
-		        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
-
-		        </div>
-	     	</div>
-      	</div>
 	     
  	</div>
 
+	<div class="body-decouverte" *ngIf="titre1 == 'Découverte'">
+	 	<ion-searchbar *ngIf="value == '2'"(ionInput)="getItemsDecouverte($event)">
+	    </ion-searchbar>
+	 	
+	 	<div *ngIf="titre == 'Découverte'">
+	 		<h1 [hidden]="vall" style="color:#ac0203;
+				    font-size: 16px;
+				    text-align:center;
+				    margin-top: 25%;">
+			        {{message1}}
+			</h1>
+			<div class="ban_decouverte">
+				
+				<img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
+				<ion-searchbar (click)="showAddressModal()" style="position: absolute;
+	    			top: 50px;">
+	    		</ion-searchbar>
+			</div>
+	 		<div class="articlepop" *ngIf="articpop == '1'">
+	 			
+	 		<div class="popu">Populaires</div>
+	 		<ion-slides slidesPerView="1.5" spaceBetween="0" *ngIf="institution && institution.length" autoplay="5000" loop="true" speed="3000" pager="true">
+			    <ion-slide *ngFor="let dec of institution">
+			      	<ion-card (click) ="goToDetailsDecouverte(dec)" style="height: 300px;">
+					  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+					  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+					  <ion-card-content style="padding-bottom: 0px;">
+					  <div class="tagdecouverte">
+					  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+					  	<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
+					  </div>
+					  
+					  
 
+					    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold; text-align: left;" >
+					      {{dec.titreArticle}}
+					    </ion-card-title>
 
+					    <ion-item style="padding-left: 0px;">
+					    <ion-avatar item-start>
+					      <img src="assets/images/profil.png">
+					    </ion-avatar>
+					    <ion-label class="label-md">
+					    	<p>{{dec.dateArticle}}</p>
+					    	<p>{{dec.idUser}}</p>
+						</ion-label>
+					    
+					  </ion-item>
+					  </ion-card-content>
+					</ion-card>
+			    </ion-slide>
+			    
+			</ion-slides>
+	 	</div >
+	 	<div *ngIf ="valrech =='0'" >
+	 		<div class="popu">Nouveautes</div>
+	     	<div *ngFor="let dec of institution">
+	  		<ion-card (click) ="goToDetailsDecouverte(dec)">
+			  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+			  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+			  <ion-card-content style="padding-bottom: 0px;">
+			  <div class="tagdecouverte">
+			  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+				<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
+			  </div>
+			  
+			  
 
-     <div *ngIf="titre1 == 'Sous categorie'">
-     	<div *ngFor="let categorie of souscat">
-  		<div class="baniere-acc" (click)= "goToListeBusiness(categorie)" [style.height] ="height" >
-        <div class="texte-accueil" [style.top] ="top">      
-            {{categorie.nomSousCategory}}
-        </div>
-  		<img *ngIf="categorie.imageSousCategory" src="{{urll}}/{{categorie.imageSousCategory}}" class="full-image" />
-  		<img *ngIf="!categorie.imageSousCategory" src="assets/images/evenement.jpg" class="full-image" />
-  		</div>
-    	</div>
-     </div>
-     
- </div>
+			    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold;" >
+			      {{dec.titreArticle}}
+			    </ion-card-title>
 
- <div class="body-decouverte" *ngIf="titre1 == 'Découverte'">
- 	<ion-searchbar *ngIf="value == '2'"(ionInput)="getItemsDecouverte($event)">
-    </ion-searchbar>
- 	
- 	<div *ngIf="titre == 'Découverte'">
- 		<h1 [hidden]="vall" style="color:#ac0203;
-			    font-size: 16px;
-			    text-align:center;
-			    margin-top: 25%;">
-		        {{message1}}
-		</h1>
-		<div class="ban_decouverte">
-			
-			<img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
-			<ion-searchbar (click)="showAddressModal()" style="position: absolute;
-    			top: 50px;">
-    		</ion-searchbar>
-		</div>
- 		<div class="articlepop" *ngIf="articpop == '1'">
- 			
- 		<div class="popu">Populaires</div>
- 		<ion-slides slidesPerView="1.5" spaceBetween="0" *ngIf="institution && institution.length" autoplay="5000" loop="true" speed="3000" pager="true">
-		    <ion-slide *ngFor="let dec of institution">
-		      	<ion-card (click) ="goToDetailsDecouverte(dec)" style="height: 300px;">
-				  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
-				  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
-				  <ion-card-content style="padding-bottom: 0px;">
-				  <div class="tagdecouverte">
-				  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
-				  	<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
-				  </div>
-				  
-				  
+			    <ion-item style="padding-left: 0px;">
+			    <ion-avatar item-start>
+			      <img src="assets/images/profil.png">
+			    </ion-avatar>
+			    <ion-label class="label-md">
+			    	<h2>{{dec.dateArticle}}</h2>
+			    	<p>{{dec.idUser}}</p>
+				</ion-label>
+			    
+			  </ion-item>
+			  </ion-card-content>
+			</ion-card>
+	    	</div>
+	    </div>
 
-				    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold; text-align: left;" >
-				      {{dec.titreArticle}}
-				    </ion-card-title>
+	    <div *ngIf ="valrech =='1'" >
+	     	<div *ngFor="let dec of insRecherche">
+	  		<ion-card (click) ="goToDetailsDecouverte(dec)">
+			  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+			  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+			  <ion-card-content style="padding-bottom: 0px;">
+			  <div class="tagdecouverte">
+			  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+				<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
+			  </div>
+			  
+			  
 
-				    <ion-item style="padding-left: 0px;">
-				    <ion-avatar item-start>
-				      <img src="assets/images/profil.png">
-				    </ion-avatar>
-				    <ion-label class="label-md">
-				    	<p>{{dec.dateArticle}}</p>
-				    	<p>{{dec.idUser}}</p>
-					</ion-label>
-				    
-				  </ion-item>
-				  </ion-card-content>
-				</ion-card>
-		    </ion-slide>
-		    
-		</ion-slides>
- 	</div >
- 	<div *ngIf ="valrech =='0'" >
- 		<div class="popu">Nouveautes</div>
-     	<div *ngFor="let dec of institution">
-  		<ion-card (click) ="goToDetailsDecouverte(dec)">
-		  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
-		  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
-		  <ion-card-content style="padding-bottom: 0px;">
-		  <div class="tagdecouverte">
-		  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
-			<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
-		  </div>
-		  
-		  
+			    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold;" >
+			      {{dec.titreArticle}}
+			    </ion-card-title>
 
-		    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold;" >
-		      {{dec.titreArticle}}
-		    </ion-card-title>
-
-		    <ion-item style="padding-left: 0px;">
-		    <ion-avatar item-start>
-		      <img src="assets/images/profil.png">
-		    </ion-avatar>
-		    <ion-label class="label-md">
-		    	<h2>{{dec.dateArticle}}</h2>
-		    	<p>{{dec.idUser}}</p>
-			</ion-label>
-		    
-		  </ion-item>
-		  </ion-card-content>
-		</ion-card>
-    	</div>
-    </div>
-
-    <div *ngIf ="valrech =='1'" >
-     	<div *ngFor="let dec of insRecherche">
-  		<ion-card (click) ="goToDetailsDecouverte(dec)">
-		  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
-		  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
-		  <ion-card-content style="padding-bottom: 0px;">
-		  <div class="tagdecouverte">
-		  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
-			<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
-		  </div>
-		  
-		  
-
-		    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold;" >
-		      {{dec.titreArticle}}
-		    </ion-card-title>
-
-		    <ion-item style="padding-left: 0px;">
-		    <ion-avatar item-start>
-		      <img src="assets/images/profil.png">
-		    </ion-avatar>
-		    <ion-label class="label-md">
-		    	<h2>{{dec.dateArticle}}</h2>
-		    	<p>{{dec.idUser}}</p>
-			</ion-label>
-		    
-		  </ion-item>
-		  </ion-card-content>
-		</ion-card>
-    	</div>
-    </div>
-     </div>
- </div>
+			    <ion-item style="padding-left: 0px;">
+			    <ion-avatar item-start>
+			      <img src="assets/images/profil.png">
+			    </ion-avatar>
+			    <ion-label class="label-md">
+			    	<h2>{{dec.dateArticle}}</h2>
+			    	<p>{{dec.idUser}}</p>
+				</ion-label>
+			    
+			  </ion-item>
+			  </ion-card-content>
+			</ion-card>
+	    	</div>
+	    </div>
+	     </div>
+	</div>
 
 </ion-content>

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {StorageUtils} from '../../Utils/storage.utils';
-import {User} from '../../Classes/user';
+import { StorageUtils} from '../../Utils/storage.utils';
+import { User} from '../../Classes/user';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { LocationsProvider } from '../../providers/locations/locations';
 import { HomePage } from '../home/home';
 import { InscriptionPage } from '../inscription/inscription';
 import { Facebook } from '@ionic-native/facebook';
@@ -35,8 +34,7 @@ export class LoginPage {
     public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder ,
     private alertCtrl: AlertController,private userService:UserServiceProvider, 
-    public loading: LoadingController,public viewCtrl: ViewController, 
-    public locations: LocationsProvider,private facebook: Facebook) {
+    public loading: LoadingController,public viewCtrl: ViewController,private facebook: Facebook) {
   	
   }
 

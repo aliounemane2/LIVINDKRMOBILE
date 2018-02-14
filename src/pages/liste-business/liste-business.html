@@ -67,26 +67,78 @@
 		        	{{message1}}
 		        </h1>
      			<div *ngFor="let evenement of institution" >
+     				<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Gold'">
+     					<div class="image-event1" (click)= "goToInstitu(evenement)">
+
+					      	<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+						          {{ evenement.price }}
+						        </div>
+						      </div>
+						      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+						      <div class="note-ins" *ngIf ="note =='1'">
+				      			<rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
+				      		  </div>
+					        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+					        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+			      		</div>
+
+     				</div>
 			       
-			      <div class="image-event1" (click)= "goToInstitu(evenement)">
+			    </div>
 
-			      	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{evenement.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <!--img src="assets/images/pintexte.png" class="full-image" /-->
-				          {{ evenement.price }}
-				        </div>
-				      </div>
-				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
-				      <div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
-		      		  </div>
-			        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
-			        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+			    <div *ngFor="let evenement of institution" >
+     				<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Premiums'">
+     					<div class="image-event1" (click)= "goToInstitu(evenement)">
 
-			      </div>
+					      	<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+						          {{ evenement.price }}
+						        </div>
+						      </div>
+						      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+						      <div class="note-ins" *ngIf ="note =='1'">
+				      			<rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
+				      		  </div>
+					        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+					        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+			      		</div>
+
+     				</div>
+			       
+			    </div>
+
+			    <div *ngFor="let evenement of institution" >
+     				<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Silver'">
+     					<div class="image-event1" (click)= "goToInstitu(evenement)">
+
+					      	<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <!--img src="assets/images/pintexte.png" class="full-image" /-->
+						          {{ evenement.price }}
+						        </div>
+						      </div>
+						      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+						      <div class="note-ins" *ngIf ="note =='1'">
+				      			<rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
+				      		  </div>
+					        <img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+					        <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+			      		</div>
+
+     				</div>
+			       
 			    </div>
      		</div>
 
@@ -195,25 +247,78 @@
 		    	</h1>
 
 			    <div *ngFor="let evenement of institution" >
-			       
-			      <div class="image-event1" (click)= "goToInstitu(evenement)">
-			      	<div class="texte-event" >
-				        <div class="evtexte">
-				          {{evenement.nomIns}}
-				        </div>
-				        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
-				          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
-				          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
-				        </div>
-				      </div>
-				      <div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
-				      <div class="note-ins" *ngIf ="note =='1'">
-		      			<rating  score="{{evenement.note}}"  max="{{evenement.note}}" ></rating>
-		      		  </div>
-			        	<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
-			        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+			    	<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Gold'">
+			    		<div class="image-event1" (click)= "goToInstitu(evenement)">
+				      		<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+						          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+						        </div>
+					      	</div>
+					      	<div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+					      	<div class="note-ins" *ngIf ="note =='1'">
+			      				<rating  score="{{evenement.note}}"  max="{{evenement.note}}" ></rating>
+			      		  	</div>
+				        	<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+				        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
 
-			      </div>
+				      </div>
+			    		
+			    	</div>
+			       
+			    </div>
+
+			    <div *ngFor="let evenement of institution" >
+			    	<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Premiums'">
+			    		<div class="image-event1" (click)= "goToInstitu(evenement)">
+				      		<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+						          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+						        </div>
+					      	</div>
+					      	<div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+					      	<div class="note-ins" *ngIf ="note =='1'">
+			      				<rating  score="{{evenement.note}}"  max="{{evenement.note}}" ></rating>
+			      		  	</div>
+				        	<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+				        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+				      </div>
+			    		
+			    	</div>
+			       
+			    </div>
+
+			    <div *ngFor="let evenement of institution" >
+			    	<div *ngIf ="evenement.idTypeoffre.nomTypeOffre =='Silver'">
+			    		<div class="image-event1" (click)= "goToInstitu(evenement)">
+				      		<div class="texte-event" >
+						        <div class="evtexte">
+						          {{evenement.nomIns}}
+						        </div>
+						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
+						          <img src="assets/images/pintexte.png" class="full-image" *ngIf="titre == 'Sight-seeing'" />
+						          <div *ngIf="titre != 'Sight-seeing'">{{ evenement.price }}</div>
+						        </div>
+					      	</div>
+					      	<div class="en-solde" *ngIf ="evenement.ensolde =='oui'">En solde</div>
+					      	<div class="note-ins" *ngIf ="note =='1'">
+			      				<rating  score="{{evenement.note}}"  max="{{evenement.note}}" ></rating>
+			      		  	</div>
+				        	<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+				        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+				      </div>
+			    		
+			    	</div>
+			       
 			    </div>
 	     	</div>
 

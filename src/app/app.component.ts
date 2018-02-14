@@ -11,13 +11,17 @@ import { User } from '../Classes/user';
 import firebase from 'firebase';
 import { RecommendationPage } from '../pages/recommendation/recommendation';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-//import {OrderByPipe} from "../pages/evenement/evenement";
-import {OrderByPipe} from "./orderby.pipe";
+import {InscriptionValidationPage} from "../pages/inscription-validation/inscription-validation";
+import { UpdatePasswordPage } from '../pages/update-password/update-password';
+import { OrderByPipe } from "./orderby.pipe";
+import { FavorisPage } from '../pages/favoris/favoris';
 
 import { HomePage } from '../pages/home/home';
 import { Storage } from '@ionic/storage';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { CacheService } from "ionic-cache";
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 declare var FCMPlugin;
 
@@ -34,13 +38,26 @@ export class MyApp {
   use:User 
   utilisateur: any;
   photo: any;
+  url: any;
 
-  constructor(private googlePlus: GooglePlus, private facebook: Facebook, public userService:UserServiceProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menu: MenuController, private events: Events, public storage: Storage) {
+  constructor(private googlePlus: GooglePlus, private facebook: Facebook, public userService:UserServiceProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public menu: MenuController, private events: Events, public storage: Storage, cache: CacheService) {
 
     this.token = StorageUtils.getToken();
+    cache.setDefaultTTL(60 * 60 * 12); //set default cache TTL for 1 hour
+
+
+    // Keep our cached results when device is offline!
+    //cache.setOfflineInvalidate(false);
     console.log(this.token);
     this.use = StorageUtils.getAccount();
-    console.log(this.use);
+    
+
+    events.subscribe('user:signedIn', (userEventData) => {
+      this.token = StorageUtils.getToken();
+      this.use = StorageUtils.getAccount();
+      console.log(this.token);
+      console.log(this.use);
+    });
     
 
     if(this.token != null){
@@ -78,6 +95,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
+      
       splashScreen.hide();
       /*FCMPlugin.getToken(
         (t) => {
@@ -102,14 +120,14 @@ export class MyApp {
     [
       {icon: 'home', title: 'Accueil', component: AccueilPage,visible: '1'},
       {icon: 'list-box', title: 'Recommendations', component: RecommendationPage,visible: '1'},
-      {icon: 'star', title: 'Favoris', component: 'ActualitesPage',visible: '1'},
+      {icon: 'star', title: 'Favoris', component: FavorisPage,visible: '1'},
       {icon: 'person', title: 'Profil', component: ProfilPage,visible: '1'},
       {icon: 'share', title: 'Partager', component: 'ActualitesPage',visible: '1'},
       {icon: 'mail', title: 'Nous contacter', component: 'ActualitesPage',visible: '1'}
     ];
     this.pages2 = 
     [
-      {icon: 'settings', title: 'Paramètres', component: 'ActualitesPage',visible: '1'}
+      {icon: 'settings', title: 'Paramètres', component: UpdatePasswordPage, visible: '1'}
     ];
   }
 
@@ -133,6 +151,7 @@ export class MyApp {
     StorageUtils.removeAccount();
     this.nav.setRoot(LoginPage);
     this.menu.close();
+    this.userService.disconnect();
   }
 
   doFbLogout(){
@@ -163,6 +182,7 @@ export class MyApp {
       this.userService.getInfoUser().subscribe(
         data => {
             this.utilisateur = data.user; 
+            this.url =data.urls;
             console.log(this.utilisateur);
                 if(data.status == 0){
                   console.log(this.utilisateur);

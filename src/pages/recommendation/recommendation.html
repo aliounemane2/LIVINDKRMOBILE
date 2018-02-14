@@ -29,9 +29,9 @@
 	    <div *ngFor="let evenement of institution" >
 	       
 	      <div class="image-event" (click)= "goToDetailsEvent(evenement)">
-          <div class="texte-event" (click)= "goToDetailsEvent(evenement)">
+          <div class="texte-event">
             <div class="evtexte">
-              {{evenement.nom}}
+              {{evenement.nomIns}}
             </div>
             <div class="evimage">
               <!--img src="assets/images/pintexte.png" class="full-image" /-->
@@ -40,8 +40,9 @@
           </div>
           <div class="note-ins">
                 <rating  score="{{evenement.note}}" max="{{evenement.note}}" ></rating>
-              </div>
-	        <img src="{{evenement.image}}" class="full-image" />
+          </div>
+	        <img *ngIf ="evenement.photoIns" src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+          <img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
           
 
 	      </div>

@@ -42,6 +42,9 @@ import { CallNumber } from '@ionic-native/call-number';
 import { DetailsDecouvertePage } from '../pages/details-decouverte/details-decouverte';
 import { RechercheDecouvertePage } from '../pages/recherche-decouverte/recherche-decouverte';
 import { DetailsSightPage } from '../pages/details-sight/details-sight';
+import { ForgetPasswordPage } from '../pages/forget-password/forget-password';
+import { UpdatePasswordPage } from '../pages/update-password/update-password';
+import { FavorisPage } from '../pages/favoris/favoris';
 
 //import {OrderByPipe} from "../pages/evenement/evenement";
 import {OrderByPipe} from "./orderby.pipe";
@@ -49,7 +52,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Toast } from '@ionic-native/toast';
 import { GooglePlus } from '@ionic-native/google-plus';
-
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { CacheModule } from "ionic-cache";
 
 @NgModule({
   declarations: [
@@ -75,7 +79,10 @@ import { GooglePlus } from '@ionic-native/google-plus';
     OrderByPipe,
     RateComponent,
     RechercheDecouvertePage,
-    DetailsSightPage
+    DetailsSightPage,
+    ForgetPasswordPage,
+    UpdatePasswordPage,
+    FavorisPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     IonicStorageModule.forRoot({
         name: '__mydb',
         driverOrder: ['sqlite', 'websql', 'indexeddb']
-    })
+    }),
+    CacheModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -110,7 +118,10 @@ import { GooglePlus } from '@ionic-native/google-plus';
     DetailsDecouvertePage,
     RateComponent,
     RechercheDecouvertePage,
-    DetailsSightPage
+    DetailsSightPage,
+    ForgetPasswordPage,
+    UpdatePasswordPage,
+    FavorisPage
   ],
   providers: [
     StatusBar,
@@ -132,7 +143,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     CallNumber,
     FileTransfer,
     Toast,
-    GooglePlus
+    GooglePlus,
+    SQLite
   ]
 })
 export class AppModule {}

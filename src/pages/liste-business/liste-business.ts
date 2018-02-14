@@ -54,7 +54,7 @@ export class ListeBusinessPage {
   note :any;
   insWeb:any;
   url: any;
-
+  testIns: any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public modalCtrl: ModalController) {
   	this.masque =false;
@@ -127,7 +127,7 @@ export class ListeBusinessPage {
 
     if(this.titleCat == 'Prestataires')
     {
-      this.map = 0;
+      this.map = 1;
       this.nota = 0;
       this.pr = 1;
       this.rec = 0;
@@ -137,7 +137,7 @@ export class ListeBusinessPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeBusinessPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     //this.getIns();
     this.getInstitutionBySousCategorie(this.categorie);
   }
@@ -159,9 +159,31 @@ export class ListeBusinessPage {
     
   }
 
+  private buildArray(array) {
+    return new Promise(resolve => {
+      let m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      this.testIns = array;
+      console.log(this.testIns);
+      resolve(true);
+    });
+  }
+
   openModal(data){
     let texte = 'voulez-vous laisser un avis à '+data.nomIns +' ?';
-      let obj = {ins: data, ret: texte};
+      let obj = {ins: data, ret: texte, parent:'add'};
       this.openMod(obj);
   }
 
@@ -324,6 +346,8 @@ export class ListeBusinessPage {
                   console.log(this.message1);
                 }
                 else{
+                  this.testIns = this.institution;
+                  this.buildArray(this.testIns);
                   console.log(this.institution);
                   this.vall =1;
                   this.message1 = "";

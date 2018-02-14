@@ -28,6 +28,7 @@ export class InscriptionPage {
   val: any;
   file: any;
   photo: any;
+  user: any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider,public viewCtrl: ViewController, private toastCtrl: ToastController, private transfer: FileTransfer) {
   	this.myFormulaire = formBuilder.group({
@@ -145,16 +146,16 @@ export class InscriptionPage {
           this.userService.createUser(this.photo,user).subscribe(
               data => {
                 console.log(data);
-                if(data.message == 2){
+                if(data.message == 2 || data.message == 1){
                   console.log(data);
-                  this.goToValidationPage();  
+                  this.goToValidationPage(user);  
                 }
                 else{
                   loader.dismiss();
                   console.log(data);
                   var subTitle ="Creation de compte";
                   this.presentToast(data.corps); 
-                  this.showToast(data.corps);
+                  //this.showToast(data.corps);
                 }
               },
               err => {
@@ -176,9 +177,9 @@ export class InscriptionPage {
     }
   }
 
-  goToValidationPage(){
+  goToValidationPage(user){
     this.navCtrl.push(InscriptionValidationPage, {
-      //'user': user
+      'user': user
     });
   }
 

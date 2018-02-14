@@ -23,6 +23,7 @@ import { ConnectvityServiceProvider } from '../../providers/connectvity-service/
 export class NotationModalPage {
 	texte: any = this.navParams.get('ret');
   inst: any = this.navParams.get('ins');
+  parent: any = this.navParams.get('parent');
 	averageRating: any;
   public locationTracker: LocationTrackerProvider
   myFormulaire: FormGroup;
@@ -32,6 +33,13 @@ export class NotationModalPage {
     this.myFormulaire = formBuilder.group({
       avis: ['', Validators.compose([Validators.maxLength(255), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
     });
+
+    console.log(this.parent);
+    console.log(this.inst);
+    if(this.parent=='update'){
+      this.averageRating = this.inst.note;
+      this.myFormulaire.controls['avis'].setValue(this.inst.avis);
+    }
   }
 
   ionViewDidLoad() {
@@ -80,7 +88,8 @@ export class NotationModalPage {
 
   addNoteIns(){
     this.connectivityService.checkNetwork();
-    if(!this.myFormulaire.valid){
+    if(this.parent=='add'){
+      if(!this.myFormulaire.valid){
       console.log("Remplissez tous les champs!");
       let message = "Remplissez tous les champs!";
       this.showToast(message);
@@ -124,7 +133,57 @@ export class NotationModalPage {
         
         });
 
+      }
     }
+
+    if(this.parent=='update'){
+      if(!this.myFormulaire.valid){
+      console.log("Remplissez tous les champs!");
+      let message = "Remplissez tous les champs!";
+      this.showToast(message);
+    }
+    else{
+      let loader = this.loading.create({
+        content: 'Chargement en cours...',
+      });
+
+      loader.present().then(() => {
+
+        var json = this.myFormulaire.value;
+
+        var note ={idNote:this.inst.idNote, note:this.averageRating, avis:json.avis};
+        console.log(note);
+        
+        this.EventService.updateNoteInstitution(note).subscribe(
+            data => {
+              console.log(data);
+              if(data.note){
+                //this.showToast("Avis modifiée avec succés");
+                this.presentToast(data.message);
+                this.viewCtrl.dismiss();
+                
+              }
+              else{
+                //this.showToast(data.message);
+                this.presentToast(data.message);
+
+              }
+
+            },
+            err => {
+                console.log(err);
+                loader.dismiss();
+                //this.showToast("UUne erreur est survenue réessayer plus tard" );
+            },
+            () => {loader.dismiss()}
+
+          );
+        
+        });
+
+      }
+    }
+    
     
     
   }

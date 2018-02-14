@@ -41,6 +41,7 @@ export class AccueilPage {
   message: any;
   value: any;
   urlsc: any;
+  data:any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locationTracker: LocationTrackerProvider, public modalCtrl: ModalController, public storage: Storage){
     //this.locationTracker.checkLocation();
@@ -59,7 +60,7 @@ export class AccueilPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccueilPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getCategory();
   }
 
@@ -96,61 +97,26 @@ export class AccueilPage {
       this.sousCat = [];
       console.log(categorie.nom);
       this.getSousCategoryByCategory(categorie);
-      /*console.log(this.sCat);
-      console.log(this.scat1);
-      for(var i =0 ; i < this.sousCategories.length; i++)
-      {
-        if(this.sousCategories[i].categorie == categorie.nom)
-        {
-          this.sousCat.push(this.sousCategories[i]);
-
-        }
-      }
-      if(this.sousCat == 0){
-        this.titre1 ="Non Sous categorie";
-      }
-      else{
-        this.titre1 ="Sous categorie";
-      }
-      if(this.sousCat == 0 && categorie.nom == 'Découverte'){
-        this.titre1 ="Découvertee";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Découverte'){
-        this.titre1 ="Découverte";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Restaurants'){
-        this.titre1 ="Restaurants";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Prestataires'){
-        this.titre1 ="Prestataires";
-      }
-      this.navCtrl.push(ListeInstitutionPage, {
+      /*this.navCtrl.push(ListeInstitutionPage, {
         'data': categorie,
         'titre': categorie.nom,
         'titre1': this.titre1,
-        'souscat':this.sousCat,
+        'souscat':this.sCat,
         'scat': categorie.id,
-        'url': this.urls
-      });
-      console.log(this.categories);
-      console.log(this.sousCat);*/
-    }
-    
-
-    
-    
+        'urlsc': this.urlsc
+      });*/
+    } 
   }
 
   getSousCategoryByCategory(categorie){
+     //if(this.connectivityService.isOnline()){
     let loader = this.loading.create({
     content: 'Chargement en cours...',
     });
 
     loader.present().then(() => {
-      this.eventService.getSousCategoryByCategory(categorie.idCategory).subscribe(
+     
+        this.eventService.getSousCategoryByCategory(categorie.idCategory).subscribe(
         data => {
             this.sCat = data.sous_category; 
             this.scat1 = data.sous_category;
@@ -178,20 +144,18 @@ export class AccueilPage {
             if(this.sCat == null && categorie.nom == 'Restaurants'){
               this.titre1 ="Restaurants";
             }
-
-            /*if(this.sCat == null && categorie.nom == 'Prestataires'){
-              this.titre1 ="Prestataires";
-            }*/
             this.navCtrl.push(ListeInstitutionPage, {
               'data': categorie,
               'titre': categorie.nom,
               'titre1': this.titre1,
               'souscat':this.sCat,
-              'scat': categorie.id,
               'urlsc': this.urlsc
             });
             console.log(this.titre1);
             console.log(categorie.nom);
+            console.log(this.sCat);
+            console.log(this.urlsc);
+            console.log(categorie);
             
           },
           err => {
@@ -202,7 +166,16 @@ export class AccueilPage {
           },
           () => {loader.dismiss()}
       );
+      
+      
     })
+
+    /*}
+      else{
+        this.data = this.eventService.getSousCategoryByCategory(categorie.idCategory);
+        console.log(this.data);
+
+      }*/
 
   }
 
@@ -220,7 +193,7 @@ export class AccueilPage {
             this.category = data.category; 
             this.url = data.urls;
             console.log(this.category);
-                if(this.category == 0){
+                if(this.category == null){
                   let titre ="Pas de category  a afficher";
                   this.message ="Pas de catégorie  à afficher";
                   this.value = true;
@@ -235,9 +208,9 @@ export class AccueilPage {
                 loader.dismiss();
                 console.log(err);
                 
-                this.message ="Une erreur est survenue reessayer plus tard ";
-                this.value = true;
-                let titre ="Une erreur est survenue reessayer plus tard ";
+                //this.message ="Une erreur est survenue reessayer plus tard ";
+                //this.value = true;
+                //let titre ="Une erreur est survenue reessayer plus tard ";
                 //this.showToast();
                 //this.presentPromptOk(titre);
                 //this.presentPromptOk(titre);
