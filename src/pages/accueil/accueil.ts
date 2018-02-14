@@ -96,47 +96,6 @@ export class AccueilPage {
       this.sousCat = [];
       console.log(categorie.nom);
       this.getSousCategoryByCategory(categorie);
-      /*console.log(this.sCat);
-      console.log(this.scat1);
-      for(var i =0 ; i < this.sousCategories.length; i++)
-      {
-        if(this.sousCategories[i].categorie == categorie.nom)
-        {
-          this.sousCat.push(this.sousCategories[i]);
-
-        }
-      }
-      if(this.sousCat == 0){
-        this.titre1 ="Non Sous categorie";
-      }
-      else{
-        this.titre1 ="Sous categorie";
-      }
-      if(this.sousCat == 0 && categorie.nom == 'Découverte'){
-        this.titre1 ="Découvertee";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Découverte'){
-        this.titre1 ="Découverte";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Restaurants'){
-        this.titre1 ="Restaurants";
-      }
-
-      if(this.sousCat == 0 && categorie.nom == 'Prestataires'){
-        this.titre1 ="Prestataires";
-      }
-      this.navCtrl.push(ListeInstitutionPage, {
-        'data': categorie,
-        'titre': categorie.nom,
-        'titre1': this.titre1,
-        'souscat':this.sousCat,
-        'scat': categorie.id,
-        'url': this.urls
-      });
-      console.log(this.categories);
-      console.log(this.sousCat);*/
     }
     
 

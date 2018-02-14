@@ -67,7 +67,6 @@ export class InstitutionPage {
       this.callNumber.callNumber(telephone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
-
     })
   }
 

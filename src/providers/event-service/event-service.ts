@@ -4,8 +4,8 @@ import 'rxjs/add/operator/map';
 import {StorageUtils} from '../../Utils/storage.utils';
 
 //const BACKEND_URL:string = 'http://localhost:8080';
-//const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API3';
-const BACKEND_URL:string = 'http://192.168.1.94:8088';
+const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API4';
+//const BACKEND_URL:string = 'http://192.168.1.94:8088';
 
 /*
   Generated class for the EventServiceProvider provider.

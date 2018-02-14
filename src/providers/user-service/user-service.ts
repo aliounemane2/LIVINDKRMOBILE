@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 //const CONTENT_TYPE_HEADER:string = 'Content-Type';
 //const APPLICATION_JSON:string = 'application/json';
-//const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API3';
-const BACKEND_URL:string = 'http://192.168.1.94:8088';
+const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API4';
+//const BACKEND_URL:string = 'http://192.168.1.94:8088';
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -25,7 +25,7 @@ export class UserServiceProvider {
   private options = new RequestOptions({headers: this.headers});
   private options1 = new RequestOptions({headers: this.headers1});
   private options2 = new RequestOptions({headers: this.headers2});
-  public url = "http://213.246.59.111:8080/LIVINDKR_API3";
+  public url = "http://213.246.59.111:8080/LIVINDKR_API4";
   file: File;
   
 

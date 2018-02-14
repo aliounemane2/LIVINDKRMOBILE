@@ -78,10 +78,10 @@ export class DetailsEventPage {
   addEvent(evenement){
     //var success = function(message) { alert("Success: " + JSON.stringify(message)); };
     //var error = function(message) { alert("Error: " + message); };
-    var endDate = this.incrementDate(evenement.date, 1)
+    var endDate = this.incrementDate(evenement.IdEvent.dateEvent, 1)
     //alert(evenement.nom+" _ "+endDate);
 
-    this.calendar.createEvent(evenement.nom,evenement.adresse, evenement.nom, evenement.date,endDate).then(
+    this.calendar.createEvent(evenement.IdEvent.nomEvent,evenement.IdEvent.idPlace.adressePlace, evenement.IdEvent.nomEvent, evenement.IdEvent.dateEvent,endDate).then(
       (msg) => { 
         let titre ="Evénement ajouté avec succés dans le calendrier";
         this.presentPromptOk(titre);
