@@ -55,6 +55,8 @@ export class ProfilPage {
   options: any ;
   server: any;
   vpci: any;
+  url: any;
+  photoProfil:any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public navCtrl: NavController, public navParams: NavParams,
    public userService:UserServiceProvider, public loading: LoadingController,
@@ -89,7 +91,7 @@ export class ProfilPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     //this.getInfosUser();
     this.getUserInfos();
     this.getAvisUser();
@@ -105,6 +107,7 @@ export class ProfilPage {
       this.userService.getInfoUser().subscribe(
         data => {
             this.utilisateur = data.user; 
+            this.url = data.urls;
             console.log(this.utilisateur);
                 if(data.status == 0){
                   console.log(this.utilisateur);
@@ -201,16 +204,22 @@ export class ProfilPage {
 
 	  	loader.present().then(() => {
 	  		var json = this.myFormulaire.value;
-        let user = {nom: json.nom, prenom: json.prenom, telephone: '+'+json.telephone,password: json.password}
+        let user = {nom: json.nom, prenom: json.prenom, telephone: '+'+json.telephone,password: json.password, pseudo:json.username}
+        console.log(user);
 
 		    this.userService.editUser(user).subscribe(
 		      data => {
-		         
-		        console.log(data.message);
-            	//this.showToast(data.message);
+		         if(data.status == 0){
+              //this.showToast("Informations modifiées avec succés");
+             }
+             else{
+              console.log(data);
+              //this.showToast(data.message);
+             }
+		        
 		      },
 		      err => {
-		          //console.log(err);
+		          console.log(err);
 		          loader.dismiss();
             		//this.showToast("Une erreur s'est produite Reessayer plus tard");
 		      },
@@ -311,8 +320,8 @@ export class ProfilPage {
     this.camera.getPicture(this.options).then((imageData) => {
       this.vpci = true;
       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.base64Image = this.resize(this.base64Image, 480, 480);
-      //this.upload();
+      this.photoProfil = this.resize(this.base64Image, 480, 480);
+      this.upload();
       
      }, (err) => {
       //console.log(err);
@@ -330,12 +339,30 @@ export class ProfilPage {
     return canvas.toDataURL("image/jpeg");
   }
 
+  uploadProfilPhoto(){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options1: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: this.username+'.jpg',
+       headers: {}
+    }
+
+    let loader = this.loading.create({
+      content: 'Chargement en cours...',
+    });
+
+     loader.present().then(() => {
+
+     });
+  }
+
   upload(){
     const fileTransfer: FileTransferObject = this.transfer.create();
 
     let options1: FileUploadOptions = {
        fileKey: 'file',
-       fileName: 'name.jpg',
+       fileName: this.username+'.jpg',
        headers: {}
     }
 
@@ -343,27 +370,24 @@ export class ProfilPage {
       content: 'Chargement en cours...',
     });
     loader.present().then(() => {
-      fileTransfer.upload(this.base64Image, this.userService.url+'api/photo/annonce', options1)
+      fileTransfer.upload(this.photoProfil, this.userService.url+'/user/updatephoto?pseudo='+this.username+'&type=0', options1)
        .then((data) => {
-         loader.dismiss();
-         //alert(data);
-         //console.log(data);
-         let chemin:Array<any> = data.response.split('"');
-         //this.nomPhoto =chemin[3];
-         //console.log(this.nomPhoto);
-        }, (err) => {
-         // error
-         loader.dismiss();
-         //alert("error"+JSON.stringify(err));
-         //console.log("error"+JSON.stringify(err));
-        });
-
+          loader.dismiss();
+          alert(data);
+          console.log(data);
+          }, (err) => {
+           // error
+           loader.dismiss();
+           alert("error"+JSON.stringify(err));
+           //console.log("error"+JSON.stringify(err));
+          }
+        );
     });
   }
 
   openModal(data){
     let texte = 'voulez-vous Modifier cet avis ?';
-      let obj = {ins: data, ret: texte};
+      let obj = {ins: data, ret: texte, parent:'update'};
       this.openMod(obj);
   }
 

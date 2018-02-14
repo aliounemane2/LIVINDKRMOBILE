@@ -4,6 +4,9 @@ import { CarteMapPage } from '../carte-map/carte-map';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { CallNumber } from '@ionic-native/call-number';
 import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Toast } from '@ionic-native/toast';
+
 
 /**
  * Generated class for the InstitutionPage page.
@@ -32,9 +35,15 @@ export class InstitutionPage {
   messagephoto: any;
   valuePhoto: any;
   valueAvis: any;
+  menu: any;
+  messageMenu: any;
+  valueMenu : any;
+  data: any;
 
-  constructor(public platform: Platform, public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, private callNumber: CallNumber) {
+  constructor(public platform: Platform, public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, private callNumber: CallNumber, private sqlite: SQLite, private toast: Toast) {
   	this.inst ='description';
+    
+
     if(navParams.get("ins") !== "undefined")
     {
 
@@ -46,7 +55,10 @@ export class InstitutionPage {
       console.log(this.categroie);
       this.valuePhoto = false;
       this.valueAvis = false;
+       this.valueMenu = false;
     }
+
+    this.data = { nomIns:this.institution.nomIns, photoIns:this.institution.photoIns, descriptionIns:this.institution.descriptionIns, adresseIns:this.institution.adresseIns, latitudeIns:this.institution.latitudeIns,longitudeIns: this.institution.longitudeIns,telephoneIns:this.institution.telephoneIns ,price:this.institution.price, idCategory:this.institution.idCategory.idCategory, idInterest:this.institution.interestIdInterest.idInterest };
   }
 
   onRatingChange(score: number) {
@@ -55,11 +67,10 @@ export class InstitutionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InstitutionPage');
-    this.connectivityService.checkNetwork();
-    //this.getVignetteIns();
+    //this.connectivityService.checkNetwork();
     this.getVignetteByInstitution(this.institution);
-    //this.getAvisIns();
     this.getAvisByInsitution(this.institution);
+    this.getMenuByInstitution(this.institution)
   }
 
   callNumeroTelephone(telephone){
@@ -97,6 +108,39 @@ export class InstitutionPage {
                 }
                 else{
                   console.log(this.vignette);
+
+                  
+                }
+            },
+            err => {
+                console.log(err);
+                loader.dismiss();
+                let titre ="Une erreur est survenue reessayer plus tard ";
+                //this.presentPromptOk(titre);
+            },
+            () => {loader.dismiss()}
+      );
+    })
+  }
+
+  getMenuByInstitution(ins){
+    let loader = this.loading.create({
+    content: 'Chargement en cours...',
+    });
+
+    loader.present().then(() => {
+      this.eventService.getMenuByInstitution(ins).subscribe(
+        data => {
+            this.menu = data.institutionMenu; 
+            console.log(this.menu);
+                if(!this.menu){
+                  let titre ="Pas de menu  a afficher";
+                  console.log(titre);
+                  this.messageMenu = "Pas de Menu disponible pour ce restaurant ";
+                  this.valueMenu = true;
+                }
+                else{
+                  console.log(this.menu);
 
                   
                 }
@@ -155,6 +199,74 @@ export class InstitutionPage {
             () => {loader.dismiss()}
       );
     })
+  }
+
+
+  saveData() {
+    this.sqlite.create({
+      name: 'livindk.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      if(this.getCurrentData(this.institution.idInstitution)){
+        db.executeSql('INSERT INTO institution VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[this.institution.idInstitution,this.data.nomIns,this.data.photoIns,
+        this.data.descriptionIns,this.data.adresseIn,
+        this.data.latitudeIns,this.data.longitudeIns,this.data.telephoneIns,
+        this.data.price,this.data.idCategory,this.data.idInteret])
+        .then(res => {
+          console.log(res);
+          console.log("Ok enregitre");
+          this.showToast("Institution aoutée comme favoris ");
+          
+        })
+        .catch(e => {
+          console.log(e);
+          console.log("Ok non enregitre "+ e);
+          this.showToast(e);
+        });
+      }
+      else{
+        console.log("Institution déja aoutée comme favoris ");
+        this.showToast("Institution déja aoutée comme favoris ");
+      }
+      
+    }).catch(e => {
+      console.log(e);
+
+      console.log("Ok enregitre "+ e);
+      this.showToast(e);
+    });
+  }
+
+  getCurrentData(idInstitution) {
+    this.sqlite.create({
+      name: 'livindk.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      db.executeSql('SELECT * FROM institution WHERE idInstitution=?', [idInstitution])
+        .then(res => {
+          if(res.rows.length > 0) {
+            this.data.idInstitution = res.rows.item(0).idInstitution;
+            return true;
+          }
+          return false;
+        })
+        .catch(e => {
+          console.log(e);
+          this.showToast(e);
+        });
+    }).catch(e => {
+      console.log(e);
+      this.showToast(e);
+      
+    });
+  }
+
+  showToast(message){
+   this.toast.show(message, '5000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
 }

@@ -1,0 +1,45 @@
+<!--
+  Generated template for the FavorisPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mes favoris</ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<div class="body-evenement" >
+		<h1 [hidden]="!valueIns" style="color:#ac0203;
+        margin-top:10%;
+        text-align:center">
+        	{{message}}
+        </h1>
+		<div *ngFor="let night of institution"  >
+	     	
+		    <div class="image-event1">
+	        	<div class="texte-event" >
+			        <div class="evtexte">
+			          {{night.nomIns}}
+			        </div>
+			        <div class="evimage"  style="line-height: 40px; color: #ffffff; width:30%;">
+			          {{ night.price }}
+			        </div>
+	      		</div>
+
+	        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+
+	        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
+
+		        </div>
+	     	</div>
+	</div>
+</ion-content>

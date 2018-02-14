@@ -33,10 +33,19 @@
     "@ionic-native/google-plus": "^4.5.3",
     "@ionic-native/network": "^4.2.1",
     "@ionic-native/splash-screen": "^4.0.1",
+<<<<<<< HEAD
     "@ionic-native/status-bar": "^4.3.1",
     "@ionic-native/toast": "^4.5.3",
     "@ionic/storage": "^2.0.1",
     "call-number": "^1.0.1",
+=======
+    "@ionic-native/sqlite": "^4.5.3",
+    "@ionic-native/status-bar": "^4.3.1",
+    "@ionic-native/toast": "^4.5.3",
+    "@ionic/storage": "^2.1.3",
+    "call-number": "^1.0.1",
+    "cordova-android": "^6.3.0",
+>>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
     "cordova-ios": "^4.4.0",
     "cordova-plugin-calendar": "^4.6.0",
     "cordova-plugin-camera": "^2.4.1",
@@ -54,10 +63,18 @@
     "cordova-plugin-statusbar": "^2.2.3",
     "cordova-plugin-whitelist": "^1.3.1",
     "cordova-plugin-x-toast": "^2.6.0",
+<<<<<<< HEAD
     "cordova-sqlite-storage": "^2.1.4",
     "cordova.plugins.diagnostic": "^3.6.8",
     "firebase": "^4.5.0",
     "ionic-angular": "3.6.0",
+=======
+    "cordova-sqlite-storage": "^2.2.0",
+    "cordova.plugins.diagnostic": "^3.6.8",
+    "firebase": "^4.5.0",
+    "ionic-angular": "3.6.0",
+    "ionic-cache": "^2.0.5",
+>>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
     "ionic-native": "^2.9.0",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
@@ -102,6 +119,10 @@
       }
     },
     "platforms": [
+<<<<<<< HEAD
+=======
+      "android",
+>>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
       "ios"
     ]
   }

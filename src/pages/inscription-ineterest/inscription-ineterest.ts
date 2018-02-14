@@ -54,7 +54,7 @@ export class InscriptionIneterestPage {
   	this.centre = {};
     this.nointe = false;
     this.interet={image:''};
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getCentreInteret();
     this.tabcentre=[];
   	console.log(this.centreInteret);

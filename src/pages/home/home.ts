@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events, ToastController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {StorageUtils} from '../../Utils/storage.utils';
+import { StorageUtils } from '../../Utils/storage.utils';
 import {User} from '../../Classes/user';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { InscriptionPage } from '../inscription/inscription';
+import { ForgetPasswordPage } from '../forget-password/forget-password';
 import { AccueilPage } from '../accueil/accueil';
 import { PublicitePage } from '../publicite/publicite';
 import { Storage } from '@ionic/storage';
@@ -21,7 +22,7 @@ export class HomePage {
     users: any;
     token: any;
 
-  constructor(public connectivityService:ConnectvityServiceProvider,private toast : Toast, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder ,private alertCtrl: AlertController,private userService:UserServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public storage: Storage, private toastCtrl: ToastController) {
+  constructor(public connectivityService:ConnectvityServiceProvider,private toast : Toast, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder ,private alertCtrl: AlertController,private userService:UserServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public storage: Storage, private toastCtrl: ToastController, private events: Events) {
   	this.myFormulaire = formBuilder.group({
   		login: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
       motpasse: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
@@ -43,9 +44,6 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    this.getUsers();
-    
-    
   }
 
   presentToast(message) {
@@ -69,6 +67,12 @@ export class HomePage {
   goToInscription(){
   	this.navCtrl.push(InscriptionPage, {
    		'inscription': 'inscription'
+    });
+  }
+
+  goToPassword(){
+    this.navCtrl.push(ForgetPasswordPage, {
+      'password': 'password'
     });
   }
 
@@ -106,19 +110,19 @@ export class HomePage {
                   //console.log('Remember me: Store user and jwt to local storage');
                   StorageUtils.setAccount(use);
                   StorageUtils.setToken(loginData);
-                  //this.events.publish('user:signedIn', user);
+                  this.events.publish('user:signedIn', use);
                   //this.events.publish('user:home', user);
                   //this.events.publish('user:loadTabs', user);
                   this.navCtrl.setRoot(AccueilPage);
                 }else {
-                  this.showToast("Login ou mot de passe incorrect");
-                  this.presentToast(this.user.message); 
+                  //this.showToast("Login ou mot de passe incorrect");
+                  this.presentToast(this.user.corps); 
                 }   
             },
             err => {
               loader.dismiss();
               this.presentToast("Login ou mot de passe incorrect");
-              this.showToast("Login ou mot de passe incorrect");
+              //this.showToast("Login ou mot de passe incorrect");
               console.log(err);
               
             },
@@ -129,57 +133,6 @@ export class HomePage {
     }
   }
 
-  getUsers(){
-    let loader = this.loading.create({
-        content: 'Connexion en cours...',
-      });
-
-      loader.present().then(() => {
-        this.userService.loginJson().subscribe(
-            data => {
-            this.users = data;
-            console.log(this.users);
-
-            },
-            err => {
-                console.log(err);
-                loader.dismiss();
-            },
-            () => {loader.dismiss()}
-            );
-      });
-  }
-
-  loginJson(){
-    console.log(this.users);
-    if(!this.myFormulaire.valid){
-      console.log("remplissez tous les champs!");
-      this.presentToast("remplissez tous les champs!");
-    }
-    else{
-      if(this.users != null){
-        var json = this.myFormulaire.value;
-        for(var i = 0; i < this.users.length; i++){
-          if(json.login == this.users[i].username && json.motpasse == this.users[i].password){
-            StorageUtils.setToken(json.login);
-            this.storage.set('name', '0');
-            
-            //this.navCtrl.setRoot(PublicitePage);
-            this.navCtrl.setRoot(AccueilPage);
-             break;
-          }
-          else{
-            console.log("Login ou mot de passe incorrect");
-            this.presentToast("Login ou mot de passe incorrect");
-          }  
-        }
-      }
-      else{
-        console.log("No users found");
-      }
-      
-    }
-  }
 
   showToast(titre){
     this.toast.show(titre, '5000', 'center').subscribe(

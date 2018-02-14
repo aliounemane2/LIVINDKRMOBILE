@@ -16,7 +16,7 @@
 
 	<div class="body-institution" >
 	  	<div class="baniere-institution">
-	  		<!--div class="note-ins">Note de l'emplacement<br/><br/>
+	  		<!--div class="note-ins"  (click) ="saveData()">Note de l'emplacement<br/><br/>
 	  			<rating style="margin-left: 50%;" score="{{institution.note}}" max="5" ></rating>
 	  		</div-->
 	  		<img *ngIf ="institution.photoIns" src="{{url}}/{{institution.photoIns}}" class="full-image" />
@@ -51,6 +51,9 @@
 					<div *ngIf="categroie != 'Restaurants'">{{institution.nomIns}}</div>
 					<div style="clear:both;">
 						<rating style="margin-left: 50%; font-size: 16px; float: right; margin-right: 5%;" score="{{moyenne}}" max="5" ></rating>
+						<div style=" font-size: 16px; float: left; margin-left: 5%; color: #ffa500;">
+							<ion-icon name="star" (click) ="saveData()"></ion-icon>
+						</div>
 					</div>
 
 					
@@ -75,8 +78,19 @@
 				</div>
 
 				<div class="menu-insti" *ngIf="categroie == 'Restaurants'">
-					<div class="titre-menu">Menu du restaurant</div>
-					<div class="sous-titre-menu">Pizza napolitaine.......</div>
+					<h1 [hidden]="!valueMenu" style="color:#ac0203;
+			        margin-top:0;
+			        text-align:center">
+			        {{messageMenu}}
+			        </h1>
+					<div class="titre-menu" [hidden]="valueMenu">Menu du restaurant</div>
+					<div *ngFor="let menu of menu">
+						<div class="sous-titre-menu">{{menu.idMenu.nomMenu}}.......</div>
+						<span style="color:#c81437; float: right;margin-top: 3%;">{{menu.prixMenu}} FCFA</span><br/>
+					</div>
+
+
+					<!--div class="sous-titre-menu">Pizza napolitaine.......</div>
 					<span style="color:#c81437; float: right;margin-top: 3%;">9000 FCFA</span><br/>
 
 					<div class="sous-titre-menu">Gnocchis alla Romana.....</div>
@@ -89,7 +103,7 @@
 					<span style="color:#c81437; float: right;margin-top: 3%;">9000 FCFA</span><br/>
 
 					<div class="sous-titre-menu">Oso bucco a la milanaise....</div>
-					<span style="color:#c81437; float: right;margin-top: 3%;">9000 FCFA</span><br/>
+					<span style="color:#c81437; float: right;margin-top: 3%;">9000 FCFA</span><br/-->
 
 					<div class="barre-resto" ></div>
 

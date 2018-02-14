@@ -101,7 +101,9 @@
 
 							<ion-item style="padding-left: 0px;">
 							    <ion-avatar item-start>
-							      <img src="assets/images/profil.png">
+							      <img *ngIf ="!evenement.idEvent.idUser.photo" src="assets/images/profil.png">
+
+							      <img *ngIf ="evenement.idEvent.idUser.photo" src="{{evenement.idEvent.idUser.photo}}">
 							    </ion-avatar>
 							    <h2>{{evenement.idEvent.idUser.pseudo}}</h2>
 							</ion-item>

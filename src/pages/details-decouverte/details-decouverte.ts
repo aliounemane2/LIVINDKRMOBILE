@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 
 /**
  * Generated class for the DetailsDecouvertePage page.
@@ -17,7 +18,7 @@ export class DetailsDecouvertePage {
 	decouverte: any;
 	titre: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider) {
   	if(navParams.get("data") !== "undefined" )
     {
       this.decouverte = navParams.get("data");
@@ -30,6 +31,31 @@ export class DetailsDecouvertePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsDecouvertePage');
+    this.updtaeNbLecteur(this.decouverte)
+  }
+
+  updtaeNbLecteur(article){   
+    this.eventService.updateNblecteur(article).subscribe(
+        data => {
+          console.log(data);
+          if(data.article){
+            //this.showToast("Avis modifiée avec succés");
+            //this.presentToast(data.message);
+            console.log(data);
+            
+          }
+          else{
+            //this.showToast(data.message);
+            console.log(data);
+
+          }
+
+        },
+        err => {
+            console.log(err);
+            //this.showToast("UUne erreur est survenue réessayer plus tard" );
+        }
+    );
   }
 
 }

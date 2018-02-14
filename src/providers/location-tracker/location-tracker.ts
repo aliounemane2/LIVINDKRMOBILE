@@ -43,11 +43,6 @@ export class LocationTrackerProvider {
   }
 
   getAllInstitutions(){
-    /*let loader = this.loading.create({
-    content: 'Chargement en cours...',
-    });*/
-
-    //loader.present().then(() => {
       this.eventService.getAllInstitutions().subscribe(
         data => {
             this.institution = data.institution; 
@@ -65,15 +60,15 @@ export class LocationTrackerProvider {
             },
             err => {
                 console.log(err);
-                //loader.dismiss();
+                
                 let titre ="Une erreur est survenue reessayer plus tard ";
-                //this.presentPromptOk(titre);
+                
             },
             () => {
-              //loader.dismiss()
+              
              }
       );
-    //})
+    
   }
 
 
@@ -101,7 +96,21 @@ export class LocationTrackerProvider {
 	    stationaryRadius: 20,
 	    distanceFilter: 10,
 	    debug: true,
-	    interval: 2000
+	    interval: 2000,
+      fastestInterval: 2500,
+      notificationTitle: "LOCATIONTEST", // Android
+      notificationText: "Background location tracking is ON.", // Android
+      notificationIconLarge: "icon", // Android
+      notificationIconSmall: "icon", // Android
+      startOnBoot: true,
+      startForeground: false,
+
+      batchSync: true,       // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
+      autoSync: true,         // <-- [Default: true] Set true to sync each location to server as it arrives.
+      maxDaysToPersist: 1, 
+
+     activityType: 'AutomotiveNavigation',
+      stopOnTerminate: true
 	  };
     console.log(this.note);
 	 
@@ -156,7 +165,7 @@ export class LocationTrackerProvider {
               { // <=== 
                 console.log('Vous êtes détecté à '+this.data[i].nomIns+' voulez-vous noter cet endroit ?');
                 let texte = 'Votre présence est détectée à '+this.data[i].nomIns+' voulez-vous noter cet endroit ?';
-                let obj = {userId: 5, name: 'Bob', ret: texte,ins: this.data[i]};
+                let obj = {ins: this.data[i], ret: texte, parent:'add'};
                 this.openModal(obj);
               }, 60000);
             }

@@ -2,7 +2,7 @@ import { DetailsEventPage } from '../details-event/details-event';
 import { Component, Pipe, PipeTransform } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController,Alert,IonicApp,LoadingController, ViewController,App, Events } from 'ionic-angular';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
-import { LocationsProvider } from '../../providers/locations/locations';
+//import { LocationsProvider } from '../../providers/locations/locations';
 import * as _ from 'lodash';
 import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 
@@ -77,7 +77,7 @@ export class EvenementPage {
   
   
 
-  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController) {
     this.typeEvents = 
     [
       {id: 0, val:"Tous"},
@@ -108,7 +108,7 @@ export class EvenementPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EvenementPage');
 
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getEvents();
     
   }
@@ -122,8 +122,7 @@ export class EvenementPage {
   filtreLocation(){
    console.log(this.typeEvents);
     if(this.typeEvents=='2'){
-      this.location = this.locations.load();
-      console.log(this.location);
+      
     }
     else{
 
@@ -300,7 +299,7 @@ export class EvenementPage {
                 console.log(this.semaine.length);
                   
               }
-              else if (now > this.evenements[i].dateEvent && this.evenements[i].dateEvent > lastDayOfWeek && this.evenements[i].dateEvent <= lastDayOfMonth) {
+              else if (now < this.evenements[i].dateEvent && this.evenements[i].dateEvent > lastDayOfWeek && this.evenements[i].dateEvent <= lastDayOfMonth) {
                 console.log("bbbbbbbbbbb");
                 this.mois.push(this.evenements[i]);
                 console.log(this.mois.length);

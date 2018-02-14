@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController, ViewController } from 'ionic-angular';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
-import { LocationsProvider } from '../../providers/locations/locations';
+//import { LocationsProvider } from '../../providers/locations/locations';
 import { InstitutionPage } from '../institution/institution';
 import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 /**
@@ -24,20 +24,22 @@ export class RecommendationPage {
   institution: any;
   value: any;
   message: any;
+  url: any;
 
-  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locations: LocationsProvider) {
+  constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController) {
     this.value = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecommendationPage');
-    this.connectivityService.checkNetwork();
+    //this.connectivityService.checkNetwork();
     this.getRecommendation();
   }
 
   goToDetailsEvent(evenement){
   	this.navCtrl.push(InstitutionPage, {
-   		'ins': evenement
+   		'ins': evenement,
+      'url': this.url
     });
   }
 
@@ -51,13 +53,17 @@ export class RecommendationPage {
       this.eventService.getRecommendation().subscribe(
         data => {
             this.institution = data.sous_category; 
+            console.log(data);
             console.log(this.institution);
-                if(this.institution == null){
-                  let titre ="Pas de evenements  a afficher";
-                  console.log(this.institution+' 1');
+                if(data.status == -1){
+                  this.value = true;
+                  let titre ="Aucune Institution ne correspond à vos centres d'interets";
+                  this.message = titre;
+                  console.log(this.message );
 
                 }
                 else{
+                  this.url = data.urls;
                   console.log(this.institution);
                   
                 }
