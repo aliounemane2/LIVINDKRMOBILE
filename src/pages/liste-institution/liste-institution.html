@@ -68,8 +68,9 @@
 		     	<div *ngIf ="ins.idTypeoffre.nomTypeOffre =='Gold'">  
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
+								
 			        	<div class="texte-event" >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -96,7 +97,7 @@
 			     		
 				        <div class="image-event1" (click)="goToInstitu(ins)">
 				        	<div class="texte-event">
-						        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+						        <div class="evtexteresto" >
 						          {{ins.nomIns}}
 						        </div>
 						        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -123,7 +124,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event"  >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -161,7 +162,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event" >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -185,7 +186,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event" >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -212,7 +213,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event"  >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -247,7 +248,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event" >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -271,7 +272,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event" >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto">
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -298,7 +299,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event"  >
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -323,7 +324,7 @@
 		     		
 			        <div class="image-event1" (click)="goToInstitu(ins)">
 			        	<div class="texte-event">
-					        <div class="evtexte" style="font-family: 'LinotypeZapfino One', arial; font-size: 30px;">
+					        <div class="evtexteresto" >
 					          {{ins.nomIns}}
 					        </div>
 					        <div class="evimage" style="line-height: 40px; color: #ffffff; width:30%;">
@@ -348,39 +349,42 @@
 	 	<div *ngIf="titre1 == 'Prestataires'">
 	 		<div *ngIf="titre == 'Prestataires'" class="bg-prestataires">
 
-		     	<ion-slides  class="image-event" *ngIf="vignette && vignette.length" autoplay="5000" loop="true" speed="3000" pager="true">
-					<ion-slide *ngFor="let vign of vignette" >
-						<div >
-		        			<img src="{{vign.image}}" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
-		      			</div>
-					</ion-slide >
-				</ion-slides >
+		     	<ion-slides  class="image-slide-event" autoplay="5000" loop="true" speed="3000" >
+						 <!-- *ngFor="let vign of publicite" -->
+						<ion-slide  >
+							<div >
+								<img *ngIf="publicite" src="{{urlll}}/{{publicite.photoPublicite}}" class="full-image" style=" height: 160px; width: 100%;" />
+
+								<img *ngIf="!publicite" src="assets/images/votrepub.png" class="full-image" style="height: 160px; width: 100%;" />
+							</div>
+						</ion-slide >
+					</ion-slides >
 
 		      	<div class="bloc-cat">
 		      		<ion-slides slidesPerView="4.5" spaceBetween="0" >
 		      			<ion-slide class="ineteret1" *ngFor="let int of souscat ; let i = index"  >
-							<div (click)="goToListeBus(int)">
-						        <div class="ineteret-image" >
-						          <!--img src="{{int.image}}" class="full-image" style="border-radius: 50%;" *ngIf="!int.val"  /--> 
+									<div (click)="goToListeBus(int)">
+											<div class="ineteret-image" >
+												<!--img src="{{int.image}}" class="full-image" style="border-radius: 50%;" *ngIf="!int.val"  /--> 
 
-						          <img *ngIf="int.imageSousCategory" src="{{url}}/{{int.imageSousCategory}}" class="full-image" style="border-radius: 50%;"  />
+												<img *ngIf="int.imageSousCategory" src="{{urll}}/{{int.imageSousCategory}}" class="full-image" style="border-radius: 50%;"  />
 
-						          <img *ngIf="!int.imageSousCategory" src="assets/images/Plumber2.png" class="full-image" style="border-radius: 50%;"  />   
-						        </div>
-						        <div class="ineteret-texte">
-						         {{int.nomSousCategory}}
-						        </div>
-						    </div>
-						</ion-slide >
+												<img *ngIf="!int.imageSousCategory" src="assets/images/Plumber2.png" class="full-image" style="border-radius: 50%;"  />   
+											</div>
+											<div class="ineteret-texte">
+											{{int.nomSousCategory}}
+											</div>
+									</div>
+								</ion-slide >
 
-						<ion-slide>
+							<ion-slide>
 					        <!-- need a empty slide to avoid last item to be inaccessible -->
 					    </ion-slide> 
 
 					    <ion-slide>
 					        <!-- need a empty slide to avoid last item to be inaccessible -->
 					    </ion-slide> 
-		      		</ion-slides >
+		      	</ion-slides >
 		      	</div>
 				
 	      	</div>
@@ -389,7 +393,7 @@
 		      		<ion-searchbar (ionInput)="getItemsRestau($event)"></ion-searchbar>
 		      	</div>
 	      	</div>
-	      	<div *ngIf="titre == 'Prestataires'" class="vedette">En vedette</div>
+	      	<div *ngIf="titre == 'Prestataires' && institution" class="vedette">En vedette</div>
 
 	      	<div class="bloc-cat" *ngIf="titre == 'Prestataires'">
 	      		<h1 [hidden]="valueJour" style="color:#ac0203;
@@ -402,7 +406,9 @@
 		      			<ion-slide class="ineteret1" *ngFor="let night of institution ; let i = index"  style="height: 20vh;">
 									<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
 						        <div class="ineteret-image" >
-						          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
+											<img *ngIf="night.photoIns" src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
+											
+											<img *ngIf="!night.photoIns" src="assets/images/978.jpg" class="full-image" style="border-radius: 50%;"  />
 						        </div>
 						        <div class="ineteret-texte">
 						         {{night.nomIns}}
@@ -410,7 +416,7 @@
 						    	</div>
 								</ion-slide >
 
-						<ion-slide>
+							<ion-slide>
 					        <!-- need a empty slide to avoid last item to be inaccessible -->
 					    </ion-slide> 
 
@@ -421,23 +427,25 @@
 
 		      		<ion-slides slidesPerView="3.5" spaceBetween="0" pager="true" *ngIf ="valrech =='1'" >
 		      			<ion-slide class="ineteret1" *ngFor="let night of insRecherche ; let i = index"  >
-							<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
-						        <div class="ineteret-image" >
-						          <img src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />    
-						        </div>
-						        <div class="ineteret-texte">
-						         {{night.nomIns}}
-						        </div>
-						    </div>
-						</ion-slide >
+									<div (click)="goToInstitu(night)" style="padding-left: 2%; padding-right: 2%;">
+											<div class="ineteret-image" >
+												<img *ngIf="night.photoIns" src="{{url}}/{{night.photoIns}}" class="full-image" style="border-radius: 50%;"  />
+												
+												<img *ngIf="!night.photoIns" src="assets/images/978.jpg" class="full-image" style="border-radius: 50%;"  />
+											</div>
+											<div class="ineteret-texte">
+											{{night.nomIns}}
+											</div>
+									</div>
+								</ion-slide >
 
-						<ion-slide>
-					        <!-- need a empty slide to avoid last item to be inaccessible -->
-					    </ion-slide> 
+								<ion-slide>
+										<!-- need a empty slide to avoid last item to be inaccessible -->
+								</ion-slide> 
 
-					    <ion-slide>
-					        <!-- need a empty slide to avoid last item to be inaccessible -->
-					    </ion-slide> 
+								<ion-slide>
+										<!-- need a empty slide to avoid last item to be inaccessible -->
+								</ion-slide> 
 		      		</ion-slides >
 		    </div>
 	 	</div>
@@ -645,13 +653,24 @@
 	    </ion-searchbar>
 	 	
 	 	<div *ngIf="titre == 'Découverte'">
+			<div *ngIf="!institution">
+						<ion-slides  class="image-slide-event">
+								<!-- *ngFor="let vign of publicite" -->
+							<ion-slide  >
+								<div >
+									<img *ngIf="publicite" src="{{urlll}}/{{publicite.photoPublicite}}" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
+									<img *ngIf="!publicite" src="assets/images/votrepub.png" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
+								</div>
+							</ion-slide >
+						</ion-slides >
+			</div>
 	 		<h1 [hidden]="vall" style="color:#ac0203;
 				    font-size: 16px;
 				    text-align:center;
 				    margin-top: 25%;">
 			        {{message1}}
 			</h1>
-			<div class="ban_decouverte">
+			<div class="ban_decouverte" *ngIf="institution">
 				
 				<img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
 				<ion-searchbar (click)="showAddressModal()" style="position: absolute;
@@ -660,43 +679,48 @@
 			</div>
 	 		<div class="articlepop" *ngIf="articpop == '1'">
 	 			
-	 		<div class="popu">Populaires</div>
-	 		<ion-slides slidesPerView="1.5" spaceBetween="0" *ngIf="institution && institution.length" autoplay="5000" loop="true" speed="3000" pager="true">
-			    <ion-slide *ngFor="let dec of institution">
-			      	<ion-card (click) ="goToDetailsDecouverte(dec)" style="height: 300px;">
-					  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
-					  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
-					  <ion-card-content style="padding-bottom: 0px;">
-					  <div class="tagdecouverte">
-					  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
-					  	<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
-					  </div>
-					  
-					  
+	 		<div class="popu" *ngIf="institution">Populaires</div>
+	 		<ion-slides slidesPerView="1.5" spaceBetween="0" *ngIf="articlePopulaires && articlePopulaires.length" autoplay="5000" loop="true" speed="3000" pager="true">
+			    <ion-slide *ngFor="let dec of articlePopulaires">
+			      <ion-card (click) ="goToDetailsDecouverte(dec)" style="height: 250px;">
+					  	<img *ngIf="dec.image" src="http://{{urldec}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+					  	<img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+							<ion-card-content style="padding-bottom: 0px;">
+								<div class="tagdecouverte">
+									<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+									<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
+								</div>
+								
+								
 
-					    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold; text-align: left;" >
-					      {{dec.titreArticle}}
-					    </ion-card-title>
+									<ion-card-title style="
+									padding-bottom: 0px;
+									font-size: 14px; 
+									font-weight: bold; 
+									text-align: left; " >
+										{{dec.titreArticle}}
+									</ion-card-title>
 
-					    <ion-item style="padding-left: 0px;">
-					    <ion-avatar item-start>
-					      <img src="assets/images/profil.png">
-					    </ion-avatar>
-					    <ion-label class="label-md">
-					    	<p>{{dec.dateArticle}}</p>
-					    	<p>{{dec.idUser}}</p>
-						</ion-label>
-					    
-					  </ion-item>
-					  </ion-card-content>
+									<ion-item style="padding-left: 0px;">
+									<ion-avatar item-start>
+										<img *ngIf="!dec.idUser.photo" src="assets/images/profil.png">
+										<img *ngIf="dec.idUser.photo" src="http://{{urldec}}/{{dec.idUser.photo}}">
+									</ion-avatar>
+									<ion-label class="label-md">
+										<p>{{dec.dateArticle}}</p>
+										<p>{{dec.idUser.pseudo}}</p>
+								</ion-label>
+									
+								</ion-item>
+							</ion-card-content>
 					</ion-card>
 			    </ion-slide>
 			    
 			</ion-slides>
 	 	</div >
-	 	<div *ngIf ="valrech =='0'" >
-	 		<div class="popu">Nouveautes</div>
-	     	<div *ngFor="let dec of institution">
+	 	<div *ngIf ="valrech =='0'"  class="block_main_news_1">
+	 		<div class="popu" *ngIf="institution">Nouveautes</div>
+	     	<!--div *ngFor="let dec of institution">
 	  		<ion-card (click) ="goToDetailsDecouverte(dec)">
 			  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
 			  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
@@ -724,41 +748,67 @@
 			  </ion-item>
 			  </ion-card-content>
 			</ion-card>
-	    	</div>
+	    	</div-->
+
+	    	<div class="inner">
+							<div *ngFor="let dec of institution; let i = index;" > 
+									<article >
+										<div (click) = "goToDetailsDecouverte(dec)">
+											<div class="pic">
+												<img *ngIf="dec.image" src="http://{{urldec}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+												<img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+											</div>
+											<div class="content">
+												<h4>{{dec.titreArticle}}</h4>
+												<div class="date">{{dec.dateArticle}} {{i}}</div>
+												<div class="date">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+												<div class="date">{{dec.idUser.pseudo}}</div>
+											</div>
+										</div>
+									</article>
+									<div *ngIf="institution">
+											<div *ngIf="i == 0">
+													<ion-slides  class="image-event">
+															<!-- *ngFor="let vign of publicite" -->
+														 <ion-slide  >
+															 <div >
+																		 <img *ngIf="publicite" src="{{urlll}}/{{publicite.photoPublicite}}" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
+					
+																		 <img *ngIf="!publicite" src="assets/images/votrepub.png" class="full-image" style="border-radius: 5px; height: 160px; width: 100%; margin-top: 2%;" />
+																	 </div>
+														 </ion-slide >
+													</ion-slides >
+											</div>	
+									</div>
+			
+									
+								</div> 
+					
+					 	
+		    </div>
 	    </div>
 
-	    <div *ngIf ="valrech =='1'" >
-	     	<div *ngFor="let dec of insRecherche">
-	  		<ion-card (click) ="goToDetailsDecouverte(dec)">
-			  <img *ngIf="dec.image" src="{{url}}/{{dec.image}}" style="height: 110px; width: 100%"/>
-			  <img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
-			  <ion-card-content style="padding-bottom: 0px;">
-			  <div class="tagdecouverte">
-			  	<div class="tagg">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
-				<div class="taglecture"> lu {{dec.nbLecteur}} fois</div>
-			  </div>
-			  
-			  
-
-			    <ion-card-title style="padding-bottom: 0px;font-size: 18px; font-weight: bold;" >
-			      {{dec.titreArticle}}
-			    </ion-card-title>
-
-			    <ion-item style="padding-left: 0px;">
-			    <ion-avatar item-start>
-			      <img src="assets/images/profil.png">
-			    </ion-avatar>
-			    <ion-label class="label-md">
-			    	<h2>{{dec.dateArticle}}</h2>
-			    	<p>{{dec.idUser}}</p>
-				</ion-label>
-			    
-			  </ion-item>
-			  </ion-card-content>
-			</ion-card>
-	    	</div>
+	    <div *ngIf ="valrech =='1'" class="block_main_news_1">
+	     	<div class="inner">
+	      		<article *ngFor="let dec of insRecherche">
+	      			<div (click) = "goToDetailsDecouverte(dec)">
+	      				<div class="pic">
+		      				<img *ngIf="dec.image" src="http://{{urldec}}/{{dec.image}}" style="height: 110px; width: 100%"/>
+	  						<img *ngIf="!dec.image" src="assets/images/decouverte1.jpg" style="height: 110px; width: 100%"/>
+		      			</div>
+		      			<div class="content">
+		      				<h4>{{dec.titreArticle}}</h4>
+		      				<div class="date">{{dec.dateArticle}}</div>
+									<div class="date">{{dec.idTagDecouverte.nomTagDecouverte}}</div>
+									<div class="date">{{dec.idUser.pseudo}}</div>
+		      			</div>
+	      			</div>
+	      			
+	      		</article>
+		      	
+		    </div>
 	    </div>
-	     </div>
+	  </div>
 	</div>
 
 </ion-content>

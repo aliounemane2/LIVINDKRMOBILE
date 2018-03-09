@@ -16,15 +16,18 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 })
 export class DetailsDecouvertePage {
 	decouverte: any;
-	titre: any;
+  titre: any;
+  url: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider) {
   	if(navParams.get("data") !== "undefined" )
     {
       this.decouverte = navParams.get("data");
       this.titre = navParams.get("titre");
+      this.url= navParams.get("url");
       console.log(this.decouverte);
       console.log(this.titre);
+      console.log(this.url);
       
     }
   }

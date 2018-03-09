@@ -61,7 +61,9 @@ page-liste-business {
 		float: left;
 		width: 20%;
 		height: 40px;
-		padding-left: 4%;
+		*padding-left: 4%;
+		text-align: right;
+    	padding-right: 10px;
 	}
 
 	.menu-right{
@@ -143,6 +145,8 @@ page-liste-business {
 	.bgsight{
 		padding-left: 4%;
     	padding-right: 4%;
+    	padding-top: 7px;
+	    overflow: hidden;
     	
 	}
 
@@ -166,6 +170,7 @@ page-liste-business {
 	    padding-left: 2%;
 	    padding-right: 2%;
 	   border-bottom: solid thin #cccccc;
+	   overflow: hidden;
 	}
 
 	.titre-pres{
@@ -174,14 +179,13 @@ page-liste-business {
 	    padding-right: 2%;
 	    float: left;
 	    padding-top: 10px;
-		padding-bottom: 5px;
+		padding-bottom: 15px;
 		border-right: solid thin #cccccc;
-		border-bottom: solid thin #cccccc;
+		*border-bottom: solid thin #cccccc;
 	}
 
 	.avis-pres{
 		width: 30%;
-	    height: 100%;
 	    float: left;
 	    padding-top: 20px;
 	}
@@ -214,6 +218,53 @@ page-liste-business {
 	.review{
 		text-align: center;
 
+	}
+
+	.block_main_news_1 article {
+	    margin-top: 15px;
+	    padding-bottom: 16px;
+	    overflow: hidden;
+	    border-bottom: 1px solid #e6eaed;
+	}
+
+	.block_main_news_1 {
+	    padding-top: 7px;
+	    overflow: hidden;
+	    *margin-left: 2%;
+    	*margin-right: 2%;
+	}
+
+	.block_main_news_1 article .pic {
+	    width: 30%;
+	    margin-right: 13px;
+	    padding-top: 2px;
+	    float: left;
+	}
+
+	.block_main_news_1 article .content {
+	    overflow: hidden;
+	}
+
+	.block_main_news_1 article .content h4 {
+	    padding-bottom: 9px;
+	    font-size: 15px;
+	    color: #1a1e22;
+	    font-weight: bold;
+	    line-height: 17px;
+	    position: relative;
+	    top: -15px;
+	}
+
+	.block_main_news_1 article .content .date {
+	    font-size: 11px;
+	    color: #868686;
+	    position: relative;
+    	top: -15px;
+	}
+
+	.inner {
+	    width: 90%;
+	    margin: 0px auto;
 	}
 
 }

@@ -80,12 +80,18 @@ export class ListeInstitutionPage {
   sCat:any;
   ca: any;
   url: any;
+  urldec: any;
   PrePopulaires: any;
   inss: any;
   instii: any;
   urll: any;
   randomQuote: string;
   testIns: any;
+  articlePopulaires: any;
+  tabPopulaires: any;
+  testArrayMax: any;
+  publicite: any;
+  urlll: any;
 
 
   constructor( private toast : Toast, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public connectivityService:ConnectvityServiceProvider,private modalCtrl: ModalController, private toastCtrl: ToastController) {
@@ -113,6 +119,8 @@ export class ListeInstitutionPage {
     this.top = '65px';
     this.note =0;
     this.height = '170px';
+    this.articlePopulaires = [];
+    
     this.price1 =
     [
       {"id":"1","price":"$"},
@@ -346,9 +354,12 @@ export class ListeInstitutionPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.insRecherche = this.institution.filter((item) => {
-        return (item.nomIns.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      if(this.institution){
+        this.insRecherche = this.institution.filter((item) => {
+          return (item.nomIns.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
+      
     }
     if(this.insRecherche == 0 ){
       this.valueJour =0;
@@ -379,9 +390,12 @@ export class ListeInstitutionPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.insRecherche = this.institution.filter((item) => {
-        return (item.tag.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      if(this.institution){
+        this.insRecherche = this.institution.filter((item) => {
+          return (item.tag.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
+      
     }
     if (val == '' || !val){
       this.valrech = 0;
@@ -406,19 +420,29 @@ export class ListeInstitutionPage {
     
     if(this.titre == 'Prestataires'){
       this.getVignetteIns();
+      this.getPublicitePrestataires();
       this.getInstitutionByCategorie(this.categorie);
       console.log("ppp");
       this.color = '#ffffff';
+      console.log("prestataires");
+
     }
     
     else if(this.titre == 'Découverte'){
       this.getArticleDecouverte();
       this.getCatDecouverte();
+      this.getVignetteIns();
+      this.getPubliciteArticle();
+      console.log("Decouverte");
     }
     else{
-      this.getInstitutionByCategorie(this.categorie);
-      console.log("p");
-
+      if(!this.souscat){
+        this.getInstitutionByCategorie(this.categorie);
+        console.log("institution");
+      }
+      else{
+        console.log("No requete");
+      }
     }
   }
 
@@ -461,7 +485,8 @@ export class ListeInstitutionPage {
     this.navCtrl.push(DetailsDecouvertePage, {
       'accueil': 'listeins',
       'data': decouverte,
-      'titre':decouverte.titreArticle
+      'titre': decouverte.titreArticle,
+      'url': this.urldec
     });
   
   }
@@ -559,7 +584,7 @@ export class ListeInstitutionPage {
             this.url = data.urls;
             console.log(this.institution);
             console.log(this.url);
-                if(this.institution == null){
+                if(!this.institution){
                   let titre ="Pas de institution  a afficher";
                   console.log(this.institution+' 1');
                   this.vall =0;
@@ -709,12 +734,13 @@ export class ListeInstitutionPage {
       this.eventService.getArticleDecouverte().subscribe(
         data => {
             this.institution = data.article; 
+            this.urldec = data.location;
             console.log(this.institution);
-                if(this.institution == 0){
+                if(!this.institution){
                   let titre ="Pas de Decouverte  a afficher";
                   console.log(this.institution+' 1');
                   this.vall =0;
-                  this.message1 = "Aucune institution pour la categorie "+this.titre;
+                  this.message1 = "Pas d'article pour la categorie "+this.titre;
                   console.log(this.message1);
 
                 }
@@ -722,6 +748,36 @@ export class ListeInstitutionPage {
                  
                   console.log(this.institution);
                   this.vall =1;
+                  this.tabPopulaires = this.institution;
+                  /*this.tabPopulaires.sort((locationA, locationB) => {
+                    //console.log(locationA.date);
+                    //console.log(locationB.distance);
+                      return locationA.distance - locationB.distance;
+  
+                  });*/
+                  
+                  let populaires = [];
+
+                  let i;
+                  let large =[];
+                  //let array = [];
+                  //array = this.tabPopulaires;
+                  let max = 0, index: number;
+                  let array = [{nblec:33},{nblec:55},{nblec:13},{nblec:46},{nblec:87},{nblec:42},{nblec:10},{nblec:34},{nblec:43},{nblec:56}];
+                  this.tabPopulaires.sort((locationA, locationB) => {
+                      //return locationA.nblec - locationB.nblec;
+                      if (locationA.nbLecteur > locationB.nbLecteur) {
+                        return -1;
+                      } else if (locationA.nbLecteur < locationB.nbLecteur) {
+                        return 1;
+                      } else {
+                        return 0;
+                      }
+  
+                  })
+                  console.log(this.tabPopulaires);
+                  //this.articlePopulaires.push(this.tabPopulaires[0]); 
+                  
                   
                 }
             },
@@ -731,7 +787,24 @@ export class ListeInstitutionPage {
                 let titre ="Une erreur est survenue reessayer plus tard ";
                 //this.presentPromptOk(titre);
             },
-            () => {loader.dismiss()}
+            () => {loader.dismiss();
+
+              if(this.tabPopulaires){
+                if(this.tabPopulaires.length == 1){               
+                    this.articlePopulaires.push(this.tabPopulaires[0]);                    
+                }
+                else if(this.tabPopulaires.length > 1 && this.tabPopulaires.length < 5){
+                  for(var i = 0 ; i<this.tabPopulaires.length; i++){                 
+                    this.articlePopulaires.push(this.tabPopulaires[i]);                  
+                  }
+                }
+              }
+
+              
+               
+
+              
+              console.log(this.articlePopulaires);}
       );
     })
   }
@@ -770,6 +843,58 @@ export class ListeInstitutionPage {
             () => {loader.dismiss()}
       );
     })
+  }
+
+  getPublicitePrestataires(){
+    //this.categories = this.eventService.getCategories();
+    
+      this.eventService.getPublicitePrestaires()
+      .subscribe(
+        data => {
+            this.publicite = data.publicite;
+            this.urlll= data.urls;
+            console.log(this.publicite);
+                if(this.publicite == null){
+                  let titre ="Pas de publicite  a afficher";
+                  console.log(titre);
+                }
+                else{
+                  console.log(this.publicite);
+                  
+                }
+            },
+            err => {
+                
+                console.log(err);
+            }
+      );
+    
+  }
+
+  getPubliciteArticle(){
+    //this.categories = this.eventService.getCategories();
+    
+      this.eventService.getPubliciteArticle()
+      .subscribe(
+        data => {
+            this.publicite = data.publicite;
+            this.urlll= data.urls;
+            console.log(this.publicite);
+                if(this.publicite == null){
+                  let titre ="Pas de publicite  a afficher";
+                  console.log(titre);
+                }
+                else{
+                  console.log(this.publicite);
+                  
+                }
+            },
+            err => {
+                
+                console.log(err);
+            }
+      );
+    
   }
 
  

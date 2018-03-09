@@ -9,12 +9,9 @@ import { ConnectvityServiceProvider } from '../../providers/connectvity-service/
 
 //const CONTENT_TYPE_HEADER:string = 'Content-Type';
 //const APPLICATION_JSON:string = 'application/json';
-<<<<<<< HEAD
-const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API4';
-=======
-const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR_API5';
+
+const BACKEND_URL:string = 'http://213.246.59.111:8080/LIVINDKR6';
 //const BACKEND_URL:string = 'http://192.168.1.130:8181';
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
 //const BACKEND_URL:string = 'http://192.168.1.94:8088';
 
 /*
@@ -32,11 +29,9 @@ export class UserServiceProvider {
   private options = new RequestOptions({headers: this.headers});
   private options1 = new RequestOptions({headers: this.headers1});
   private options2 = new RequestOptions({headers: this.headers2});
-<<<<<<< HEAD
-  public url = "http://213.246.59.111:8080/LIVINDKR_API4";
-=======
-  public url = "http://213.246.59.111:8080/LIVINDKR_API5";
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
+
+  public url = "http://213.246.59.111:8080/LIVINDKR6";
+  //public url = "http://192.168.1.94:8088";
   file: File;
   insKey = 'ins-key-group';
   
@@ -82,7 +77,10 @@ export class UserServiceProvider {
   }
 
   editUser(user){
-    return this.http.post(BACKEND_URL+'/user/updateUser', JSON.stringify(user), this.options1)
+    let headers = new Headers({'Content-Type': 'application/json',
+    'Authorization': StorageUtils.getToken()});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(BACKEND_URL+'/user/updateUser', JSON.stringify(user), options)
     .timeout(50000)
     .map((res:Response) => {
         let user:any = res.json();
@@ -96,10 +94,13 @@ export class UserServiceProvider {
     return BACKEND_URL;
   }
   editPhotoProfil(user,photo){
+    let headers = new Headers({'Content-Type': 'application/json',
+    'Authorization': StorageUtils.getToken()});
+    let options = new RequestOptions({headers: headers});
     this.file = photo;
     let formData: FormData = new FormData();
     formData.append('file', this.file);
-    return this.http.post(BACKEND_URL+'/user/updatephoto?pseudo='+user.pseudo+'&type=0', formData, this.options1)
+    return this.http.post(BACKEND_URL+'/user/updatephoto?pseudo='+user.pseudo+'&type=0', formData, options)
     .timeout(50000)
     .map((res:Response) => {
         let user:any = res.json();   
@@ -109,9 +110,12 @@ export class UserServiceProvider {
   }
 
   getInfoUser(){
+    let headers = new Headers({'Content-Type': 'application/json',
+    'Authorization': StorageUtils.getToken()});
+    let options = new RequestOptions({headers: headers});
     let request, cacheKey;
     cacheKey = BACKEND_URL+'/users/getuser';
-    request = this.http.get(BACKEND_URL+'/users/getuser', this.options1)
+    request = this.http.get(BACKEND_URL+'/users/getuser', options)
     .timeout(50000)
     .map((res:Response) => {
         let avis:any = res.json();
@@ -203,7 +207,10 @@ export class UserServiceProvider {
   }
 
   updatePassword(user){
-    return this.http.post(BACKEND_URL+'/user/updatePassword?email='+user.email+'&password='+user.password+'&id=1'+'&oldpassword='+user.oldpassword+'&type=mobile',JSON.stringify(user), this.options1) 
+    let headers = new Headers({'Content-Type': 'application/json',
+    'Authorization': StorageUtils.getToken()});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(BACKEND_URL+'/user/updatePassword?email='+user.email+'&password='+user.password+'&id=1'+'&oldpassword='+user.oldpassword+'&type=mobile',JSON.stringify(user), options) 
     .timeout(50000)
     .map((res:Response) => {
       let user: any = res.json();

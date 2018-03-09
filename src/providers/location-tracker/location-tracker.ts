@@ -29,8 +29,11 @@ export class LocationTrackerProvider {
   val: any;
   token: any;
 
-  constructor(private diagnostic: Diagnostic, public http: Http, public zone: NgZone, public eventService:EventServiceProvider, public loading: LoadingController, private backgroundGeolocation: BackgroundGeolocation, private geolocation: Geolocation, public alertCtrl: AlertController, public modalCtrl: ModalController, public connectivityService:ConnectvityServiceProvider, public platform: Platform) {
-    this.connectivityService.checkNetwork();
+  constructor(private diagnostic: Diagnostic, public http: Http, public zone: NgZone, 
+    public eventService:EventServiceProvider, public loading: LoadingController, 
+    private backgroundGeolocation: BackgroundGeolocation,
+     private geolocation: Geolocation, public alertCtrl: AlertController, public modalCtrl: ModalController, public connectivityService:ConnectvityServiceProvider, public platform: Platform) {
+    //this.connectivityService.checkNetwork();
     this.val = 0;
     console.log('Hello LocationTrackerProvider Provider');
     this.token = StorageUtils.getToken();
@@ -95,8 +98,9 @@ export class LocationTrackerProvider {
 	    desiredAccuracy: 0,
 	    stationaryRadius: 20,
 	    distanceFilter: 10,
-	    debug: true,
-	    interval: 2000,
+	    debug: false,
+      //interval: 30 * 60 * 1000,
+      interval: 3000,
       fastestInterval: 2500,
       notificationTitle: "LOCATIONTEST", // Android
       notificationText: "Background location tracking is ON.", // Android
@@ -143,7 +147,7 @@ export class LocationTrackerProvider {
 	 
 		this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
 		 
-		  console.log(position);
+		  //console.log(position);
 		 
 		  // Run update inside of Angular's zone
 		  this.zone.run(() => {
@@ -153,7 +157,7 @@ export class LocationTrackerProvider {
 
 		    //ajout
         //this.getInstitution();
-        console.log(this.institution);
+        //console.log(this.institution);
 
 		    this.data = this.applyHaversine(this.institution, this.lat, this.lng);
 		    for(var i = 0; i < this.data.length; i++){
@@ -175,17 +179,7 @@ export class LocationTrackerProvider {
             break;
             
 		    	}
-          /*else{
-             console.log('pppppooo');
-            setTimeout(() => { // <=== 
-              console.log('ppppp');
-              let texte = 'Vous etes detecte a '+this.data[i].nom+' voulez vous noter cet endroit';
-              let obj = {userId: '1', name: 'Bob', ret: texte};
-              this.openModal(obj);
-            }, 20000);
-            break;
-            
-          }*/
+          
 		    }
 		    //fin ajout
 		  });
@@ -196,8 +190,8 @@ export class LocationTrackerProvider {
   stopTracking() {
   	console.log('stopTracking');
  
-	this.backgroundGeolocation.finish();
-	this.watch.unsubscribe();
+	/*this.backgroundGeolocation.finish();
+	this.watch.unsubscribe();*/
   }
 
   getDistanceBetweenPoints(start, end, units){
@@ -236,7 +230,7 @@ export class LocationTrackerProvider {
             lng: long
         };
 
-        console.log(usersLocation);
+        //console.log(usersLocation);
 
   		locations.map((location) => {
 
@@ -245,17 +239,17 @@ export class LocationTrackerProvider {
                 lng: location.longitudeIns
             };
 
-            console.log(placeLocation);
+            //console.log(placeLocation);
  
             location.distance = this.getDistanceBetweenPoints(
                 usersLocation,
                 placeLocation,
                 'miles'
             ).toFixed(2);
-            console.log(location.distance);
+            //console.log(location.distance);
     	});
 		
-		console.log(locations);
+		//console.log(locations);
     	return locations;
     }
 

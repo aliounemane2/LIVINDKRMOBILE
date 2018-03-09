@@ -284,5 +284,24 @@ page-favoris {
 	    opacity: 0.8;
 	    left: 40%;
 	}
+	.favoris{
+		width: 10%;
+		float: left;
+		height: 40px;
+		color: #ffffff;
+		background-color: #c81437;
+		position: absolute;
+    	top: 130px;
+    	border-radius: 50%;
+    	left: 0;
+    	
+	}
+
+	.favoristexte{
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 20px;
+	}
 
 }

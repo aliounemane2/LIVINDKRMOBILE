@@ -42,6 +42,7 @@ export class InscriptionIneterestPage {
   user: any;
   nointe: any;
   messages: any;
+  location: any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider, public eventService:EventServiceProvider, private toastCtrl: ToastController) {
 
@@ -112,6 +113,7 @@ export class InscriptionIneterestPage {
       this.userService.getInterest().subscribe(
         data => {
             this.centreInteret = data.interests; 
+            this.location = data.location;
             //this.centreInteret = data;
             console.log(this.centreInteret);
                 if(this.centreInteret == null){
@@ -121,7 +123,7 @@ export class InscriptionIneterestPage {
                 else{
                   console.log(this.centreInteret);
                   var tof = "";
-                  var tof1 = "assets/images/ICONS_Photo1.png";
+                  var tof1 = "";
                   for (var i=0; i<this.centreInteret.length; i++)
                   {
                     if(this.centreInteret[i].photoInterest == null){
@@ -129,36 +131,54 @@ export class InscriptionIneterestPage {
                     }
                     else{
                       tof = this.centreInteret[i].photoInterest;
+                      console.log(this.centreInteret[i].photoInterest);
+                    }
+
+                    if(this.centreInteret[i].photoInterest2 == null){
+                      tof1 = "assets/images/ICONS_Photo1.png";
+                    }
+                    else{
+                      tof1 = this.centreInteret[i].photoInterest2;
+                      console.log(this.centreInteret[i].photoInterest2);
                     }
 
                     if(i >=0 && i<=8){
+                      
                       this.centreInteret[i] ={
                         idInterest: this.centreInteret[i].idInterest,
                         nomInterest: this.centreInteret[i].nomInterest,
-                        photoInterest: tof,
-                        photo: tof1,
+                        //photoInterest: tof,
+                        //photoInterest2: tof1,
+                        photoInterest: this.centreInteret[i].photoInterest2,
+                        photoInterest2: this.centreInteret[i].photoInterest,
                         val: false,
                         idcat: 1
                       }; 
                     }
 
                     if(i >=9 && i<=17){
+                      
                       this.centreInteret[i] ={
                         idInterest: this.centreInteret[i].idInterest,
                         nomInterest: this.centreInteret[i].nomInterest,
-                        pphotoInterest: tof,
-                        photo: tof1,
+                        //photoInterest: tof,
+                        //photoInterest2: tof1,
+                        photoInterest: this.centreInteret[i].photoInterest2,
+                        photoInterest2: this.centreInteret[i].photoInterest,
                         val: false,
                         idcat: 2
                       }; 
                     }
 
                     if(i >=18 && i<=27){
+                      
                       this.centreInteret[i] ={
                         idInterest: this.centreInteret[i].idInterest,
                         nomInterest: this.centreInteret[i].nomInterest,
-                        photoInterest: tof,
-                        photo: tof1,
+                        //photoInterest: tof,
+                        //photoInterest2: tof1,
+                        photoInterest: this.centreInteret[i].photoInterest2,
+                        photoInterest2: this.centreInteret[i].photoInterest,
                         val: false,
                         idcat: 3
                       }; 
@@ -167,6 +187,7 @@ export class InscriptionIneterestPage {
                   }
 
                    console.log(this.centreInteret);
+                   console.log(this.location);
 
                    this.getCategoriesInteret();
 
@@ -305,9 +326,9 @@ export class InscriptionIneterestPage {
     }
     else{
 
-        this.tournerPhotoVersDos(interet.photo);
-        this.urlFace = interet.photo;
-        console.log(interet.photo);
+        this.tournerPhotoVersDos(interet.photoInterest2);
+        this.urlFace = interet.photoInterest2;
+        console.log(interet.photoInterest2);
         let idx = answers.controls.findIndex(x => x.value == interet.idInterest);
         answers.removeAt(idx)
         console.log(this.myFormulaire.value);
@@ -334,13 +355,20 @@ export class InscriptionIneterestPage {
         else{
           tof = this.centreInteret[i].photoInterest;
         }
+
+        if(this.centreInteret[i].photoInterest == null){
+          tof1 = "assets/images/ICONS_Photo2.png";
+        }
+        else{
+          tof1 = this.centreInteret[i].photoInterest2;
+        }
         if(this.idTypeCat == this.centreInteret[i].idcat)
         {
           this.centreInteret[i] ={
             idInterest: this.centreInteret[i].idInterest,
             nomInterest: this.centreInteret[i].nomInterest,
             photoInterest: tof,
-            photo: tof1,
+            photoInterest2: tof1,
             val: false,
             idcat: this.centreInteret[i].idcat
 
@@ -351,7 +379,7 @@ export class InscriptionIneterestPage {
             idInterest: this.centreInteret[i].idInterest,
             nomInterest: this.centreInteret[i].nomInterest,
             photoInterest: tof,
-            photo: tof1,
+            photoInterest2: tof1,
             val: false,
             idcat: this.centreInteret[i].idcat
           });
@@ -424,7 +452,7 @@ export class InscriptionIneterestPage {
                   console.log(this.idTypeCat);
 
                   var tof = "";
-                  var tof1 = "assets/images/ICONS_Photo1.png";
+                  var tof1 = "";
                   if(this.interests){
                     for (var i=0; i<this.interests.length; i++)
                     {
@@ -433,6 +461,13 @@ export class InscriptionIneterestPage {
                       }
                       else{
                         tof = this.centreInteret[i].photoInterest;
+                      }
+
+                      if(this.centreInteret[i].photoInterest2 == null){
+                        tof = "assets/images/ICONS_Photo1.png";
+                      }
+                      else{
+                        tof = this.centreInteret[i].photoInterest2;
                       }
                         if(this.idTypeCat == this.interests[i].idcat)
                         {
@@ -446,8 +481,10 @@ export class InscriptionIneterestPage {
 
                             idInterest: this.centreInteret[i].idInterest,
                             nomInterest: this.centreInteret[i].nomInterest,
-                            photoInterest: tof,
-                            photo: tof1,
+                            //photoInterest: tof,
+                            //photoInterest2: tof1,
+                            photoInterest: this.centreInteret[i].photoInterest2,
+                            photoInterest2: this.centreInteret[i].photoInterest,
                             val: false,
                             idcat: this.centreInteret[i].idcat
                           };
@@ -463,8 +500,10 @@ export class InscriptionIneterestPage {
 
                             idInterest: this.centreInteret[i].idInterest,
                             nomInterest: this.centreInteret[i].nomInterest,
-                            photoInterest: tof,
-                            photo: tof1,
+                            //photoInterest: tof,
+                            //photoInterest2: tof1,
+                            photoInterest: this.centreInteret[i].photoInterest2,
+                            photoInterest2: this.centreInteret[i].photoInterest,
                             val: false,
                             idcat: this.centreInteret[i].idcat
                           });

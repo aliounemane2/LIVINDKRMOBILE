@@ -42,20 +42,15 @@ export class AccueilPage {
   value: any;
   urlsc: any;
   data:any;
+  urlll: any;
 
   constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public locationTracker: LocationTrackerProvider, public modalCtrl: ModalController, public storage: Storage){
     //this.locationTracker.checkLocation();
-    this.publicite ={id: "1", image:"assets/images/pub.jpg"};
+    //this.publicite ={id: "1", image:"assets/images/pub.jpg"};
+    this.getPublicite();
     this.value = false;
-    this.storage.get('name').then((val) => {
-      console.log('Your name is', val);
-      this.isPub = val;
-      console.log(this.isPub);
-      if(this.isPub == '0'){
-        this.openMod(this.publicite);
-      }
-    })
     
+
   }
 
   ionViewDidLoad() {
@@ -97,23 +92,9 @@ export class AccueilPage {
       this.sousCat = [];
       console.log(categorie.nom);
       this.getSousCategoryByCategory(categorie);
-<<<<<<< HEAD
-    }
-    
 
-    
-    
-=======
-      /*this.navCtrl.push(ListeInstitutionPage, {
-        'data': categorie,
-        'titre': categorie.nom,
-        'titre1': this.titre1,
-        'souscat':this.sCat,
-        'scat': categorie.id,
-        'urlsc': this.urlsc
-      });*/
-    } 
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
+      
+    }
   }
 
   getSousCategoryByCategory(categorie){
@@ -123,19 +104,18 @@ export class AccueilPage {
     });
 
     loader.present().then(() => {
-     
+
         this.eventService.getSousCategoryByCategory(categorie.idCategory).subscribe(
         data => {
-            this.sCat = data.sous_category; 
+            this.sCat = data.sous_category;
             this.scat1 = data.sous_category;
             this.urlsc = data.urls;
 
-            //this.sCat = data; 
+            //this.sCat = data;
             //this.scat1 = data;
             console.log(this.sCat);
-            console.log(this.scat1); 
-            console.log(this.urlsc); 
-
+            console.log(this.scat1);
+            console.log(this.urlsc);
             if(this.sCat == null){
               this.titre1 ="Non Sous categorie";
             }
@@ -152,19 +132,31 @@ export class AccueilPage {
             if(this.sCat == null && categorie.nom == 'Restaurants'){
               this.titre1 ="Restaurants";
             }
-            this.navCtrl.push(ListeInstitutionPage, {
-              'data': categorie,
-              'titre': categorie.nom,
-              'titre1': this.titre1,
-              'souscat':this.sCat,
-              'urlsc': this.urlsc
-            });
-            console.log(this.titre1);
-            console.log(categorie.nom);
-            console.log(this.sCat);
-            console.log(this.urlsc);
-            console.log(categorie);
+
+
+            /*if(this.sCat == null && categorie.nom != 'Découverte'){
+              this.titre1 ="Non Sous categorie";
+              //this.callNextPage(categorie)
+            }
+            else if(this.sCat != null && categorie.nom =="Prestataires"){
+              this.titre1 ="Prestataires";
+              //this.callNextPage(categorie)
+            }
+            else if(this.sCat != null && categorie.nom != "Prestataires"){
+              this.titre1 ="Sous categorie";
+              //this.callNextPage(categorie)
+            }
+            else if(this.sCat == null && categorie.nom == 'Découverte'){
+              this.titre1 ="Découverte";
+              //this.callNextPage(categorie)
+            }
+
+            else if(this.sCat == null && categorie.nom == 'Restaurants'){
+              this.titre1 ="Restaurants";
+              //this.callNextPage(categorie)
+            }*/
             
+
           },
           err => {
               console.log(err);
@@ -172,10 +164,24 @@ export class AccueilPage {
               let titre ="Une erreur est survenue reessayer plus tard ";
               //this.presentPromptOk(titre);
           },
-          () => {loader.dismiss()}
+          () => {
+              this.navCtrl.push(ListeInstitutionPage, {
+                'data': categorie,
+                'titre': categorie.nom,
+                'titre1': this.titre1,
+                'souscat':this.sCat,
+                'urlsc': this.urlsc
+              });
+              console.log(this.titre1);
+              console.log(categorie.nom);
+              console.log(this.sCat);
+              console.log(this.urlsc);
+              console.log(categorie);
+              loader.dismiss();
+            }
       );
-      
-      
+
+
     })
 
     /*}
@@ -185,6 +191,21 @@ export class AccueilPage {
 
       }*/
 
+  }
+
+  callNextPage(categorie){
+    this.navCtrl.push(ListeInstitutionPage, {
+      'data': categorie,
+      'titre': categorie.nom,
+      'titre1': this.titre1,
+      'souscat':this.sCat,
+      'urlsc': this.urlsc
+    });
+    console.log(this.titre1);
+    console.log(categorie.nom);
+    console.log(this.sCat);
+    console.log(this.urlsc);
+    console.log(categorie);
   }
 
 
@@ -198,7 +219,7 @@ export class AccueilPage {
       this.eventService.getCategory()
       .subscribe(
         data => {
-            this.category = data.category; 
+            this.category = data.category;
             this.url = data.urls;
             console.log(this.category);
                 if(this.category == null){
@@ -209,13 +230,13 @@ export class AccueilPage {
                 }
                 else{
                   console.log(this.category);
-                  
+
                 }
             },
             err => {
                 loader.dismiss();
                 console.log(err);
-                
+
                 //this.message ="Une erreur est survenue reessayer plus tard ";
                 //this.value = true;
                 //let titre ="Une erreur est survenue reessayer plus tard ";
@@ -230,6 +251,46 @@ export class AccueilPage {
     })
   }
 
-  
+  getPublicite(){
+    //this.categories = this.eventService.getCategories();
+    
+      this.eventService.getPublicite()
+      .subscribe(
+        data => {
+            this.publicite = data.publicite;
+            this.urlll= data.urls;
+            console.log(this.publicite);
+                if(this.publicite == null){
+                  let titre ="Pas de publicite  a afficher";
+                  console.log(titre);
+                }
+                else{
+                  console.log(this.publicite);
+                  
+                }
+            },
+            err => {
+                
+                console.log(err);
+            },
+            ()=> {
+              this.storage.get('name').then((val) => {
+                console.log('Your name is', val);
+                this.isPub = val;
+                console.log(this.isPub);
+                if(this.isPub == '0'){
+                  if(this.publicite){
+                    let obj = {pub: this.publicite, url: this.urlll};
+                    this.openMod(obj);
+                  }
+                  
+                }
+              })
+            }
+      );
+    
+  }
+
+
 
 }

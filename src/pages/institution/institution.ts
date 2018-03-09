@@ -6,6 +6,18 @@ import { CallNumber } from '@ionic-native/call-number';
 import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
+import { Http,Response,Headers,RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
+import {StorageUtils} from '../../Utils/storage.utils';
+import { Observable } from 'rxjs';
+//import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
+
+
+declare var cordova: any;
+
 
 
 /**
@@ -39,8 +51,32 @@ export class InstitutionPage {
   messageMenu: any;
   valueMenu : any;
   data: any;
+  verifIdInstitution: any;
+  photo: any;
+  base64Image: any;
+  linkImage: any;
+  storageDirectory: string = '';
+  private headers = new Headers({'Content-Type': 'application/json',
+  'Authorization': StorageUtils.getToken()});
+  private options = new RequestOptions({headers: this.headers});
 
-  constructor(public platform: Platform, public connectivityService:ConnectvityServiceProvider, public navCtrl: NavController, public navParams: NavParams ,private alertCtrl: AlertController,private eventService:EventServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, private callNumber: CallNumber, private sqlite: SQLite, private toast: Toast) {
+  constructor(public platform: Platform, public connectivityService:ConnectvityServiceProvider, 
+    public navCtrl: NavController, public navParams: NavParams ,
+    private alertCtrl: AlertController,private eventService:EventServiceProvider, 
+    public loading: LoadingController,public viewCtrl: ViewController, 
+    private callNumber: CallNumber, private sqlite: SQLite, 
+    private toast: Toast, public http: Http,private transfer: FileTransfer, private file: File) {
+
+      if (this.platform.is('ios')) {
+        this.storageDirectory = cordova.file.documentsDirectory;
+      }
+      else if(this.platform.is('android')) {
+        this.storageDirectory = cordova.file.dataDirectory;
+      }
+      else {
+        // exit otherwise, but you could add further types here e.g. Windows
+        //return false;
+      }
   	this.inst ='description';
     
 
@@ -55,15 +91,176 @@ export class InstitutionPage {
       console.log(this.categroie);
       this.valuePhoto = false;
       this.valueAvis = false;
-       this.valueMenu = false;
+      this.valueMenu = false;
     }
 
-    this.data = { nomIns:this.institution.nomIns, photoIns:this.institution.photoIns, descriptionIns:this.institution.descriptionIns, adresseIns:this.institution.adresseIns, latitudeIns:this.institution.latitudeIns,longitudeIns: this.institution.longitudeIns,telephoneIns:this.institution.telephoneIns ,price:this.institution.price, idCategory:this.institution.idCategory.idCategory, idInterest:this.institution.interestIdInterest.idInterest };
+    
+
+    this.data = { nomIns:this.institution.nomIns, photoIns:this.url+'/'+this.institution.photoIns, 
+      descriptionIns:this.institution.descriptionIns, adresseIns:this.institution.adresseIns, 
+      latitudeIns:this.institution.latitudeIns,longitudeIns: this.institution.longitudeIns,
+      telephoneIns:this.institution.telephoneIns ,price:this.institution.price, 
+      idCategory:this.institution.idCategory.idCategory, 
+      idInterest:this.institution.interestIdInterest.idInterest };
+      console.log(this.url+"/"+this.institution.photoIns);
+      this.downloadImage(this.url+"/"+this.institution.photoIns);
+      //this.photo = this.getBase64Image(this.institution.photoIns);
+      //this.convertToDataURLviaCanvas(this.url+'/'+this.institution.photoIns, "image/jpeg")
+      /*this.convertToDataURLviaCanvas("assets/images/briochedore5.jpg", "image/jpeg")
+      .then(base64 => {
+        this.photo = 'data:image/jpg;base64,'+base64;
+        console.log(this.photo);
+      })*/
+      //this.download();
+      
+      /*console.log(this.photo);
+      this.linkImage = this.http.get(this.url+'/'+this.institution.photoIns, this.options);
+      this.getBase64ImageFromURL(this.url+'/'+this.institution.photoIns).subscribe(base64data => {
+        console.log(base64data);
+        this.base64Image = 'data:image/jpg;base64,' + base64data;
+      });
+      console.log(this.base64Image);
+    const toDataURL = url => fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': StorageUtils.getToken()
+      }})
+    .then(response => response.blob())
+    .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    }))
+  
+  
+  //toDataURL(this.url+"/"+this.institution.photoIns)
+  toDataURL("http://www.footmercato.net/images/a/neymar-a-livre-ses-verites-sur-sa-situation-au-psg_213987.jpg")
+    .then(dataUrl => {
+      console.log('RESULT:', dataUrl)
+    })*/
   }
 
   onRatingChange(score: number) {
     this.averageRating = score;
   }
+
+  download() {
+    alert("ppp");
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    const url = this.url+"/"+this.institution.photoIns;
+    fileTransfer.download(url, this.file.dataDirectory + this.institution.photoIns).then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+      this.base64Image = entry.toUrl();
+      alert('download complete: ' + entry.toURL());
+    }, (error) => {
+      // handle error
+      alert('download not complete: ' + error);
+    });
+  }
+
+  downloadImage(image) {
+    this.platform.ready().then(() => {
+
+      const fileTransfer: FileTransferObject = this.transfer.create();
+
+      //const imageLocation = `${cordova.file.applicationDirectory}www/assets/img/${image}`;
+      const imageLocation = this.url+"/"+this.institution.photoIns;
+
+      fileTransfer.download(imageLocation, this.storageDirectory + this.institution.photoIns).then((entry) => {
+
+        const alertSuccess = this.alertCtrl.create({
+          title: `Download Succeeded!`,
+          subTitle: `${image} was successfully downloaded to: ${entry.toURL()}`,
+          buttons: ['Ok']
+        });
+        
+        
+        this.getBase64ImageFromURL(`${entry.toURL()}`).subscribe(base64data => {
+          console.log(base64data);
+          this.base64Image = 'data:image/jpg;base64,' + base64data;
+          this.photo = `${entry.toURL()}`;
+        });
+
+        //alertSuccess.present();
+
+      }, (error) => {
+
+        const alertFailure = this.alertCtrl.create({
+          title: `Download Failed!`,
+          subTitle: `${image} was not successfully downloaded. Error code: ${error.code}  ${imageLocation}`,
+          buttons: ['Ok']
+        });
+
+        //alertFailure.present();
+
+      });
+
+    });
+  }
+
+  getBase64ImageFromURL(url) {
+    return Observable.create((observer) => {
+      let img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.src = url;
+      if (!img.complete) {
+        img.onload = () => {
+          observer.next(this.getBase64Image1(img));
+          observer.complete();
+        };
+        img.onerror = (err) => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image1(img));
+        observer.complete();
+      }
+    });
+  }
+
+  getBase64Image1(img: HTMLImageElement) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/jpg");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
+
+  
+
+  getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/jpg");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
+
+  convertToDataURLviaCanvas(url, outputFormat){
+    return new Promise((resolve, reject) => {
+    let img = new Image();
+    img.crossOrigin = 'cheikh';
+    img.onload = () => {
+      let canvas = <HTMLCanvasElement> document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'),
+        dataURL;
+      canvas.height = img.height;
+      canvas.width = img.width;
+      ctx.drawImage(img, 0, 0);
+      dataURL = canvas.toDataURL(outputFormat);
+      resolve(dataURL);
+      console.log(dataURL);
+      canvas = null;
+    };
+    img.src = url;
+  });
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InstitutionPage');
@@ -207,9 +404,16 @@ export class InstitutionPage {
       name: 'livindk.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
-      if(this.getCurrentData(this.institution.idInstitution)){
-        db.executeSql('INSERT INTO institution VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[this.institution.idInstitution,this.data.nomIns,this.data.photoIns,
-        this.data.descriptionIns,this.data.adresseIn,
+      this.getCurrentData(this.institution.idInstitution);
+      if(this.verifIdInstitution == 0){
+        console.log("Institution déja aoutée comme favoris ");
+        this.showToast("Institution déja aoutée comme favoris ");
+      }
+      else{
+        
+        db.executeSql('INSERT INTO institution VALUES(?,?,?,?,?,?,?,?,?,?,?)',[this.institution.idInstitution,
+          this.data.nomIns,this.photo,
+        this.data.descriptionIns,this.data.adresseIns,
         this.data.latitudeIns,this.data.longitudeIns,this.data.telephoneIns,
         this.data.price,this.data.idCategory,this.data.idInteret])
         .then(res => {
@@ -222,18 +426,15 @@ export class InstitutionPage {
           console.log(e);
           console.log("Ok non enregitre "+ e);
           this.showToast(e);
+          this.showToast("Erreur 4");
         });
-      }
-      else{
-        console.log("Institution déja aoutée comme favoris ");
-        this.showToast("Institution déja aoutée comme favoris ");
-      }
-      
+      } 
     }).catch(e => {
       console.log(e);
 
       console.log("Ok enregitre "+ e);
       this.showToast(e);
+      this.showToast("Erreur 5");
     });
   }
 
@@ -246,17 +447,23 @@ export class InstitutionPage {
         .then(res => {
           if(res.rows.length > 0) {
             this.data.idInstitution = res.rows.item(0).idInstitution;
-            return true;
+            this.verifIdInstitution = 0;
+            this.showToast(this.verifIdInstitution);
           }
-          return false;
+          else{
+            this.verifIdInstitution = 1;
+            this.showToast(this.verifIdInstitution);
+          };
         })
         .catch(e => {
           console.log(e);
           this.showToast(e);
+          this.showToast("Erreur 1");
         });
     }).catch(e => {
       console.log(e);
       this.showToast(e);
+      this.showToast("Erreur 2");
       
     });
   }

@@ -15,7 +15,7 @@
 
 <ion-content>
 	<div class="baniere-decouverte">
-		<img *ngIf="decouverte.image" src="{{url}}/{{decouverte.image}}" class="full-image" />
+		<img *ngIf="decouverte.image" src="http://{{url}}/{{decouverte.image}}" class="full-image" />
 		<img *ngIf="!decouverte.image" src="assets/images/decouverte1.jpg" class="full-image"/>
 	</div>
 	<div class="tagdecouverte">
@@ -27,11 +27,12 @@
 
 	    <ion-item style="padding-left: 0px;">
 		    <ion-avatar item-start>
-		      <img src="assets/images/profil.png">
+					<img *ngIf="!decouverte.idUser.photo" src="assets/images/profil.png">
+					<img *ngIf="decouverte.idUser.photo" src="http://{{url}}/{{decouverte.idUser.photo}}">
 		    </ion-avatar>
 		    <ion-label class="label-md">
 		    	<h2>{{decouverte.dateArticle}}</h2>
-		    	<p>{{decouverte.iduser}}</p>
+		    	<p>{{decouverte.idUser.photo}}</p>
 			</ion-label>
 		    
 		</ion-item>

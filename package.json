@@ -1,129 +1,126 @@
 {
-  "name": "LivInDakar",
-  "version": "0.0.1",
-  "author": "Qualshore",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
-  "dependencies": {
-    "@angular/common": "4.1.3",
-    "@angular/compiler": "4.1.3",
-    "@angular/compiler-cli": "4.1.3",
-    "@angular/core": "4.1.3",
-    "@angular/forms": "4.1.3",
-    "@angular/http": "4.1.3",
-    "@angular/platform-browser": "4.1.3",
-    "@angular/platform-browser-dynamic": "4.1.3",
-    "@ionic-native/background-geolocation": "^4.3.0",
-    "@ionic-native/calendar": "^4.3.3",
-    "@ionic-native/call-number": "^4.5.2",
-    "@ionic-native/camera": "^4.2.1",
-    "@ionic-native/core": "^4.2.0",
-    "@ionic-native/diagnostic": "^4.3.1",
-    "@ionic-native/facebook": "^4.3.1",
-    "@ionic-native/file-transfer": "^4.5.2",
-    "@ionic-native/geolocation": "^4.2.1",
-    "@ionic-native/google-maps": "^4.2.1",
-    "@ionic-native/google-plus": "^4.5.3",
-    "@ionic-native/network": "^4.2.1",
-    "@ionic-native/splash-screen": "^4.0.1",
-<<<<<<< HEAD
-    "@ionic-native/status-bar": "^4.3.1",
-    "@ionic-native/toast": "^4.5.3",
-    "@ionic/storage": "^2.0.1",
-    "call-number": "^1.0.1",
-=======
-    "@ionic-native/sqlite": "^4.5.3",
-    "@ionic-native/status-bar": "^4.3.1",
-    "@ionic-native/toast": "^4.5.3",
-    "@ionic/storage": "^2.1.3",
-    "call-number": "^1.0.1",
-    "cordova-android": "^6.3.0",
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
-    "cordova-ios": "^4.4.0",
-    "cordova-plugin-calendar": "^4.6.0",
-    "cordova-plugin-camera": "^2.4.1",
-    "cordova-plugin-compat": "^1.2.0",
-    "cordova-plugin-console": "^1.0.5",
-    "cordova-plugin-device": "^1.1.4",
-    "cordova-plugin-facebook4": "^1.7.4",
-    "cordova-plugin-file": "^5.0.0",
-    "cordova-plugin-file-transfer": "^1.7.0",
-    "cordova-plugin-geolocation": "^2.4.3",
-    "cordova-plugin-googleplus": "^5.2.1",
-    "cordova-plugin-mauron85-background-geolocation": "^2.2.5",
-    "cordova-plugin-network-information": "^1.3.3",
-    "cordova-plugin-splashscreen": "^4.0.3",
-    "cordova-plugin-statusbar": "^2.2.3",
-    "cordova-plugin-whitelist": "^1.3.1",
-    "cordova-plugin-x-toast": "^2.6.0",
-<<<<<<< HEAD
-    "cordova-sqlite-storage": "^2.1.4",
-    "cordova.plugins.diagnostic": "^3.6.8",
-    "firebase": "^4.5.0",
-    "ionic-angular": "3.6.0",
-=======
-    "cordova-sqlite-storage": "^2.2.0",
-    "cordova.plugins.diagnostic": "^3.6.8",
-    "firebase": "^4.5.0",
-    "ionic-angular": "3.6.0",
-    "ionic-cache": "^2.0.5",
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
-    "ionic-native": "^2.9.0",
-    "ionic-plugin-keyboard": "^2.2.1",
-    "ionicons": "3.0.0",
-    "mx.ferreyra.callnumber": "~0.0.2",
-    "rxjs": "5.4.0",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "2.1.4",
-    "typescript": "2.3.4"
-  },
-  "description": "An Ionic project",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-console": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-whitelist": {},
-      "ionic-plugin-keyboard": {},
-      "cordova-plugin-network-information": {},
-      "cordova-plugin-camera": {},
-      "cordova-plugin-mauron85-background-geolocation": {
-        "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
-        "CONTENT_AUTHORITY": "$PACKAGE_NAME"
-      },
-      "cordova.plugins.diagnostic": {},
-      "cordova-plugin-geolocation": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-facebook4": {
-        "APP_ID": "1967628513484972",
-        "APP_NAME": "livindakar"
-      },
-      "cordova-plugin-calendar": {},
-      "mx.ferreyra.callnumber": {},
-      "cordova-sqlite-storage": {},
-      "cordova-plugin-file-transfer": {},
-      "cordova-plugin-compat": {},
-      "cordova-plugin-x-toast": {},
-      "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.qualshore.livindakar"
-      }
+    "name": "LivInDakar",
+    "version": "0.0.1",
+    "author": "Qualshore",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "scripts": {
+        "clean": "ionic-app-scripts clean",
+        "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
+        "ionic:build": "ionic-app-scripts build",
+        "ionic:serve": "ionic-app-scripts serve"
     },
-    "platforms": [
-<<<<<<< HEAD
-=======
-      "android",
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
-      "ios"
-    ]
-  }
+    "dependencies": {
+        "@angular/common": "4.1.3",
+        "@angular/compiler": "4.1.3",
+        "@angular/compiler-cli": "4.1.3",
+        "@angular/core": "4.1.3",
+        "@angular/forms": "4.1.3",
+        "@angular/http": "4.1.3",
+        "@angular/platform-browser": "4.1.3",
+        "@angular/platform-browser-dynamic": "4.1.3",
+        "@ionic-native/background-geolocation": "^4.3.0",
+        "@ionic-native/calendar": "4.3.3",
+        "@ionic-native/call-number": "4.5.2",
+        "@ionic-native/camera": "4.2.1",
+        "@ionic-native/core": "4.2.0",
+        "@ionic-native/diagnostic": "4.3.1",
+        "@ionic-native/facebook": "4.3.1",
+        "@ionic-native/fcm": "4.5.3",
+        "@ionic-native/file": "4.5.3",
+        "@ionic-native/file-transfer": "4.5.2",
+        "@ionic-native/geolocation": "4.2.1",
+        "@ionic-native/google-maps": "4.2.1",
+        "@ionic-native/google-plus": "^4.5.3",
+        "@ionic-native/network": "4.2.1",
+        "@ionic-native/social-sharing": "4.5.3",
+        "@ionic-native/splash-screen": "4.0.1",
+        "@ionic-native/sqlite": "4.5.3",
+        "@ionic-native/status-bar": "4.3.1",
+        "@ionic-native/toast": "4.5.3",
+        "@ionic/storage": "2.1.3",
+        "call-number": "1.0.1",
+        "cordova-android": "^6.3.0",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-calendar": "4.6.0",
+        "cordova-plugin-camera": "2.4.1",
+        "cordova-plugin-compat": "^1.2.0",
+        "cordova-plugin-console": "1.0.5",
+        "cordova-plugin-device": "1.1.4",
+        "cordova-plugin-facebook4": "1.7.4",
+        "cordova-plugin-fcm": "^2.1.2",
+        "cordova-plugin-file": "5.0.0",
+        "cordova-plugin-file-transfer": "1.7.0",
+        "cordova-plugin-geolocation": "2.4.3",
+        "cordova-plugin-googleplus": "^5.2.1",
+        "cordova-plugin-mauron85-background-geolocation": "^2.3.2",
+        "cordova-plugin-network-information": "1.3.3",
+        "cordova-plugin-splashscreen": "4.0.3",
+        "cordova-plugin-statusbar": "2.2.3",
+        "cordova-plugin-whitelist": "1.3.1",
+        "cordova-plugin-x-socialsharing": "5.2.1",
+        "cordova-plugin-x-toast": "2.6.0",
+        "cordova-sqlite-storage": "2.2.0",
+        "cordova.plugins.diagnostic": "3.6.8",
+        "es6-promise-plugin": "4.1.0",
+        "firebase": "4.5.0",
+        "ionic-angular": "3.6.0",
+        "ionic-cache": "2.0.5",
+        "ionic-native": "2.9.0",
+        "ionic-plugin-keyboard": "2.2.1",
+        "ionicons": "3.0.0",
+        "mx.ferreyra.callnumber": "0.0.2",
+        "rxjs": "5.4.0",
+        "sw-toolbox": "3.6.0",
+        "zone.js": "0.8.12"
+    },
+    "devDependencies": {
+        "@ionic/app-scripts": "2.1.4",
+        "typescript": "2.3.4"
+    },
+    "description": "An Ionic project",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-console": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-whitelist": {},
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-camera": {},
+            "cordova.plugins.diagnostic": {},
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "1967628513484972",
+                "APP_NAME": "livindakar"
+            },
+            "cordova-plugin-calendar": {},
+            "mx.ferreyra.callnumber": {},
+            "cordova-sqlite-storage": {},
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-x-toast": {},
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-mauron85-background-geolocation": {
+                "ICON": "@mipmap/icon",
+                "SMALL_ICON": "@mipmap/icon",
+                "ACCOUNT_NAME": "@string/app_name",
+                "ACCOUNT_LABEL": "@string/app_name",
+                "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+                "CONTENT_AUTHORITY": "$PACKAGE_NAME",
+                "ALWAYS_USAGE_DESCRIPTION": "This app always requires location tracking"
+            },
+            "cordova-plugin-fcm": {},
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.358136605028-8rp6tq0s08gfarsub579v3cd6m2l5ngv"
+            },
+            "cordova-plugin-compat": {}
+        },
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    }
 }

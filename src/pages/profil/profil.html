@@ -23,10 +23,10 @@
         <img src="assets/images/bgsearch.jpeg" style="height: 170px; width: 100%"/>
         <div class="image-user">
          
-        <ion-avatar item-start (click)="getPicture()">
+        <ion-avatar item-start >
           <ion-icon name="camera" class="icone-photo"></ion-icon>
             <div *ngIf="utilisateur">
-              <!--div *ngIf="!vpci"-->
+              <!--div *ngIf="!vpci"  (click)="getPicture()"-->
                   <img *ngIf="!utilisateur.photo" src="assets/images/profil.png"  class="full-image"/>
                   
                   <img *ngIf="utilisateur.photo" src="{{url}}/{{utilisateur.photo}}"  class="full-image"/>
@@ -143,9 +143,9 @@
             <ion-input formControlName="email" type="text" class="champannonce" disabled="true"  placeholder="Email"></ion-input>
           </ion-item>
 
-          <ion-item>
+          <!--ion-item>
             <ion-input formControlName="password" type="password" class="champannonce" placeholder="Mot de passe" ></ion-input>
-          </ion-item>
+          </ion-item-->
 
           <button class="btnsuivant"  >Mettre a jour</button>
 

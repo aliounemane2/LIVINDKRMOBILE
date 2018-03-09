@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:358136605028:android:eb4d17d0e64c7e93",
+        "mobilesdk_app_id": "1:358136605028:android:d052ca49b26283ed",
         "android_client_info": {
-          "package_name": "com.qualshore.livindakar"
+          "package_name": "com.qualshore.livindakarApp"
         }
       },
       "oauth_client": [

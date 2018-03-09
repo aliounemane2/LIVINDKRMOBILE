@@ -65,10 +65,10 @@ export class ProfilPage {
    	this.myFormulaire = formBuilder.group({
       nom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       email: [''],
-      prenom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'),Validators.required])],
-      username: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9]*'), Validators.required])],
-      telephone: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
-      password: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
+      prenom: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+      username: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      telephone: ['', Validators.compose([Validators.maxLength(30), Validators.required])]
+      //password: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
       //indicatif: ['']
     });
     this.valuePhoto = false;
@@ -104,7 +104,7 @@ export class ProfilPage {
     });
 
     loader.present().then(() => {
-      this.userService.getInfoUser().subscribe(
+      this.eventService.getInfoUser().subscribe(
         data => {
             this.utilisateur = data.user; 
             this.url = data.urls;
@@ -211,6 +211,7 @@ export class ProfilPage {
 		      data => {
 		         if(data.status == 0){
               //this.showToast("Informations modifiées avec succés");
+              console.log("Informations modifiées avec succés");
              }
              else{
               console.log(data);

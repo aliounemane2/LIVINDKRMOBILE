@@ -141,9 +141,12 @@ export class EvenementPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.insMois = this.mois.filter((item) => {
-        return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      if(this.mois){
+        this.insMois = this.mois.filter((item) => {
+          return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
+      
     }
     console.log(this.insMois);
 
@@ -175,9 +178,11 @@ export class EvenementPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.insJour = this.jour.filter((item) => {
-        return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      if(this.jour){
+        this.insJour = this.jour.filter((item) => {
+          return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
     }
 
     if(this.insJour == 0 ){
@@ -206,9 +211,12 @@ export class EvenementPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.insSemaine = this.semaine.filter((item) => {
-        return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      if(this.semaine){
+        this.insSemaine = this.semaine.filter((item) => {
+          return (item.idInterest.nomInterest.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
+      
     }
 
     if(this.insSemaine == 0 ){

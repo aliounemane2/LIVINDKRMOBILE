@@ -54,11 +54,11 @@ export class UpdatePasswordPage {
     }
     else{ 
       //this.connectivityService.checkNetwork();
-      console.log(this.email);
+      //console.log(this.email);
       var json = this.myFormulaire.value;
       if(json.pwdnew != json.pwdconf){
       	console.log("Les mots de passe ne sont pas identiques");
-      //this.showToast("Les mots de passe ne sont pas identiques")
+      this.showToast("Les mots de passe ne sont pas identiques")
       }
       else{
       	let loader = this.loading.create({
@@ -72,19 +72,19 @@ export class UpdatePasswordPage {
 	        	console.log(data);
 		        if(data.corps == 1){
 		          this.logout();
-              //this.showToast("Modification effectuée avec succés Veuillez vous reconnecter svp") 
+              this.showToast("Modification effectuée avec succés Veuillez vous reconnecter svp") 
 		        }
 		        else{
 		        	var subTitle ="Creation de compte";
 		        	console.log(data);
 	          		//this.presentToast(data.message);
-	          		//this.showToast("Le mot de passe est incorrect");
+	          		this.showToast("Le mot de passe est incorrect");
 		        }
 	        },
 	        err => {
 	            console.log(err);
 	          loader.dismiss();
-	          //this.showToast("Une erreur est survenue réessayer plus tard")
+	          this.showToast("Une erreur est survenue réessayer plus tard")
 	        },
 	        () => {loader.dismiss()}
 
@@ -126,6 +126,14 @@ export class UpdatePasswordPage {
       	);
     })
 
+	}
+	
+	showToast(titre){
+    this.toast.show(titre, '5000', 'center').subscribe(
+      toast => {
+        //console.log(toast);
+      }
+    );
   }
 
 

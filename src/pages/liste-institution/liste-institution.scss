@@ -89,11 +89,51 @@ page-liste-institution {
 	    overflow: hidden;
 	    line-height: 40px;
 	}
+
+	.evtexteresto{
+		float: left;
+		width: 70%;
+		height: 40px;
+		text-align: center;
+		*padding-top: 8px;
+		text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+		line-height: 40px;
+		font-family: 'LinotypeZapfino One', arial; 
+		font-size: 30px;
+	}
+
+	
+
+	.favoris{
+		width: 10%;
+		float: left;
+		height: 40px;
+		color: #ffffff;
+		background-color: #c81437;
+		position: absolute;
+    	top: 130px;
+    	border-radius: 50%;
+    	left: 0;
+    	
+	}
+
+	.favoristexte{
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 20px;
+	}
+
+	
 	.evimage{
 		float: left;
 		width: 20%;
 		height: 40px;
-		padding-left: 4%;
+		*padding-left: 4%;
+		text-align: right;
+    	padding-right: 10px;
 	}
 
 	.baniere-acc{
@@ -101,7 +141,6 @@ page-liste-institution {
 		height: 170px;
 		position: relative;
 		*margin-bottom: 2%;
-		*background-color: #cde87u;
 		border-bottom: 2px solid #ffffff;
 	}
 
@@ -164,6 +203,13 @@ page-liste-institution {
 	    margin-right: 2%;
 	}
 
+	.image-slide-event{
+		width: 100%;
+	    height: 170px;
+	    
+	
+	}
+
 	.ineteret1{
 		float:left; 
 		padding-bottom: 3%;
@@ -192,16 +238,17 @@ page-liste-institution {
      	*box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 	}
 	.bloc-cat{
-		margin-top: 15px;
+		*margin-top: 15px;
+		margin-left: 2%;
+		margin-right: 2%;
 	}
 	.bg-prestataires{
 		background-color: #ffffff;
-	    margin-top: 1%;
-	    margin-bottom: 3%;
-	    margin-left: 2%;
-	    margin-right: 2%;
-	    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-	    box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.3);
+		margin-top: -4px;
+	    *margin-top: 1%;
+	    *margin-bottom: 3%;
+	    *-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+	    *box-shadow: 0 3px 8px 2px rgba(0, 0, 0, 0.3);
 	}
 
 	.vedette{
@@ -218,7 +265,7 @@ page-liste-institution {
 		margin-top: 5%;
 	}
 	.recherche{
-		margin-top:5%;
+		*margin-top:5%;
 	}
 
 	.range-md.range-has-pin {
@@ -227,13 +274,13 @@ page-liste-institution {
 
 	.taglecture{
 		float: left;
-		width: 20%;
+		width: 40%;
 		
 	}
 
 	.tagg{
 		float: left;
-		width: 80%;
+		width: 60%;
 		color: blue;
 		text-align: left;
 	}
@@ -283,6 +330,53 @@ page-liste-institution {
 	    border-radius: 50%;
 	    opacity: 0.8;
 	    left: 40%;
+	}
+
+	.block_main_news_1 article {
+	    margin-top: 15px;
+	    padding-bottom: 16px;
+	    overflow: hidden;
+	    border-bottom: 1px solid #e6eaed;
+	}
+
+	.block_main_news_1 {
+	    padding-top: 7px;
+	    overflow: hidden;
+	    *margin-left: 2%;
+    	*margin-right: 2%;
+	}
+
+	.block_main_news_1 article .pic {
+	    width: 30%;
+	    margin-right: 13px;
+	    padding-top: 2px;
+	    float: left;
+	}
+
+	.block_main_news_1 article .content {
+	    overflow: hidden;
+	}
+
+	.block_main_news_1 article .content h4 {
+	    padding-bottom: 9px;
+	    font-size: 15px;
+	    color: #1a1e22;
+	    font-weight: bold;
+	    line-height: 17px;
+	    position: relative;
+	    top: -15px;
+	}
+
+	.block_main_news_1 article .content .date {
+	    font-size: 11px;
+	    color: #868686;
+	    position: relative;
+    	top: -15px;
+	}
+
+	.inner {
+	    width: 90%;
+	    margin: 0px auto;
 	}
 
 }

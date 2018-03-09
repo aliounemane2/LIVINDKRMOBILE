@@ -211,7 +211,7 @@
 		      			{{pr.price}}
 		      		</div>
 		      	</div>
-		      	<div class="bgsight" *ngIf="valrech == '0'"> 
+		      	<!--div class="bgsight" *ngIf="valrech == '0'"> 
 		      		<div *ngFor="let evenement of institution" class="bg-texte">
 	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
 	     				<div class="descsight">{{evenement.descriptionIns}}</div>
@@ -223,10 +223,58 @@
 	     				<div class="titre-sight" (click) = "goToDetailsSight(evenement)">{{evenement.nomIns}}</div>
 	     				<div class="descsight">{{evenement.descriptionIns}}</div>
 	     			</div>
-		      	</div>	
+		      	</div-->
+
+		      	<div class="inner">
+								<h1 [hidden]="vall" style="color:#ac0203;
+								font-size: 16px;
+								 text-align:center;
+								 margin-top: 25%;
+								 padding-left: 5%;
+							 padding-right: 5%;">
+								 {{message1}}
+						 </h1>
+		      		<div *ngIf="valrech == '0'"  class="block_main_news_1">
+			      		<article *ngFor="let evenement of institution">
+			      			<div (click) = "goToDetailsSight(evenement)">
+			      				<div class="pic">
+				      				<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+						        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+				      			</div>
+				      			<div class="content">
+				      				<h4>{{ evenement.nomIns }}</h4>
+				      				<p class="date">{{evenement.adresseIns}}</p>
+				      			</div>
+			      			</div>
+			      			
+			      		</article>
+			      	</div>
+
+			    </div>
+
+		      	
+
+			    <div class="inner">
+			    	<div *ngIf="valrech == '1'"  class="block_main_news_1">
+			      		<article *ngFor="let evenement of insPrice">
+			      			<div (click) = "goToDetailsSight(evenement)">
+				      			<div class="pic">
+				      				<img *ngIf ="evenement.photoIns"  src="{{url}}/{{evenement.photoIns}}" class="full-image" />
+						        	<img *ngIf ="!evenement.photoIns" src="assets/images/978.jpg" class="full-image" />
+				      			</div>
+				      			<div class="content">
+				      				<h4>{{ evenement.nomIns }}</h4>
+				      				<p class="date">{{evenement.adresseIns}}</p>
+				      			</div>
+			      			</div>
+			      		</article>
+		      		</div>
+			    </div>
+		      	
+		      		
      		</div>
 
-     		<div *ngIf="titre != 'Sight-Seeing'">
+     		<div *ngIf="titre != 'Sight-Seeing'" >
 
      			<div class="content-menu-price" *ngIf="val1 == '1'">
 		      		<div *ngFor="let pr of price1" class="menu-price" (click)="flitreByprice(institution,pr.price)">

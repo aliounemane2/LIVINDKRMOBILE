@@ -17,12 +17,16 @@ import { AccueilPage } from '../accueil/accueil';
 export class PublicitePage {
 	pub1: any;
 	pub2: any;
-	pub3: any;
+  pub3: any;
+  publicite: any = this.navParams.get('pub');
+  url: any = this.navParams.get('url');
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
   	this.pub1 = 0;
   	this.pub2 = 0;
-  	this.pub3 = 0;
+    this.pub3 = 0;
+    console.log(this.publicite);
+    console.log(this.url);
     /*setTimeout(() => { // <=== 
       //this.navCtrl.setRoot(AccueilPage);
       this.viewCtrl.dismiss();

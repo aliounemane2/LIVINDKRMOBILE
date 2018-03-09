@@ -32,14 +32,14 @@ export class InscriptionPage {
 
   constructor(public connectivityService:ConnectvityServiceProvider, private toast : Toast, public platform: Platform, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private alertCtrl: AlertController, public loading: LoadingController, public userService:UserServiceProvider,public viewCtrl: ViewController, private toastCtrl: ToastController, private transfer: FileTransfer) {
   	this.myFormulaire = formBuilder.group({
-      prenom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      nom: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      prenom: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      nom: ['', Validators.compose([Validators.maxLength(30),  Validators.required])],
       email: ['',Validators.compose([Validators.maxLength(30), Validators.required])],
       telephone: ['', Validators.compose([Validators.maxLength(15), Validators.pattern('[0-9]*'), Validators.required]
       )],
       username: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
-      motpasse: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
-      confirmmotpasse: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
+      motpasse: ['', Validators.compose([Validators.maxLength(30),  Validators.required])],
+      confirmmotpasse: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       residant: [''],
       indicatif: [''],
       sexe: [''],
@@ -104,9 +104,9 @@ export class InscriptionPage {
     if(!this.myFormulaire.valid){
       console.log("Remplissez tous les champs!");
       let message = "Remplissez tous les champs!";
-      //this.showToast("Remplissez tous les champs!");
-      this.presentToast(message);
-      this.showToast(message);
+      this.showToast("Remplissez tous les champs!");
+      //this.presentToast(message);
+      //this.showToast(message);
     }
     else{
 
@@ -119,7 +119,7 @@ export class InscriptionPage {
           var message ="Les mots de passes ne sont pas identiques";
           var subTitle ="Mot de passe";
           this.showToast(message);
-          this.presentToast(message);
+          //this.presentToast(message);
           console.log("Les mots de passes ne sont pas identiques");
         }
         else{
@@ -154,8 +154,8 @@ export class InscriptionPage {
                   loader.dismiss();
                   console.log(data);
                   var subTitle ="Creation de compte";
-                  this.presentToast(data.corps); 
-                  //this.showToast(data.corps);
+                  //this.presentToast(data.corps); 
+                  this.showToast(data.corps);
                 }
               },
               err => {
@@ -170,7 +170,7 @@ export class InscriptionPage {
       }
       else{
         console.log('Email non valide');
-        this.presentToast("Email non valide");
+        //this.presentToast("Email non valide");
         this.showToast("Email non valide");
       }
       

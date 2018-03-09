@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title >{{institution.nomIns}}</ion-title>
+	<ion-title >{{institution.nomIns}}</ion-title>
+	<ion-buttons end>
+		<button (click) ="saveData()" style="background-color: #000000; font-size: 18px;">
+			<ion-icon name="star" style="color: #ffffff;"></ion-icon>
+		</button>
+	</ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -51,9 +56,9 @@
 					<div *ngIf="categroie != 'Restaurants'">{{institution.nomIns}}</div>
 					<div style="clear:both;">
 						<rating style="margin-left: 50%; font-size: 16px; float: right; margin-right: 5%;" score="{{moyenne}}" max="5" ></rating>
-						<div style=" font-size: 16px; float: left; margin-left: 5%; color: #ffa500;">
+						<!--div style=" font-size: 16px; float: left; margin-left: 5%; color: #ffa500;">
 							<ion-icon name="star" (click) ="saveData()"></ion-icon>
-						</div>
+						</div-->
 					</div>
 
 					
@@ -153,10 +158,11 @@
 			        margin-top:10%;
 			        text-align:center">
 			        {{messagephoto}}
-			        </h1>
+					</h1>
+					
 					<ion-slides  pager="true">
 						<ion-slide *ngFor="let vign of vignette" >
-							<img *ngIf ="vign.cheminVignette" src="{{vign.cheminVignette}}" class="full-image" />
+							<img *ngIf =" vign.cheminVignette" src="{{vign.cheminVignette}}" class="full-image" />
 							<img *ngIf ="!vign.cheminVignette" src="assets/images/978.jpg" class="full-image" />
 						</ion-slide >
 					</ion-slides >

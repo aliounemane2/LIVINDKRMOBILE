@@ -1,0 +1,176 @@
+<!--
+  Generated template for the InstitutionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+    <ion-navbar>
+    <ion-title >{{institution.nomIns}}</ion-title>
+    <!--ion-buttons end>
+      <button (click) ="saveData()" style="background-color: #000000; font-size: 18px;">
+        <ion-icon name="star" style="color: #ffffff;"></ion-icon>
+      </button>
+    </ion-buttons-->
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content style="background-color:#ededed;">
+  
+    <div class="body-institution" >
+        <div class="baniere-institution">
+          <!--div class="note-ins"  (click) ="saveData()">Note de l'emplacement<br/><br/>
+            <rating style="margin-left: 50%;" score="{{institution.note}}" max="5" ></rating>
+          </div-->
+          <img *ngIf ="institution.photoIns" src="{{institution.photoIns}}" class="full-image" />
+          <img *ngIf ="!institution.photoIns" src="assets/images/978.jpg" class="full-image" />
+        </div>
+  
+      <ion-segment [(ngModel)]="inst" style="background-color:#000000;">
+          <ion-segment-button value="description" style="color:#ffffff; background-color:#000000;">
+            Description
+          </ion-segment-button>
+  
+          <ion-segment-button value="avis" style="color: #ffffff; background-color: #000000;">
+            Avis
+          </ion-segment-button>
+  
+          <ion-segment-button value="photo" style="color: #ffffff; background-color: #000000;">
+            Photo
+          </ion-segment-button>
+  
+          <ion-segment-button value="lieu" style="color: #ffffff; background-color: #000000;">
+            Lieu
+          </ion-segment-button>
+  
+      </ion-segment>
+  
+      <div [ngSwitch]="inst" >
+        <div *ngSwitchCase="'description'" >
+          <div class="titre-ins">
+            <div *ngIf="institution.idCategory == '2'" class="name-resto">
+              {{institution.nomIns}}
+            </div>
+            <div *ngIf="institution.idCategory != '2'">{{institution.nomIns}}</div>
+            <div style="clear:both;">
+              <rating style="margin-left: 50%; font-size: 16px; float: right; margin-right: 5%;" score="{{moyenne}}" max="5" ></rating>
+              <!--div style=" font-size: 16px; float: left; margin-left: 5%; color: #ffa500;">
+                <ion-icon name="star" (click) ="saveData()"></ion-icon>
+              </div-->
+            </div>
+  
+            
+            
+          </div>
+          <div class="texte-institution">
+            {{institution.descriptionIns}}
+          </div>
+  
+          <div class="texte-institution" >
+            <div *ngIf="institution.idCategory == '2'" (click)="callNumeroTelephone(institution.telephone)">
+              Telephone: {{institution.telephoneIns}}
+            </div>
+            horaires: lun - sam : 9h - 23h   / dim : 10h - 22h
+          </div>
+  
+          <div class="image-insti" *ngIf="institution.idCategory == '2'">
+            <div class="ins-img"><img src="assets/images/1.jpg" class="full-image" /></div>
+            <div class="ins-img"><img src="assets/images/2.jpg" class="full-image" /></div>
+            <div class="ins-img"><img src="assets/images/3.jpg" class="full-image" /></div>
+            <div class="ins-img"><img src="assets/images/4.jpg" class="full-image" /></div>
+          </div>
+  
+          <div class="menu-insti" *ngIf="institution.idCategory == '2'">
+            <h1 [hidden]="!valueMenu" style="color:#ac0203;
+                margin-top:0;
+                text-align:center">
+                {{messageMenu}}
+                </h1>
+            <div class="titre-menu" [hidden]="valueMenu">Menu du restaurant</div>
+            <!--div *ngFor="let menu of menu">
+              <div class="sous-titre-menu">{{menu.idMenu.nomMenu}}.......</div>
+              <span style="color:#c81437; float: right;margin-top: 3%;">{{menu.prixMenu}} FCFA</span><br/>
+            </div-->
+  
+  
+            
+  
+            <div class="barre-resto" ></div>
+  
+            <div class="rv-resto" *ngIf="institution.idCategory == '2'">
+              Les rendez vous de la terasse<br/><br/>
+              - Le buffet affaires tous le midis (14500 F) <br/><br/>
+              - Le Mardi soir 'Les soirées gourmandes' (12500 F)  <br/><br/>
+              - Le grand buffet du dimanche (32500 F)  <br/>
+            </div>
+          </div>
+  
+  
+        </div>
+  
+        <div *ngSwitchCase="'avis'">
+          <div class="texte-instituti">
+            <!--h1 [hidden]="!valueAvis" style="color:#ac0203;
+                margin-top:10%;
+                text-align:center">
+                {{messageAvis}}
+                </h1>
+            <div >
+              <div *ngFor="let avis of avis" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;">
+                {{avis.idUser.pseudo}}<br/>
+                <rating  score="{{avis.note}}" max="5"></rating><br/>
+                {{avis.avis}}
+              </div>
+  
+            </div-->
+          </div>
+          
+        </div>
+  
+        <div *ngSwitchCase="'photo'">
+          
+          
+  
+          <div class="texte-institution">
+            <!--h1 [hidden]="!valuePhoto" style="color:#ac0203;
+                margin-top:10%;
+                text-align:center">
+                {{messagephoto}}
+            </h1>
+            
+            <img src="{{base64Image}}" class="full-image" />
+            <ion-slides  pager="true">
+              <ion-slide *ngFor="let vign of vignette" >
+                <img *ngIf =" vign.cheminVignette" src="{{vign.cheminVignette}}" class="full-image" />
+                <img *ngIf ="!vign.cheminVignette" src="assets/images/978.jpg" class="full-image" />
+              </ion-slide >
+            </ion-slides -->
+            
+          </div>
+        </div>
+  
+        <div *ngSwitchCase="'lieu'">
+          
+          <div class="texte-instituti">
+            {{institution.adresseIns}}
+            <div class="route" (click)="goToCarteMap(institution)">
+              <ion-icon name="pin"></ion-icon>&nbsp; &nbsp; Comment m'y rendre
+            </div>
+          </div>
+  
+  
+        </div>
+    </div>
+    </div>
+  </ion-content>
+  
+  <!--ion-footer class="bg-footer" >
+      <div class="r-sociaux"> <img src="assets/images/facebook1.png" class="full-image" /></div>
+      <div class="r-sociaux"> <img src="assets/images/twitter1.png" class="full-image" /></div>
+      <div class="r-sociaux"> <img src="assets/images/youtube1.png" class="full-image" /></div>
+      <div class="r-sociaux"> <img src="assets/images/instagram1.png" class="full-image" /></div>
+      <span class="powered">Liv'in Dakar by Qualshore</span>
+    
+  </ion-footer-->

@@ -45,6 +45,7 @@ import { DetailsSightPage } from '../pages/details-sight/details-sight';
 import { ForgetPasswordPage } from '../pages/forget-password/forget-password';
 import { UpdatePasswordPage } from '../pages/update-password/update-password';
 import { FavorisPage } from '../pages/favoris/favoris';
+import { DetailsFavorisPage } from '../pages/details-favoris/details-favoris';
 
 //import {OrderByPipe} from "../pages/evenement/evenement";
 import {OrderByPipe} from "./orderby.pipe";
@@ -54,6 +55,10 @@ import { Toast } from '@ionic-native/toast';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { CacheModule } from "ionic-cache";
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { File } from '@ionic-native/file';
+import { FCM } from '@ionic-native/fcm';
+
 
 @NgModule({
   declarations: [
@@ -82,7 +87,8 @@ import { CacheModule } from "ionic-cache";
     DetailsSightPage,
     ForgetPasswordPage,
     UpdatePasswordPage,
-    FavorisPage
+    FavorisPage,
+    DetailsFavorisPage
   ],
   imports: [
     BrowserModule,
@@ -121,7 +127,8 @@ import { CacheModule } from "ionic-cache";
     DetailsSightPage,
     ForgetPasswordPage,
     UpdatePasswordPage,
-    FavorisPage
+    FavorisPage,
+    DetailsFavorisPage
   ],
   providers: [
     StatusBar,
@@ -144,7 +151,10 @@ import { CacheModule } from "ionic-cache";
     FileTransfer,
     Toast,
     GooglePlus,
-    SQLite
+    SQLite,
+    SocialSharing,
+    File,
+    FCM
   ]
 })
 export class AppModule {}

@@ -4,6 +4,7 @@ import { CarteMapPage } from '../carte-map/carte-map';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { Calendar } from '@ionic-native/calendar';
 import { ConnectvityServiceProvider } from '../../providers/connectvity-service/connectvity-service';
+import { Toast } from '@ionic-native/toast';
 
 
 declare var plugins;
@@ -21,24 +22,24 @@ declare var plugins;
   templateUrl: 'details-event.html',
 })
 export class DetailsEventPage {
-	eventdetails : any;
-	evenement: any;
+        eventdetails : any;
+        evenement: any;
   averageRating: any;
   vignette: any;
   photos: any;
   url: any;
 
-  constructor(public connectivityService:ConnectvityServiceProvider,public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider, public loading: LoadingController, public platform: Platform,private calendar: Calendar, private alertCtrl: AlertController) {
-  	this.eventdetails ='description';
-  	if(navParams.get("evenement") !== "undefined")
-  	{
+  constructor(public connectivityService:ConnectvityServiceProvider,public navCtrl: NavController, public navParams: NavParams, private eventService:EventServiceProvider, public loading: LoadingController, public platform: Platform,private calendar: Calendar, private alertCtrl: AlertController, private toast: Toast) {
+        this.eventdetails ='description';
+        if(navParams.get("evenement") !== "undefined")
+        {
 
-  	  this.evenement = navParams.get("evenement");
-      this.url = navParams.get("url");
-      this.averageRating = this.evenement.note;
-      console.log(this.evenement);
-      console.log(this.evenement.note);
-  	}
+          this.evenement = navParams.get("evenement");
+          this.url = navParams.get("url");
+          this.averageRating = this.evenement.note;
+          console.log(this.evenement);
+          console.log(this.evenement.note);
+        }
   }
 
   onRatingChange(score: number) {
@@ -78,46 +79,22 @@ export class DetailsEventPage {
   addEvent(evenement){
     //var success = function(message) { alert("Success: " + JSON.stringify(message)); };
     //var error = function(message) { alert("Error: " + message); };
-<<<<<<< HEAD
-    var endDate = this.incrementDate(evenement.IdEvent.dateEvent, 1)
-    //alert(evenement.nom+" _ "+endDate);
-
-    this.calendar.createEvent(evenement.IdEvent.nomEvent,evenement.IdEvent.idPlace.adressePlace, evenement.IdEvent.nomEvent, evenement.IdEvent.dateEvent,endDate).then(
-=======
     var endDate = this.incrementDate(evenement.idEvent.dateEvent, 1)
+    var startDate = this.incrementDate(evenement.idEvent.dateEvent, 0)
     //alert(evenement.nom+" _ "+endDate);
 
-    this.calendar.createEvent(evenement.idEvent.nomEvent, evenement.idEvent.idPlace.adressePlace, evenement.idEvent.nomEvent, evenement.idEvent.dateEvent, endDate).then(
->>>>>>> 41d8e9b61ca5a5632bc61eb8c767a88c45cb0f9d
-      (msg) => { 
+    console.log(evenement.idEvent.nomEvent+" "+evenement.idEvent.idPlace.adressePlace+" "+evenement.idEvent.nomEvent+" "+startDate+" "+endDate);
+
+    this.calendar.createEvent(evenement.idEvent.nomEvent, evenement.idEvent.idPlace.adressePlace, evenement.idEvent.nomEvent, startDate, endDate).then(
+      (msg) => {
         let titre ="Evénement ajouté avec succés dans le calendrier";
-        this.presentPromptOk(titre);
+        this.showToast(titre);
         console.log(msg); },
-      (err) => { 
+      (err) => {
         let titre ="Une erreur est survenue reessayer plus tard ";
-        this.presentPromptOk(titre);
+        this.showToast(titre);
         console.log(err); }
     );
-
-    /*window['plugins'].calendar.createEvent(evenement.nom,evenement.adresse,evenement.date,endDate,success,error);
-
-    this.calendar.createEvent(evenement.nom,evenement.adresse,evenement.date,endDate,success,error).then(() => {
-      console.log('Event Created!');
-      let titre ="Evénement ajouté avec succés dans le calendrier";
-      this.presentPromptOk(titre);
-    }).catch((err) => {
-      console.log('Oops, something went wrong:', err);
-      alert(err);
-      let titre ="Une erreur est survenue reessayer plus tard ";
-      this.presentPromptOk(titre);
-    });*/
-
-
-    //return this.calendar.createEvent(evenement.nom,evenement.adresse,evenement.date,endDate,success,error);
-    
-    
-    
-
   }
 
   scheduleEvents(evenement){
@@ -142,7 +119,7 @@ export class DetailsEventPage {
     return tmpDate;
   };
 
-  
+
 
   getPhotoByEvent(event){
     let loader = this.loading.create({
@@ -152,7 +129,7 @@ export class DetailsEventPage {
     loader.present().then(() => {
       this.eventService.getPhotoByEvent(event.idEvent.idEvent).subscribe(
         data => {
-            this.photos = data.events_photos; 
+            this.photos = data.events_photos;
             console.log(this.photos);
                 if(!this.photos){
                   let titre ="Pas de avis  a afficher";
@@ -160,9 +137,9 @@ export class DetailsEventPage {
 
                 }
                 else{
-          
+
                   console.log(this.photos);
-                  
+
                 }
             },
             err => {
@@ -174,6 +151,14 @@ export class DetailsEventPage {
             () => {loader.dismiss()}
       );
     })
+  }
+
+  showToast(message){
+   this.toast.show(message, '5000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
 }

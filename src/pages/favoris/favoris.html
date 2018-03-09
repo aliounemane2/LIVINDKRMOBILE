@@ -25,7 +25,13 @@
         </h1>
 		<div *ngFor="let night of institution"  >
 	     	
-		    <div class="image-event1">
+		    <div class="image-event1" (click) = "getCurrentData(night.idInstitution)">
+						<div class="favoris" (click)="deleteData(night.idInstitution)">
+								<div class="favoristexte">
+										<ion-icon name="star" style="color: #ffffff;" ></ion-icon>
+								</div>									
+						</div>
+
 	        	<div class="texte-event" >
 			        <div class="evtexte">
 			          {{night.nomIns}}
@@ -35,7 +41,7 @@
 			        </div>
 	      		</div>
 
-	        	<img *ngIf ="night.photoIns"  src="{{url}}/{{night.photoIns}}" class="full-image" />
+	        	<img *ngIf ="night.photoIns"  src="{{night.photoIns}}" class="full-image" />
 
 	        	<img *ngIf ="!night.photoIns" src="assets/images/978.jpg" class="full-image" />
 

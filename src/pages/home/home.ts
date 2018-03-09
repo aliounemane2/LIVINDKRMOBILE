@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageUtils } from '../../Utils/storage.utils';
 import {User} from '../../Classes/user';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { InscriptionPage } from '../inscription/inscription';
 import { ForgetPasswordPage } from '../forget-password/forget-password';
 import { AccueilPage } from '../accueil/accueil';
@@ -22,10 +23,15 @@ export class HomePage {
     users: any;
     token: any;
 
-  constructor(public connectivityService:ConnectvityServiceProvider,private toast : Toast, public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder ,private alertCtrl: AlertController,private userService:UserServiceProvider, public loading: LoadingController,public viewCtrl: ViewController, public storage: Storage, private toastCtrl: ToastController, private events: Events) {
+  constructor(public connectivityService:ConnectvityServiceProvider,
+    private toast : Toast, public navCtrl: NavController, public navParams: NavParams,
+    public formBuilder: FormBuilder ,private alertCtrl: AlertController,
+    private userService:UserServiceProvider, public loading: LoadingController,
+    public viewCtrl: ViewController, public storage: Storage, 
+    private toastCtrl: ToastController, private events: Events, private eventService:EventServiceProvider) {
   	this.myFormulaire = formBuilder.group({
-  		login: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])],
-      motpasse: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
+  		login: ['', Validators.compose([Validators.maxLength(30),  Validators.required])],
+      motpasse: ['', Validators.compose([Validators.maxLength(30), Validators.required])]
   	});
 
     this.token = StorageUtils.getToken();
@@ -84,7 +90,8 @@ export class HomePage {
     //this.connectivityService.checkNetwork();
     if(!this.myFormulaire.valid){
       console.log("remplissez tous les champs!");
-      this.presentToast("remplissez tous les champs!");
+      //this.presentToast("remplissez tous les champs!");
+      this.showToast("Remplissez tous les champs!")
     }
     else
     {
@@ -96,7 +103,7 @@ export class HomePage {
 
       loader.present().then(() => {
 
-        this.userService.dologin(json.login,json.motpasse).subscribe(
+        this.eventService.dologin(json.login,json.motpasse).subscribe(
             data => {
                 this.user = data; 
                 console.log(this.user);
@@ -106,23 +113,25 @@ export class HomePage {
                   let loginData:any = this.user.key;
                   let use:User = this.userService.readJwt(loginData);
                   console.log(use);
+                  let donnees={user: use, token: loginData};
                   use.username = json.login;
                   //console.log('Remember me: Store user and jwt to local storage');
                   StorageUtils.setAccount(use);
-                  StorageUtils.setToken(loginData);
-                  this.events.publish('user:signedIn', use);
+                  //StorageUtils.setToken(loginData);
+                  this.events.publish('user:signedIn', donnees);
                   //this.events.publish('user:home', user);
                   //this.events.publish('user:loadTabs', user);
                   this.navCtrl.setRoot(AccueilPage);
                 }else {
                   //this.showToast("Login ou mot de passe incorrect");
                   this.presentToast(this.user.corps); 
+                  this.showToast(this.user.corps)
                 }   
             },
             err => {
               loader.dismiss();
-              this.presentToast("Login ou mot de passe incorrect");
-              //this.showToast("Login ou mot de passe incorrect");
+              //this.presentToast("Login ou mot de passe incorrect");
+              this.showToast("Login ou mot de passe incorrect");
               console.log(err);
               
             },

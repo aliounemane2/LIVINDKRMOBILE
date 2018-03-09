@@ -62,6 +62,9 @@ export class LoginPage {
         firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
             console.log("Firebase success: " + JSON.stringify(success));
+            console.log("uid: " + JSON.stringify(success.uid));
+            console.log("uproviderData id: " + JSON.stringify(success.providerData.uid));
+            
             this.userProfile = success;
             StorageUtils.setToken(JSON.stringify(success.displayName));
             this.navCtrl.setRoot(AccueilPage);
@@ -78,7 +81,7 @@ export class LoginPage {
   }
 
   doGoogleLogin(){
-    let nav = this.navCtrl;
+     let nav = this.navCtrl;
     let env = this;
     let loading = this.loading.create({
       content: 'Please wait...'
@@ -86,7 +89,7 @@ export class LoginPage {
     loading.present();
     this.googlePlus.login({
       'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-      'webClientId': 'webClientId.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'webClientId': 'm358136605028-b99vbvdhij0418hicdrptbtet9annn0a.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
     })
     .then(function (user) {
@@ -101,7 +104,7 @@ export class LoginPage {
 
       }
   
-      /*env.nativeStorage.setItem('user', {
+     /*env.nativeStorage.setItem('user', {
         name: user.displayName,
         email: user.email,
         picture: user.imageUrl
@@ -110,10 +113,10 @@ export class LoginPage {
         nav.push(AccueilPage);
       }, function (error) {
         console.log(error);
-      })*/
+      })
     }, function (error) {
       loading.dismiss();
-      this.showToast(error);
+      this.showToast(error);*/
     });
   }
 

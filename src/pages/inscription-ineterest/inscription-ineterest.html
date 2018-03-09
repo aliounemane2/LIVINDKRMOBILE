@@ -26,9 +26,9 @@
     <div *ngFor="let interet of inte ; let i = index">
       <div class="ineteret1" (click)= "photoClicked(interet)" >
         <div class="ineteret-image" >
-          <img src="{{interet.photoInterest}}" class="full-image" style="border-radius: 50%; border: solid 1px #000000;" *ngIf="!interet.val"  />  
+          <img src="{{location}}/{{interet.photoInterest}}" class="full-image" style="border-radius: 50%; border: solid 1px #000000;" *ngIf="!interet.val"  />  
 
-          <img src="{{interet.photo}}" class="full-image" style="border-radius: 50%;" *ngIf="interet.val" [style.backgroundColor] ="color" /> 
+          <img src="{{location}}/{{interet.photoInterest2}}" class="full-image" style="border-radius: 50%;" *ngIf="interet.val" [style.backgroundColor] ="color" /> 
         </div>
         <div class="ineteret-texte" *ngIf="!interet.val">
           

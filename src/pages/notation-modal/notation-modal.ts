@@ -31,7 +31,7 @@ export class NotationModalPage {
   constructor(public connectivityService:ConnectvityServiceProvider,private toast : Toast, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public EventService: EventServiceProvider, public loading: LoadingController, private toastCtrl: ToastController, public formBuilder: FormBuilder) {
   	this.averageRating = 0;
     this.myFormulaire = formBuilder.group({
-      avis: ['', Validators.compose([Validators.maxLength(255), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
+      avis: ['', Validators.compose([Validators.maxLength(255),  Validators.required])]
     });
 
     console.log(this.parent);

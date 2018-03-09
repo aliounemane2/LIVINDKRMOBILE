@@ -72,7 +72,7 @@ export class InscriptionValidationPage {
     //this.connectivityService.checkNetwork();
     if(!this.myFormulaire.valid){
       console.log("Remplissez le champs!");
-      this.presentToast("Remplissez le champs!");
+      //this.presentToast("Remplissez le champs!");
       this.showToast("Le champ est obligatoire")
     }
     else{ 
@@ -90,8 +90,8 @@ export class InscriptionValidationPage {
 		        }
 		        else{
 		        	var subTitle ="Creation de compte";
-              this.presentToast(data.message);
-              //this.showToast("Le code de validation est incorrect")
+              //this.presentToast(data.message);
+              this.showToast("Le code de validation est incorrect")
 		          
 		        }
             //loader.dismiss();
@@ -99,7 +99,7 @@ export class InscriptionValidationPage {
 	        err => {
 	            console.log(err);
               loader.dismiss();
-              //this.showToast("Une erreur est survenue réessayer plus tard")
+              this.showToast("Une erreur est survenue réessayer plus tard")
 	        },
 	        () => {loader.dismiss()}
 

@@ -1,3 +1,9 @@
+Node version: v6.11.3
+
+Cordova version: 7.0.1
+
+Config.xml file: 
+
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.qualshore.livindakarApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>LIV'IN DAKAR</name>
@@ -80,11 +86,9 @@
         <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="android" spec="^6.3.0" />
-    <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-calendar" spec="4.6.0" />
     <plugin name="cordova-plugin-camera" spec="2.4.1" />
-    <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <plugin name="cordova-plugin-compat" spec="1.2.0" />
     <plugin name="cordova-plugin-console" spec="1.0.5" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-facebook4" spec="1.7.4">
@@ -95,9 +99,6 @@
     <plugin name="cordova-plugin-file" spec="5.0.0" />
     <plugin name="cordova-plugin-file-transfer" spec="1.7.0" />
     <plugin name="cordova-plugin-geolocation" spec="2.4.3" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.358136605028-8rp6tq0s08gfarsub579v3cd6m2l5ngv" />
-    </plugin>
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.3.2">
         <variable name="ICON" value="@mipmap/icon" />
         <variable name="SMALL_ICON" value="@mipmap/icon" />
@@ -117,4 +118,25 @@
     <plugin name="cordova.plugins.diagnostic" spec="3.6.8" />
     <plugin name="ionic-plugin-keyboard" spec="2.2.1" />
     <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.358136605028-8rp6tq0s08gfarsub579v3cd6m2l5ngv" />
+    </plugin>
+    <engine name="android" spec="~6.3.0" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>
+
+
+Plugins: 
+
+cordova-plugin-calendar,cordova-plugin-camera,cordova-plugin-compat,cordova-plugin-console,cordova-plugin-device,cordova-plugin-facebook4,cordova-plugin-fcm,cordova-plugin-file,cordova-plugin-file-transfer,cordova-plugin-geolocation,cordova-plugin-googleplus,cordova-plugin-mauron85-background-geolocation,cordova-plugin-network-information,cordova-plugin-splashscreen,cordova-plugin-statusbar,cordova-plugin-whitelist,cordova-plugin-x-socialsharing,cordova-plugin-x-toast,cordova-sqlite-storage,cordova.plugins.diagnostic,es6-promise-plugin,ionic-plugin-keyboard,mx.ferreyra.callnumber
+
+Error retrieving Android platform information: 
+Android SDK is not set up properly. Make sure that the Android SDK 'tools' and 'platform-tools' directories are in the PATH variable. 
+
+Error: android: Command failed with exit code ENOENT
+
+iOS platform:
+
+Xcode 9.2
+Build version 9C40b
+

@@ -1,0 +1,138 @@
+page-details-favoris {
+    .body-institution{
+		width: 100%;
+	}
+	.baniere-institution{
+		width:100%;
+		*height: 15%;
+		margin-bottom: -4px;
+	}
+	.texte-institution{
+		margin-top: 10px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    margin-left: 10px;
+	    padding-left: 10px;
+	    margin-right: 10px;
+	    padding-right: 10px;
+	    background-color: #ffffff;
+	    color: #000000;
+	    font-family: arial;
+    	font-size: 12px;
+	    text-align: justify;
+	    box-shadow: 1px 1px 7px #888888;
+	    *font-weight: bold;
+	    line-height: 24px;
+	}
+
+	.texte-instituti{
+		margin-top: 10px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    margin-left: 10px;
+	    padding-left: 10px;
+	    margin-right: 10px;
+	    padding-right: 10px;
+	    background-color: #ffffff;
+	    color: #000000;
+	    
+	    text-align: justify;
+	    box-shadow: 1px 1px 7px #888888;
+	    *font-weight: bold;
+	    line-height: 24px;
+	}
+
+	.image-insti{
+		margin-top: 10px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    margin-left: 10px;
+	    padding-left: 10px;
+	    margin-right: 10px;
+	    padding-right: 5px;
+	    background-color: #ffffff;
+	    box-shadow: 1px 1px 7px #888888;
+	    height: 100px;
+	   
+	}
+
+	.menu-insti{
+		margin-top: 10px;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    margin-left: 10px;
+	    padding-left: 10px;
+	    margin-right: 10px;
+	    padding-right: 5px;
+	    background-color: #ffffff;
+	    box-shadow: 1px 1px 7px #888888;
+	    
+	   
+	}
+
+	.ins-img{
+		width:  21%;
+		float: left;
+		margin-left: 3%;
+		height: 70px;
+	}
+	.note-ins{
+		position: absolute;
+	    left: 50%;
+	    top: 10%;
+	    color: #ffffff;
+	}
+
+	.titre-ins{
+		padding-top: 10px;
+	    padding-bottom: 25px;
+	    background-color: #ffffff;
+	    color: #c81437;
+	    font-size: 20px;
+	    font-weight: bold;
+	    box-shadow: 1px 1px 7px #888888;
+	    text-align: center;
+	    margin-right: 10px;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    *font-family: Zapfino Forte LT Pro;
+	}
+
+	.titre-menu{
+		font-size: 16px;
+	    font-weight: bold;
+	    font-family: Arial;
+	    color: #000000;
+	    margin-bottom: 10%;
+
+	}
+
+	.sous-titre-menu{
+		font-size: 14px;
+	    font-family: Maven Pro;
+	    padding-left: 2%;
+	    margin-top: 3%;
+	    float: left;
+	    width: 70%;
+	}
+	.barre-resto{
+		height: 10px;
+	    background-color: #c81535;
+	    margin-top: 20%;
+	    margin-bottom: 8%;
+	    margin-left: 1%;
+	    margin-right: 1%;
+	    border-radius: 2px;
+	}
+
+	.rv-resto{
+	 	font-size: 14px;
+	    font-family: Maven Pro;
+	    color: #000000;
+	}
+	.name-resto{
+		font-family: 'LinotypeZapfino One', arial; 
+		font-size: 50px;
+	}
+
+}
